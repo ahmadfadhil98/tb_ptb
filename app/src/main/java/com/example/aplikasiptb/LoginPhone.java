@@ -6,21 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Profil extends AppCompatActivity {
+public class LoginPhone extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil);
+        setContentView(R.layout.activity_login_phone);
     }
 
-    public void toDetailProfil(View view){
-        Intent intent = new Intent(this, DetailProfil.class);
+    public void toMap(View view){
+        Intent intent = new Intent(this, Map.class);
         startActivity(intent);
     }
 
-    public void toHome(View view){
-        Intent intent = new Intent(this, Walkhthrough.class);
+    public void toLoginEmail(View view){
+        Intent intent = new Intent(this, LoginEmail.class);
         startActivity(intent);
     }
 }

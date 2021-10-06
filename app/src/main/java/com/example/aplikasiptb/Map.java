@@ -2,7 +2,9 @@ package com.example.aplikasiptb;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,5 +49,15 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    public void toProfil(View view){
+        Intent intent = new Intent(this, Profil.class);
+        startActivity(intent);
+    }
+
+    public void toDetail(View view){
+        Intent intent = new Intent(this, DetailHomestay.class);
+        startActivity(intent);
     }
 }

@@ -13,18 +13,18 @@ public class LaunchScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launch_screen);
     }
 
-    public void pindahkeReview(View view){
-        Intent intent = new Intent(this, Review.class);
+    public void toWalkhthrough(View view){
+        Intent intent = new Intent(this, Walkhthrough.class);
         startActivity(intent);
     }
 
-    public void profil(View view){
-        Intent intent = new Intent(this, Profil.class);
-        startActivity(intent);
-    }
-
-    public void map(View view){
-        Intent intent = new Intent(this, Map.class);
-        startActivity(intent);
-    }
+//    public void profil(View view){
+//        Intent intent = new Intent(this, Profil.class);
+//        startActivity(intent);
+//    }
+//
+//    public void map(View view){
+//        Intent intent = new Intent(this, Map.class);
+//        startActivity(intent);
+//    }
 }

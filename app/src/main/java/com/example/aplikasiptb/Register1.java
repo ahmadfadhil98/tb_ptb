@@ -6,16 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class DetailProfil extends AppCompatActivity {
+public class Register1 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_profil);
+        setContentView(R.layout.activity_register1);
     }
 
-    public void toUbahPassword(View view){
-        Intent intent = new Intent(this, UbahPasssword.class);
+    public void toRegister2(View view){
+        Intent intent = new Intent(this, Register2.class);
         startActivity(intent);
     }
 }

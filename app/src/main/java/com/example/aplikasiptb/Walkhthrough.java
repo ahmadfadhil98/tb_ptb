@@ -6,21 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Profil extends AppCompatActivity {
+public class Walkhthrough extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil);
+        setContentView(R.layout.activity_walkhthrough);
     }
 
-    public void toDetailProfil(View view){
-        Intent intent = new Intent(this, DetailProfil.class);
+    public void toRegister(View view){
+        Intent intent = new Intent(this, Register1.class);
         startActivity(intent);
     }
 
-    public void toHome(View view){
-        Intent intent = new Intent(this, Walkhthrough.class);
+    public void toLoginPhone(View view){
+        Intent intent = new Intent(this, LoginPhone.class);
         startActivity(intent);
     }
 }
