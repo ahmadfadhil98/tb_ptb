@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiPTB">
         <activity
+            android:name=".UpdateProfil"
+            android:exported="true" />
+        <activity
+            android:name=".Notifikasi"
+            android:exported="true" />
+        <activity
+            android:name=".InfoPembayaran"
+            android:exported="true" />
+        <activity
+            android:name=".Booking"
+            android:exported="true" />
+        <activity
             android:name=".LaunchScreenActivity"
             android:exported="true">
             <intent-filter>
