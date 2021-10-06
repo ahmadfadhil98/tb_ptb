@@ -8,6 +8,7 @@
 
     <ImageView
         android:id="@+id/imageView2"
+        style="bold"
         android:layout_width="776dp"
         android:layout_height="1851dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,24 +18,91 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/_4030276379_d04968cd36_b" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="62dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Harau"
+                    android:textAlignment="textEnd"
+                    android:textColor="#FBF8F7"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Stay"
+                    android:textColor="#673AB7"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Memudahkan"
+                android:textAlignment="center"
+                android:textColor="#FFFEFE"
+                android:textSize="34sp" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mencari Homestay"
+                android:textAlignment="center"
+                android:textColor="#FDFCFC"
+                android:textSize="34sp" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="di Harau"
+                android:textAlignment="center"
+                android:textColor="#FAF7F7"
+                android:textSize="34sp" />
+
+        </LinearLayout>
+    </FrameLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="158dp"
-            android:layout_marginTop="611dp"
-            android:layout_marginEnd="159dp"
-            android:layout_marginBottom="72dp"
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip4"
+            android:layout_width="224dp"
+            android:layout_height="72dp"
+            android:layout_marginEnd="94dp"
+            android:layout_marginBottom="43dp"
+            android:onClick="toWalkhthrough"
             android:text="Memulai"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:chipSurfaceColor="#673AB7"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

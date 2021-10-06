@@ -3,12 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/drawable/anonymous_house_1.xml" value="0.240625" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/drawable/ic_back.xml" value="0.12604166666666666" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/drawable/input_bg.xml" value="0.240625" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_booking.xml" value="0.22" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_detail_homestay.xml" value="0.25" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_detail_profil.xml" value="0.22" />
         <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_fullscreen.xml" value="0.12771739130434784" />
-        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_launch_screen.xml" value="0.25" />
-        <entry key="..\:/Users/LENOVO/.AndroidStudio3.5/tb_ptb/app/src/main/res/layout/activity_booking.xml" value="0.25" />
-        <entry key="..\:/Users/LENOVO/.AndroidStudio3.5/tb_ptb/app/src/main/res/layout/activity_info_pembayaran.xml" value="0.22" />
-        <entry key="..\:/Users/LENOVO/.AndroidStudio3.5/tb_ptb/app/src/main/res/layout/activity_notifikasi.xml" value="0.25" />
-        <entry key="..\:/Users/LENOVO/.AndroidStudio3.5/tb_ptb/app/src/main/res/layout/activity_update_profil.xml" value="0.25" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_booking.xml" value="0.25" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_info_pembayaran.xml" value="0.22" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_notifikasi.xml" value="0.25" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_update_profil.xml" value="0.25" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_launch_screen.xml" value="0.2" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_login_email.xml" value="0.22" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_login_phone.xml" value="0.22" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_map.xml" value="0.22" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_profil.xml" value="0.25" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_register1.xml" value="0.25" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_register2.xml" value="0.22" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_register3.xml" value="0.22" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_review.xml" value="0.33" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_ubah_passsword.xml" value="0.22" />
+        <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_walkhthrough.xml" value="0.25" />
       </map>
     </option>
   </component>
