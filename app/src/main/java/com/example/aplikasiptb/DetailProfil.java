@@ -18,4 +18,9 @@ public class DetailProfil extends AppCompatActivity {
         Intent intent = new Intent(this, UbahPasssword.class);
         startActivity(intent);
     }
+
+    public void toEditProfil(View view){
+        Intent intent = new Intent(this, UpdateProfil.class);
+        startActivity(intent);
+    }
 }

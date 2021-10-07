@@ -23,4 +23,9 @@ public class Profil extends AppCompatActivity {
         Intent intent = new Intent(this, Walkhthrough.class);
         startActivity(intent);
     }
+
+    public void toNotifikasi(View view){
+        Intent intent = new Intent(this, Notifikasi.class);
+        startActivity(intent);
+    }
 }

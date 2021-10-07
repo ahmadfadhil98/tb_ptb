@@ -147,6 +147,7 @@
         android:id="@+id/button3"
         android:layout_width="307dp"
         android:layout_height="51dp"
+        android:onClick="toDetailHomestay"
         android:text="Oke"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
