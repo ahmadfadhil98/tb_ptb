@@ -5,77 +5,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Review">
+    tools:context=".ReviewActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="34dp"
-        android:layout_marginVertical="10dp">
-
-        <TextView
-            android:id="@+id/titleReview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="176dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="177dp"
-            android:layout_marginBottom="7dp"
-            android:text="Review"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="25dp">
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="37dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="7dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/left_arrow" />
+            android:id="@+id/imageView17"
+            android:layout_width="30dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="35dp"
+            app:srcCompat="@drawable/back" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/head4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Review"
+            android:textAlignment="center"
+            android:textColor="#090A0A"
+            android:textSize="20sp" />
+    </RelativeLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="59dp" >
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/star"
             android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="86dp"
-            android:layout_marginBottom="12dp"
-            android:numStars="5"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:contentDescription="ratingStar"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:numStars="5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/star" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginVertical="12dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginVertical="10dp"
         app:cardCornerRadius="25dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="16dp"
             android:background="@android:color/transparent"
             android:gravity="start"
-            android:hint="Tulis Komentar Anda" />
+            android:hint="Tulis Komentar Anda"
+            android:minHeight="48dp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -83,14 +80,16 @@
         android:id="@+id/button4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginVertical="10dp"
         android:text="Kirim Penilaian"
-        android:layout_marginHorizontal="25dp"
-        android:layout_marginVertical="12dp"
         app:cornerRadius="20dp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="35dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,8 +99,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginVertical="10dp">
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
 
 
                 <androidx.cardview.widget.CardView
@@ -165,8 +164,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginVertical="10dp">
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
 
 
                 <androidx.cardview.widget.CardView
@@ -229,8 +228,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginVertical="10dp">
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
 
 
                 <androidx.cardview.widget.CardView
@@ -293,8 +292,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginVertical="10dp">
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
 
 
                 <androidx.cardview.widget.CardView
@@ -357,8 +356,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginVertical="10dp">
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
 
 
                 <androidx.cardview.widget.CardView

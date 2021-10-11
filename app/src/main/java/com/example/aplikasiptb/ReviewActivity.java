@@ -3,7 +3,7 @@ package com.example.aplikasiptb;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Review extends AppCompatActivity {
+public class ReviewActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

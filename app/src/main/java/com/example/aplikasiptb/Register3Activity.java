@@ -6,16 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Register2 extends AppCompatActivity {
+public class Register3Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register2);
+        setContentView(R.layout.activity_register3);
     }
 
-    public void toRegister3(View view){
-        Intent intent = new Intent(this, Register3.class);
+    public void toMap(View view){
+        Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
     }
 }

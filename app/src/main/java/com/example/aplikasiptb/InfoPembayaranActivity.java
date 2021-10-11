@@ -6,16 +6,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Register1 extends AppCompatActivity {
+public class InfoPembayaranActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register1);
+        setContentView(R.layout.activity_info_pembayaran);
     }
 
-    public void toRegister2(View view){
-        Intent intent = new Intent(this, Register2.class);
+    public void toDetailHomestay(View view){
+        Intent intent = new Intent(this, DetailHomestayActivity.class);
         startActivity(intent);
     }
 }

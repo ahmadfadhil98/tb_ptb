@@ -14,17 +14,9 @@ public class LaunchScreenActivity extends AppCompatActivity {
     }
 
     public void toWalkhthrough(View view){
-        Intent intent = new Intent(this, Walkhthrough.class);
+        Intent intent = new Intent(this, WalkhthroughActivity.class);
         startActivity(intent);
+        finish();
     }
 
-//    public void profil(View view){
-//        Intent intent = new Intent(this, Profil.class);
-//        startActivity(intent);
-//    }
-//
-//    public void map(View view){
-//        Intent intent = new Intent(this, Map.class);
-//        startActivity(intent);
-//    }
 }

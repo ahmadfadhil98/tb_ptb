@@ -6,21 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Walkhthrough extends AppCompatActivity {
+public class LoginPhoneActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_walkhthrough);
+        setContentView(R.layout.activity_login_phone);
     }
 
-    public void toRegister(View view){
-        Intent intent = new Intent(this, Register1.class);
+    public void toMap(View view){
+        Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
     }
 
-    public void toLoginPhone(View view){
-        Intent intent = new Intent(this, LoginPhone.class);
+    public void toLoginEmail(View view){
+        Intent intent = new Intent(this, LoginEmailActivity.class);
         startActivity(intent);
     }
 }

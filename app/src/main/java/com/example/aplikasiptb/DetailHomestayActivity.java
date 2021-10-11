@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class DetailHomestay extends AppCompatActivity {
+public class DetailHomestayActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,12 +15,17 @@ public class DetailHomestay extends AppCompatActivity {
     }
 
     public void toReview(View view){
-        Intent intent = new Intent(this, Review.class);
+        Intent intent = new Intent(this, ReviewActivity.class);
         startActivity(intent);
     }
 
     public void toBooking(View view){
-        Intent intent = new Intent(this, Booking.class);
+        Intent intent = new Intent(this, BookingActivity.class);
+        startActivity(intent);
+    }
+
+    public void toMapArah(View view){
+        Intent intent = new Intent(this, ArahActivity.class);
         startActivity(intent);
     }
 }

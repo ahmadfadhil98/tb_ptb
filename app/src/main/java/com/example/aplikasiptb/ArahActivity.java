@@ -2,9 +2,7 @@ package com.example.aplikasiptb;
 
 import androidx.fragment.app.FragmentActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,18 +10,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.aplikasiptb.databinding.ActivityMapBinding;
+import com.example.aplikasiptb.databinding.ActivityArahBinding;
 
-public class Map extends FragmentActivity implements OnMapReadyCallback {
+public class ArahActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private ActivityMapBinding binding;
+    private ActivityArahBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMapBinding.inflate(getLayoutInflater());
+        binding = ActivityArahBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -49,15 +47,5 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
-
-    public void toProfil(View view){
-        Intent intent = new Intent(this, Profil.class);
-        startActivity(intent);
-    }
-
-    public void toDetail(View view){
-        Intent intent = new Intent(this, DetailHomestay.class);
-        startActivity(intent);
     }
 }

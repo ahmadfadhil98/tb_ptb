@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Profil extends AppCompatActivity {
+public class ProfilActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,17 +15,17 @@ public class Profil extends AppCompatActivity {
     }
 
     public void toDetailProfil(View view){
-        Intent intent = new Intent(this, DetailProfil.class);
+        Intent intent = new Intent(this, DetailProfilActivity.class);
         startActivity(intent);
     }
 
     public void toHome(View view){
-        Intent intent = new Intent(this, Walkhthrough.class);
+        Intent intent = new Intent(this, WalkhthroughActivity.class);
         startActivity(intent);
     }
 
     public void toNotifikasi(View view){
-        Intent intent = new Intent(this, Notifikasi.class);
+        Intent intent = new Intent(this, NotifikasiActivity.class);
         startActivity(intent);
     }
 }
