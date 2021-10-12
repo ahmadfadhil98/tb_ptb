@@ -13,14 +13,14 @@
         android:layout_marginVertical="35dp">
 
         <ImageView
-            android:id="@+id/imageView17"
+            android:id="@+id/backImg"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginLeft="35dp"
             app:srcCompat="@drawable/back" />
 
         <TextView
-            android:id="@+id/head4"
+            android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ubah Profil"
@@ -48,7 +48,7 @@
                 app:srcCompat="@drawable/profile" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/uploadBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="100dp"
@@ -57,60 +57,90 @@
                 android:textSize="12sp"
                 app:cornerRadius="25dp" />
 
-            <EditText
-                android:id="@+id/fullname"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:ems="10"
-                android:hint="Nama Lengkap"
-                android:minHeight="48dp"
-                android:paddingHorizontal="25dp" />
+                android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:ems="10"
-                android:hint="Username"
-                android:minHeight="48dp"
-                android:paddingHorizontal="25dp" />
+                <EditText
+                    android:id="@+id/fullname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:ems="10"
+                    android:hint="Nama Lengkap"
+                    android:minHeight="48dp"
+                    android:paddingHorizontal="25dp"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/jk"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:minHeight="48dp"
-                android:spinnerMode="dropdown" />
+                android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/nohp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:ems="10"
-                android:hint="No Handphone"
-                android:inputType="phone"
-                android:minHeight="48dp"
-                android:paddingHorizontal="25dp" />
+                <EditText
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:ems="10"
+                    android:hint="Username"
+                    android:minHeight="48dp"
+                    android:paddingHorizontal="25dp"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/email"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:ems="10"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp"
-                android:paddingHorizontal="25dp" />
+                android:layout_height="match_parent">
+
+                <Spinner
+                    android:id="@+id/jk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:minHeight="48dp"
+                    android:spinnerMode="dropdown"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/nohp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:ems="10"
+                    android:hint="No Handphone"
+                    android:inputType="phone"
+                    android:minHeight="48dp"
+                    android:paddingHorizontal="25dp"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:ems="10"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp"
+                    android:paddingHorizontal="25dp"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -118,28 +148,41 @@
                 android:layout_marginVertical="10dp"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/tempatLahir"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/input_bg"
-                    android:ems="10"
-                    android:hint="Tempat Lahir"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-                <EditText
-                    android:id="@+id/tglLahir"
+                    <EditText
+                        android:id="@+id/tempatLahir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_bg"
+                        android:ems="10"
+                        android:hint="Tempat Lahir"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/input_bg"
-                    android:ems="10"
-                    android:hint="Tanggal Lahir"
-                    android:inputType="date"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/tglLahir"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_bg"
+                        android:ems="10"
+                        android:hint="Tanggal Lahir"
+                        android:inputType="date"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
 
 
@@ -150,10 +193,11 @@
         android:id="@+id/button5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="35dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="35dp"
         android:minHeight="48dp"
-        android:layout_marginHorizontal="35dp"
+        android:onClick="toProfil"
         android:text="Simpan"
         app:cornerRadius="25dp" />
 

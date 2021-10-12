@@ -14,14 +14,14 @@
         android:layout_marginBottom="25dp">
 
         <ImageView
-            android:id="@+id/imageView17"
+            android:id="@+id/backImg"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginLeft="35dp"
             app:srcCompat="@drawable/back" />
 
         <TextView
-            android:id="@+id/head4"
+            android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Booking"
@@ -33,9 +33,9 @@
             android:id="@+id/reset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
             android:layout_marginHorizontal="35dp"
             android:text="Reset"
+            android:textAlignment="textEnd"
             android:textColor="#9C27B0"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -53,7 +53,7 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nama_il"
+                android:id="@+id/case_nama"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -72,82 +72,120 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/unit"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:minHeight="48dp"
-                android:spinnerMode="dropdown"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_height="match_parent">
 
-            <Spinner
-                android:id="@+id/tipe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:minHeight="48dp"
-                android:spinnerMode="dropdown"
-                tools:ignore="SpeakableTextPresentCheck" />
+                <Spinner
+                    android:id="@+id/unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="35dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:minHeight="48dp"
+                    android:spinnerMode="dropdown"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/jumlahHari"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:minHeight="48dp"
-                android:spinnerMode="dropdown"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_height="match_parent">
 
-            <EditText
-                android:id="@+id/jumlah"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:hint="Tarif"
-                android:minHeight="48dp"
-                android:paddingHorizontal="25dp" />
+                <Spinner
+                    android:id="@+id/tipe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="35dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:minHeight="48dp"
+                    android:spinnerMode="dropdown"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/tarif"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:hint="Uang Muka"
-                android:minHeight="48dp"
-                android:paddingHorizontal="25dp" />
+                android:layout_height="match_parent">
 
-            <Spinner
-                android:id="@+id/pembayaran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:minHeight="48dp"
-                android:spinnerMode="dropdown"
-                tools:ignore="SpeakableTextPresentCheck" />
+                <Spinner
+                    android:id="@+id/jumlahHari"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="35dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:minHeight="48dp"
+                    android:spinnerMode="dropdown"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/metode"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="35dp"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/input_bg"
-                android:minHeight="48dp"
-                android:spinnerMode="dropdown"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/jumlah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="35dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:hint="Tarif"
+                    android:minHeight="48dp"
+                    android:paddingHorizontal="25dp"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/tarif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="35dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:hint="Uang Muka"
+                    android:minHeight="48dp"
+                    android:paddingHorizontal="25dp"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Spinner
+                    android:id="@+id/pembayaran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="35dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:minHeight="48dp"
+                    android:spinnerMode="dropdown"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Spinner
+                    android:id="@+id/metode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="35dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/input_bg"
+                    android:minHeight="48dp"
+                    android:spinnerMode="dropdown"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
     </ScrollView>

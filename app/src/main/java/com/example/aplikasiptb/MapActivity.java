@@ -45,13 +45,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mapFragment.getMapAsync(this);
 
         search = (EditText) findViewById(R.id.search);
-        ImageView IconSearch = (ImageView) findViewById(R.id.imageSearch);
         search.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    IconSearch.callOnClick();
-                    return true;
+                    findOnMap(v);
                 }
                 return false;
             }

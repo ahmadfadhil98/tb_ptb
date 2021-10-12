@@ -20,14 +20,14 @@
             android:layout_marginBottom="25dp">
 
             <ImageView
-                android:id="@+id/imageView17"
+                android:id="@+id/backImg"
                 android:layout_width="30dp"
                 android:layout_height="24dp"
                 android:layout_marginLeft="35dp"
                 app:srcCompat="@drawable/back" />
 
             <TextView
-                android:id="@+id/head4"
+                android:id="@+id/head"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Pendaftaran"
@@ -45,77 +45,120 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <EditText
-                    android:id="@+id/nama"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="35dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/input_bg"
-                    android:hint="Nama Lengkap"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp" />
+                    android:layout_height="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <EditText
-                    android:id="@+id/email2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="35dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/input_bg"
-                    android:ems="10"
-                    android:hint="Email"
-                    android:inputType="textEmailAddress"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp" />
+                    <EditText
+                        android:id="@+id/nama"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="35dp"
+                        android:layout_marginVertical="10dp"
+                        android:background="@drawable/input_bg"
+                        android:hint="Nama Lengkap"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/nomor3"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="35dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/input_bg"
-                    android:ems="16"
-                    android:hint="Nomor Handphone"
-                    android:inputType="phone"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp" />
+                    android:layout_height="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <EditText
-                    android:id="@+id/jenis"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="35dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/input_bg"
-                    android:hint="Jenis Kelamin"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp" />
+                    <EditText
+                        android:id="@+id/email2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="35dp"
+                        android:layout_marginVertical="10dp"
+                        android:background="@drawable/input_bg"
+                        android:ems="10"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/tempat"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="35dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/input_bg"
-                    android:hint="Tempat Lahir"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp" />
+                    android:layout_height="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <EditText
-                    android:id="@+id/tanggal"
+                    <EditText
+                        android:id="@+id/nomor3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="35dp"
+                        android:layout_marginVertical="10dp"
+                        android:background="@drawable/input_bg"
+                        android:ems="16"
+                        android:hint="Nomor Handphone"
+                        android:inputType="phone"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="35dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/input_bg"
-                    android:ems="16"
-                    android:hint="Tanggal Lahir"
-                    android:inputType="date"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp" />
+                    android:layout_height="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <EditText
+                        android:id="@+id/jenis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="35dp"
+                        android:layout_marginVertical="10dp"
+                        android:background="@drawable/input_bg"
+                        android:hint="Jenis Kelamin"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <EditText
+                        android:id="@+id/tempat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="35dp"
+                        android:layout_marginVertical="10dp"
+                        android:background="@drawable/input_bg"
+                        android:hint="Tempat Lahir"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <EditText
+                        android:id="@+id/tanggal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="35dp"
+                        android:layout_marginVertical="10dp"
+                        android:background="@drawable/input_bg"
+                        android:ems="16"
+                        android:hint="Tanggal Lahir"
+                        android:inputType="date"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
         </ScrollView>
 

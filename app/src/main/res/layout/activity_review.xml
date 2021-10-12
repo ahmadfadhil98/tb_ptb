@@ -14,14 +14,14 @@
         android:layout_marginBottom="25dp">
 
         <ImageView
-            android:id="@+id/imageView17"
+            android:id="@+id/backImg"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginLeft="35dp"
             app:srcCompat="@drawable/back" />
 
         <TextView
-            android:id="@+id/head4"
+            android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Review"
@@ -77,7 +77,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/uploadBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="35dp"

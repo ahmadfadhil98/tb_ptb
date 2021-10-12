@@ -51,7 +51,6 @@
                     android:layout_marginVertical="10dp"
                     android:layout_weight="2"
                     android:minHeight="48dp"
-                    android:onClick="findOnMap"
                     android:src="?android:attr/actionModeWebSearchDrawable"
                     tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
@@ -64,7 +63,7 @@
                     android:background="@android:color/transparent"
                     android:paddingStart="5dp"
                     android:inputType="textPersonName"
-                    android:text="Pencarian..." />
+                    android:hint="Pencarian..." />
 
                 <ImageView
                     android:id="@+id/imageView18"

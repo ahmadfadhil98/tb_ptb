@@ -14,14 +14,14 @@
         android:layout_marginBottom="25dp">
 
         <ImageView
-            android:id="@+id/imageView17"
+            android:id="@+id/backImg"
             android:layout_width="30dp"
             android:layout_height="24dp"
             android:layout_marginLeft="35dp"
             app:srcCompat="@drawable/back" />
 
         <TextView
-            android:id="@+id/head4"
+            android:id="@+id/head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Detail Homestay"
@@ -171,7 +171,7 @@
                         app:srcCompat="@drawable/download__1_" />
 
                     <TextView
-                        android:id="@+id/textView39"
+                        android:id="@+id/textUrl"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -192,11 +192,11 @@
                         app:srcCompat="@drawable/download__2_" />
 
                     <TextView
-                        android:id="@+id/textView38"
+                        android:id="@+id/textPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="08xx-xxxx-xxxx" />
+                        android:text="085200000000" />
                 </LinearLayout>
 
                 <TextView
