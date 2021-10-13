@@ -59,7 +59,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">>
 
                 <EditText
                     android:id="@+id/fullname"
@@ -76,7 +77,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">>
 
                 <EditText
                     android:id="@+id/username"
@@ -93,22 +95,26 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">>
 
-                <Spinner
+                <EditText
                     android:id="@+id/jk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     android:background="@drawable/input_bg"
+                    android:ems="10"
+                    android:hint="Jenis Kelamin"
                     android:minHeight="48dp"
-                    android:spinnerMode="dropdown"
+                    android:paddingHorizontal="25dp"
                     tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">>
 
                 <EditText
                     android:id="@+id/nohp"
@@ -126,7 +132,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">>
 
                 <EditText
                     android:id="@+id/email"
@@ -144,14 +151,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">>
 
                     <EditText
                         android:id="@+id/tempatLahir"
@@ -162,13 +169,15 @@
                         android:ems="10"
                         android:hint="Tempat Lahir"
                         android:minHeight="48dp"
-                        android:paddingHorizontal="25dp" />
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">>
 
                     <EditText
                         android:id="@+id/tglLahir"
@@ -180,7 +189,8 @@
                         android:hint="Tanggal Lahir"
                         android:inputType="date"
                         android:minHeight="48dp"
-                        android:paddingHorizontal="25dp" />
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>

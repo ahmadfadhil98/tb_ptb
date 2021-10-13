@@ -50,6 +50,7 @@ public class UpdateProfilActivity extends AppCompatActivity {
     public void toDetailProfil(View view){
         Intent intent = new Intent(this, DetailProfilActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void selectImage(Context context) {
