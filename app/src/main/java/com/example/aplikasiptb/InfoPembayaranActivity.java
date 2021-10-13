@@ -27,5 +27,6 @@ public class InfoPembayaranActivity extends AppCompatActivity {
     public void toDetailHomestay(View view){
         Intent intent = new Intent(this, DetailHomestayActivity.class);
         startActivity(intent);
+        finish();
     }
 }

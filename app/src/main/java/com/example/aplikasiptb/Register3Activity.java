@@ -27,5 +27,6 @@ public class Register3Activity extends AppCompatActivity {
     public void toMap(View view){
         Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
+        finish();
     }
 }

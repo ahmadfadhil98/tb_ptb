@@ -2,8 +2,10 @@ package com.example.aplikasiptb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class UbahPassswordActivity extends AppCompatActivity {
@@ -21,5 +23,12 @@ public class UbahPassswordActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+    }
+
+    public void toDetailProfil(View view){
+        Intent intent = new Intent(this, DetailProfilActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

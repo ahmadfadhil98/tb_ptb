@@ -32,6 +32,7 @@ public class ProfilActivity extends AppCompatActivity {
     public void toHome(View view){
         Intent intent = new Intent(this, WalkhthroughActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void toNotifikasi(View view){

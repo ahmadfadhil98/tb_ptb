@@ -34,6 +34,6 @@ public class BookingActivity extends AppCompatActivity {
     public void toInfoPembayaran(View view){
         Intent intent = new Intent(this, InfoPembayaranActivity.class);
         startActivity(intent);
-
+        finish();
     }
 }

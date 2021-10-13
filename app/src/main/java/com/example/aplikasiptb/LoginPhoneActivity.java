@@ -27,6 +27,7 @@ public class LoginPhoneActivity extends AppCompatActivity {
     public void toMap(View view){
         Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void toLoginEmail(View view){

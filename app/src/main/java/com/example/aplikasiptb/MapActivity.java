@@ -91,6 +91,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         startActivity(intent);
     }
 
+    public void toHome(View view){
+        Intent intent = new Intent(this, WalkhthroughActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     public void findOnMap(View v){
         Geocoder geocoder = new Geocoder(this);
         try {
@@ -113,6 +119,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             exitTime = System.currentTimeMillis();
         } else {
             finish();
+            System.exit(0);
         }
 
     }

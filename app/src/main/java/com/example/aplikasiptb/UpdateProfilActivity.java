@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ public class UpdateProfilActivity extends AppCompatActivity {
 
     TextView iconBack;
     private ImageView imageView;
+    Button uploadBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,9 @@ public class UpdateProfilActivity extends AppCompatActivity {
         });
 
         imageView = (ImageView) findViewById(R.id.upload);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        uploadBtn = findViewById(R.id.uploadBtn);
+
+        uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectImage(UpdateProfilActivity.this);
@@ -43,8 +47,8 @@ public class UpdateProfilActivity extends AppCompatActivity {
         });
     }
 
-    public void toProfil(View view){
-        Intent intent = new Intent(this, ProfilActivity.class);
+    public void toDetailProfil(View view){
+        Intent intent = new Intent(this, DetailProfilActivity.class);
         startActivity(intent);
     }
 
