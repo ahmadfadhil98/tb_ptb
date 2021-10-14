@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetailHomestayActivity extends AppCompatActivity {
 
@@ -41,19 +42,23 @@ public class DetailHomestayActivity extends AppCompatActivity {
             }
         });
 
-//        textNohp = (TextView) findViewById(R.id.nohp);
-//        textNohp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String nohHp = "tel:"+textNohp.getText().toString();
-//                Uri noHpUri = Uri.parse(nohHp);
-//
-//                Intent dialIntent = new Intent();
-//                dialIntent.setAction(Intent.ACTION_DIAL);
-//                dialIntent.setData(noHpUri);
-//                startActivity(dialIntent);
-//            }
-//        });
+        textNohp = (TextView) findViewById(R.id.textPhone);
+        textNohp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String nohHp = "tel:"+textNohp.getText().toString();
+                Uri noHpUri = Uri.parse(nohHp);
+
+                Intent dialIntent = new Intent();
+                dialIntent.setAction(Intent.ACTION_DIAL);
+                dialIntent.setData(noHpUri);
+                if (dialIntent.resolveActivity(getPackageManager()) != null){
+                    startActivity(dialIntent);
+                }else{
+                    Toast.makeText(DetailHomestayActivity.this, "Aplikasi Untuk melakukan Dial tidak ada", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void toReview(View view){
