@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
@@ -17,268 +17,61 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@android:color/transparent">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingVertical="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp"
+            android:layout_weight="2"
+            android:src="@drawable/back" />
+
+        <ImageView
+            android:id="@+id/imageSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="10dp"
+            android:layout_weight="2"
+            android:minHeight="48dp"
+            android:src="?android:attr/actionModeWebSearchDrawable"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:background="@android:color/transparent">
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:hint="Pencarian..."
+            android:inputType="textPersonName"
+            android:paddingStart="5dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingVertical="10dp"
-                android:paddingEnd="10dp"
-                android:background="@color/white">
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:layout_marginVertical="10dp"
-                    android:src="@drawable/back" />
-
-                <ImageView
-                    android:id="@+id/imageSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginVertical="10dp"
-                    android:layout_weight="2"
-                    android:minHeight="48dp"
-                    android:src="?android:attr/actionModeWebSearchDrawable"
-                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-                <EditText
-                    android:id="@+id/search"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:background="@android:color/transparent"
-                    android:paddingStart="5dp"
-                    android:inputType="textPersonName"
-                    android:hint="Pencarian..." />
-
-                <ImageView
-                    android:id="@+id/imageView18"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:onClick="toProfil"
-                    android:src="@drawable/profile"
-                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-
-            android:contentDescription="scrollHomestay">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="15dp"
-                    android:onClick="toDetail"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageView7"
-                        android:layout_width="195dp"
-                        android:layout_height="154dp"
-                        app:srcCompat="@drawable/house" />
-
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Abdi Homestay"
-                        android:textColor="@color/black"
-                        android:textSize="18dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView15"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Penginapan" />
-
-                        <TextView
-                            android:id="@+id/textView14"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="4.5" />
-
-                        <ImageView
-                            android:id="@+id/imageView8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@android:drawable/btn_star_big_on" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="15dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imagehome3"
-                        android:layout_width="195dp"
-                        android:layout_height="154dp"
-                        app:srcCompat="@drawable/house" />
-
-                    <TextView
-                        android:id="@+id/home3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Abdi Homestay"
-                        android:textColor="@color/black"
-                        android:textSize="18dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/deshome3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Penginapan" />
-
-                        <TextView
-                            android:id="@+id/starhome3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="4.5" />
-
-                        <ImageView
-                            android:id="@+id/star3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@android:drawable/btn_star_big_on" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="15dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imagehome1"
-                        android:layout_width="195dp"
-                        android:layout_height="154dp"
-                        app:srcCompat="@drawable/house" />
-
-                    <TextView
-                        android:id="@+id/home1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Abdi Homestay"
-                        android:textColor="@color/black"
-                        android:textSize="18dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/deshome1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Penginapan" />
-
-                        <TextView
-                            android:id="@+id/starhome1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="4.5" />
-
-                        <ImageView
-                            android:id="@+id/star1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@android:drawable/btn_star_big_on" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="15dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imagehome2"
-                        android:layout_width="195dp"
-                        android:layout_height="154dp"
-                        app:srcCompat="@drawable/house" />
-
-                    <TextView
-                        android:id="@+id/home2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Abdi Homestay"
-                        android:textColor="@color/black"
-                        android:textSize="18dp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/deshome2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Penginapan" />
-
-                        <TextView
-                            android:id="@+id/starhome2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="4.5" />
-
-                        <ImageView
-                            android:id="@+id/star2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@android:drawable/btn_star_big_on" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-        </HorizontalScrollView>
-
+        <ImageView
+            android:id="@+id/imageView18"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:onClick="toProfil"
+            android:src="@drawable/profile"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
     </LinearLayout>
 
-</RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvHomestay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        tools:listitem="@layout/item_homestay" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

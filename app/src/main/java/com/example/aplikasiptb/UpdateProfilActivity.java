@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 public class UpdateProfilActivity extends AppCompatActivity {
 
-    TextView iconBack;
+    ImageView iconBack;
     private ImageView imageView;
     Button uploadBtn;
 
@@ -28,7 +28,7 @@ public class UpdateProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profil);
 
-        iconBack = (TextView) findViewById(R.id.head);
+        iconBack = findViewById(R.id.backImg);
         iconBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

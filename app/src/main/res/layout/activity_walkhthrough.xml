@@ -8,9 +8,13 @@
     tools:context=".WalkhthroughActivity">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,7 +56,8 @@
                 android:id="@+id/imageView12"
                 android:layout_width="match_parent"
                 android:layout_height="337dp"
-                app:srcCompat="@drawable/anonymous_house_1" />
+                app:srcCompat="@drawable/anonymous_house_1"
+                android:layout_marginHorizontal="35dp"/>
 
             <TextView
                 android:id="@+id/textView44"
@@ -75,42 +80,40 @@
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip7"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginTop="10dp"
+        android:onClick="toRegister"
+        android:text="Buat akun"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:chipBackgroundColor="#673AB7"
+        app:layout_constraintBottom_toTopOf="@+id/textView43"
+        tools:layout_editor_absoluteX="100dp" />
+
+    <TextView
+        android:id="@+id/textView43"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="Sudah punya akun?"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView42" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip7"
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:layout_marginHorizontal="100dp"
-            android:onClick="toRegister"
-            android:text="Buat akun"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:chipBackgroundColor="#673AB7" />
-
-        <TextView
-            android:id="@+id/textView43"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sudah punya akun?"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView42"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:onClick="toLoginPhone"
-            android:text="Masuk"
-            android:textAlignment="center"
-            android:textColor="#673AB7" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:onClick="toLoginPhone"
+        android:text="Masuk"
+        android:textAlignment="center"
+        android:textColor="#673AB7"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </LinearLayout>

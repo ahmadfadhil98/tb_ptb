@@ -1,6 +1,8 @@
 package com.example.aplikasiptb;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +15,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.aplikasiptb.adapter.HomestayAdapter;
+import com.example.aplikasiptb.model.Homestay;
+import com.example.aplikasiptb.model.Notifikasi;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,6 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.aplikasiptb.databinding.ActivityMapBinding;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -31,6 +37,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private ActivityMapBinding binding;
     private long exitTime = 0;
     EditText search;
+    RecyclerView rvHomestay;
+    HomestayAdapter homestayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +62,37 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 return false;
             }
         });
+
+        homestayAdapter = new HomestayAdapter();
+        homestayAdapter.setListHomestay(generateData());
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false);
+
+        rvHomestay = findViewById(R.id.rvHomestay);
+        rvHomestay.setAdapter(homestayAdapter);
+        rvHomestay.setLayoutManager(layoutManager);
     }
 
+    public ArrayList<Homestay> generateData(){
+        ArrayList<Homestay> listHomestay = new ArrayList<>();
+        listHomestay.add(new Homestay("Homestay A",
+                "Penginapan",
+                1));
+        listHomestay.add(new Homestay("Homestay B",
+                "Penginapan",
+                2));
+        listHomestay.add(new Homestay("Homestay C",
+                "Penginapan",
+                3));
+        listHomestay.add(new Homestay("Homestay D",
+                "Penginapan",
+                4));
+        listHomestay.add(new Homestay("Homestay E",
+                "Penginapan",
+                5));
+        return listHomestay;
+    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.

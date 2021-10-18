@@ -6,18 +6,20 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class DetailHomestayActivity extends AppCompatActivity {
 
-    TextView iconBack,urlWeb,textNohp;
+    TextView urlWeb,textNohp;
+    ImageView iconBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_homestay);
 
-        iconBack = (TextView) findViewById(R.id.head);
+        iconBack = findViewById(R.id.backImg);
         iconBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

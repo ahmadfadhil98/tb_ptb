@@ -6,18 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 public class BookingActivity extends AppCompatActivity {
 
-    TextView iconBack;
+    ImageView iconBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
 
-        iconBack = (TextView) findViewById(R.id.head);
+        iconBack = findViewById(R.id.backImg);
         iconBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

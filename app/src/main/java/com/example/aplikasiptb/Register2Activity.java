@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 public class Register2Activity extends AppCompatActivity {
 
-    TextView iconBack;
+    ImageView iconBack;
     private ImageView imageView;
 
     @Override
@@ -34,7 +34,7 @@ public class Register2Activity extends AppCompatActivity {
             }
         });
 
-        iconBack = (TextView) findViewById(R.id.head);
+        iconBack = findViewById(R.id.backImg);
         iconBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
