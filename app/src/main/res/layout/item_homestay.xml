@@ -2,10 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardHomestay"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -15,9 +17,9 @@
             android:layout_height="150dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:src="@drawable/house"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/house" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textNamaHomestay"
@@ -46,9 +48,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
+            android:src="@android:drawable/btn_star_big_on"
             app:layout_constraintBottom_toTopOf="@+id/textRating"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:src="@android:drawable/btn_star_big_on" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/textRating"

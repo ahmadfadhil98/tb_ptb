@@ -1,5 +1,6 @@
 package com.example.aplikasiptb;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +38,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private ActivityMapBinding binding;
     private long exitTime = 0;
     EditText search;
+    CardView cardHomestay;
     RecyclerView rvHomestay;
     HomestayAdapter homestayAdapter;
 
@@ -52,6 +54,15 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+//        cardHomestay = findViewById(R.id.cardHomestay);
+//        cardHomestay.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MapActivity.this, ProfilActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
         search = (EditText) findViewById(R.id.search);
         search.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -63,7 +74,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
-        homestayAdapter = new HomestayAdapter();
+        homestayAdapter = new HomestayAdapter(this);
         homestayAdapter.setListHomestay(generateData());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
