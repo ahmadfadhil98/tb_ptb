@@ -66,15 +66,25 @@ public class DetailHomestayActivity extends AppCompatActivity {
     public void toReview(View view){
         Intent intent = new Intent(this, ReviewActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void toBooking(View view){
         Intent intent = new Intent(this, BookingActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void toMapArah(View view){
         Intent intent = new Intent(this, ArahActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

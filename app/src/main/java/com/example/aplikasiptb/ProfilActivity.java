@@ -28,6 +28,7 @@ public class ProfilActivity extends AppCompatActivity {
     public void toDetailProfil(View view){
         Intent intent = new Intent(this, DetailProfilActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void toHome(View view){
@@ -39,5 +40,13 @@ public class ProfilActivity extends AppCompatActivity {
     public void toNotifikasi(View view){
         Intent intent = new Intent(this, NotifikasiActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

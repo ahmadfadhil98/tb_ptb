@@ -28,10 +28,19 @@ public class DetailProfilActivity extends AppCompatActivity {
     public void toUbahPassword(View view){
         Intent intent = new Intent(this, UbahPassswordActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void toEditProfil(View view){
         Intent intent = new Intent(this, UpdateProfilActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ProfilActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

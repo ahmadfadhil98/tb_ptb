@@ -30,4 +30,11 @@ public class Register3Activity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, Register2Activity.class);
+        startActivity(intent);
+        finish();
+    }
 }

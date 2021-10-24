@@ -54,21 +54,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-//        cardHomestay = findViewById(R.id.cardHomestay);
-//        cardHomestay.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MapActivity.this, ProfilActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
         search = (EditText) findViewById(R.id.search);
         search.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    findOnMap(v);
+                    findOnMap();
                 }
                 return false;
             }
@@ -118,9 +109,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng harau = new LatLng(-0.105881, 100.6603642);
+        mMap.addMarker(new MarkerOptions().position(harau).title("Lembah Harau"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(harau,15));
     }
 
     public void goToLocation(double latitude,double longitude,int zoom){
@@ -132,11 +123,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public void toProfil(View view){
         Intent intent = new Intent(this, ProfilActivity.class);
         startActivity(intent);
-    }
-
-    public void toDetail(View view){
-        Intent intent = new Intent(this, DetailHomestayActivity.class);
-        startActivity(intent);
+        finish();
     }
 
     public void toHome(View view){
@@ -145,7 +132,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         finish();
     }
 
-    public void findOnMap(View v){
+    public void findOnMap(){
         Geocoder geocoder = new Geocoder(this);
         try {
             List<Address> mylist = geocoder.getFromLocationName(search.getText().toString(),1);

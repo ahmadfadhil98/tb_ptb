@@ -26,34 +26,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="10dp"
-            android:layout_weight="2"
-            android:src="@drawable/back" />
-
-        <ImageView
-            android:id="@+id/imageSearch"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="10dp"
-            android:layout_weight="2"
-            android:minHeight="48dp"
-            android:src="?android:attr/actionModeWebSearchDrawable"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
         <EditText
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@android:color/transparent"
+            android:drawableStart="?android:attr/actionModeWebSearchDrawable"
+            android:drawablePadding="25dp"
             android:ems="10"
             android:hint="Pencarian..."
             android:inputType="textPersonName"
-            android:paddingStart="5dp" />
+            android:paddingStart="35dp" />
 
         <ImageView
             android:id="@+id/imageView18"

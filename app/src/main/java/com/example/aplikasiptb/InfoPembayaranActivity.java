@@ -29,4 +29,11 @@ public class InfoPembayaranActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, BookingActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

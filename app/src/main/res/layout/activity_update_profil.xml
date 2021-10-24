@@ -93,42 +93,76 @@
                     tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginTop="5dp"
+                android:layout_marginHorizontal="5dp"
+                android:text="Jenis Kelamin" />
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:autofillHints="Jenis Kelamin"
+                android:orientation="horizontal"
+                android:layout_above="@+id/view_below" >
+
+                <RadioButton
+                    android:id="@+id/radio1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="60dp"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Laki-laki" />
+
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Perempuan" />
+            </RadioGroup>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">>
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/jk"
-                    android:layout_width="match_parent"
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ccp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/input_bg"
-                    android:ems="10"
-                    android:hint="Jenis Kelamin"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp"
-                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:padding="8dp"
+                    app:ccp_autoDetectCountry="true"
+                    app:ccp_showFullName="false"
+                    app:ccp_showNameCode="false"
+                    app:ccp_showPhoneCode="true" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">>
-
-                <EditText
-                    android:id="@+id/nohp"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/input_bg"
-                    android:ems="10"
-                    android:hint="No Handphone"
-                    android:inputType="phone"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp"
-                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/nomor3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_bg"
+                        android:ems="16"
+                        android:hint="Nomor Handphone"
+                        android:inputType="phone"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

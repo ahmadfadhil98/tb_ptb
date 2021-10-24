@@ -32,4 +32,11 @@ public class UbahPassswordActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, DetailProfilActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

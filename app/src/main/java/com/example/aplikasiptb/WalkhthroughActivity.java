@@ -19,11 +19,13 @@ public class WalkhthroughActivity extends AppCompatActivity {
     public void toRegister(View view){
         Intent intent = new Intent(this, Register1Activity.class);
         startActivity(intent);
+        finish();
     }
 
     public void toLoginPhone(View view){
         Intent intent = new Intent(this, LoginPhoneActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

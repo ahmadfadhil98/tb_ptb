@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -60,5 +61,12 @@ public class NotifikasiActivity extends AppCompatActivity {
                 "19-02-2009",
                 "Booking Anda di homestay E Berhasil. Lakukan pembayaran Segera"));
         return listNotifikasi;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ProfilActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

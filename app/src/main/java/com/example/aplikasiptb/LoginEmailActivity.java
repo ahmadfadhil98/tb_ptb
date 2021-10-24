@@ -30,4 +30,11 @@ public class LoginEmailActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, LoginPhoneActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

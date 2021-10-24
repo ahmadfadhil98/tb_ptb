@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="35dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginTop="10dp"
         android:text="Masuk ke akun"
         android:textColor="#090A0A"
         android:textSize="14sp"
@@ -60,34 +60,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="35dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="15dp"
         android:text="Anda akan menerima verifikasi SMS yang mungkin menerapkan tarif pesan dan data."
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-        tools:layout_editor_absoluteX="54dp" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:layout_editor_absoluteX="35dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView49"
-        tools:layout_editor_absoluteX="-60dp">
+        android:layout_marginEnd="35dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView49">
 
-        <EditText
-            android:id="@+id/nomor"
-            android:layout_width="match_parent"
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="35dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/input_bg"
-            android:ems="10"
-            android:hint="Nomor Handphone"
-            android:inputType="phone"
-            android:minHeight="48dp"
-            android:paddingHorizontal="25dp"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:padding="8dp"
+            app:ccp_autoDetectCountry="true"
+            app:ccp_showFullName="false"
+            app:ccp_showNameCode="false"
+            app:ccp_showPhoneCode="true" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/nomor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/input_bg"
+                android:ems="10"
+                android:hint="Nomor Handphone"
+                android:inputType="phone"
+                android:minHeight="48dp"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/button7"

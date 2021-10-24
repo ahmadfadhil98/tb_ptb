@@ -109,5 +109,13 @@ public class Register2Activity extends AppCompatActivity {
     public void toRegister3(View view){
         Intent intent = new Intent(this, Register3Activity.class);
         startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, Register1Activity.class);
+        startActivity(intent);
+        finish();
     }
 }
