@@ -20,11 +20,11 @@ import java.util.ArrayList;
 
 public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.HomestayViewHolder> {
 
-    private Context mContext;
-
-    public HomestayAdapter(Context mContext) {
-        this.mContext = mContext;
-    }
+//    private Context mContext;
+//
+//    public HomestayAdapter(Context mContext) {
+//        this.mContext = mContext;
+//    }
 
     public class HomestayViewHolder extends RecyclerView.ViewHolder {
         TextView textNamaHomestay,textJenis,textRating;
@@ -35,8 +35,24 @@ public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.Homest
             textNamaHomestay = itemView.findViewById(R.id.textNamaHomestay);
             textJenis = itemView.findViewById(R.id.textJenis);
             textRating = itemView.findViewById(R.id.textRating);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
+//            parentLayout = itemView.findViewById(R.id.parent_layout);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickObject.onClick();
+                }
+            });
         }
+    }
+
+    public interface OnHomestayViewHolderClick {
+        void onClick();
+    }
+
+    OnHomestayViewHolderClick clickObject;
+
+    public void setClickObject(OnHomestayViewHolderClick clickObject) {
+        this.clickObject = clickObject;
     }
 
     ArrayList<Homestay> listHomestay = new ArrayList<>();
@@ -61,15 +77,17 @@ public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.Homest
         viewHolder.textNamaHomestay.setText(homestay.nama);
         viewHolder.textJenis.setText(homestay.jenis);
 //        viewHolder.textRating.setText(homestay.rating);
-        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, DetailHomestayActivity.class);
-                mContext.startActivity(intent);
-            }
-        });
+//        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext, DetailHomestayActivity.class);
+//                mContext.startActivity(intent);
+//            }
+//        });
+
 
     }
+
 
     @Override
     public int getItemCount() {

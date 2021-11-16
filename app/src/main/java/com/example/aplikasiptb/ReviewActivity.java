@@ -2,6 +2,7 @@ package com.example.aplikasiptb;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRatingBar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +45,7 @@ public class ReviewActivity extends AppCompatActivity {
                 generateData()
         );
         LinearLayoutManager layoutManager= new LinearLayoutManager(this);
+//        GridLayoutManager layoutManager = new GridLayoutManager(this, 2,GridLayoutManager.VERTICAL, false);
 
         rvReview = findViewById(R.id.rvReview);
         rvReview.setAdapter(reviewAdapter);

@@ -1,24 +1,21 @@
 package com.example.aplikasiptb;
 
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.aplikasiptb.adapter.HomestayAdapter;
 import com.example.aplikasiptb.model.Homestay;
-import com.example.aplikasiptb.model.Notifikasi;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,13 +29,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback,HomestayAdapter.OnHomestayViewHolderClick {
 
     private GoogleMap mMap;
     private ActivityMapBinding binding;
     private long exitTime = 0;
     EditText search;
-    CardView cardHomestay;
     RecyclerView rvHomestay;
     HomestayAdapter homestayAdapter;
 
@@ -48,6 +44,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         binding = ActivityMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -65,8 +62,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
-        homestayAdapter = new HomestayAdapter(this);
+        homestayAdapter = new HomestayAdapter();
         homestayAdapter.setListHomestay(generateData());
+        homestayAdapter.setClickObject(this);
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false);
@@ -159,5 +158,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     }
 
+    @Override
+    public void onClick() {
+        Intent intent = new Intent(this, DetailHomestayActivity.class);
+        startActivity(intent);
+    }
 
 }
