@@ -54,35 +54,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         binding = ActivityMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-//        call.enqueue(new Callback<Auth>() {
-//            @Override
-//            public void onResponse(Call<Auth> call, Response<Auth> response) {
-//                Auth authClass = response.body();
-//                if (authClass != null ){
-//
-//                    AuthData authData = authClass.getData();
-//                    String token = authData.getToken();
-//
-//                    SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = preferences.edit();
-//                    editor.putString("TOKEN",token);
-//                    editor.apply();
-//
-//                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//                }else{
-//                    Toast.makeText(getApplicationContext(),"Kombinasi Username dan Password anda salah",Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Auth> call, Throwable t) {
-//                Toast.makeText(getApplicationContext(),"Gagal menghubungi server",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -107,7 +78,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 //        Toast.makeText(this,token,Toast.LENGTH_SHORT).show();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://ff66-114-125-58-154.ngrok.io")
+                .baseUrl("https://135c-114-125-58-154.ngrok.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

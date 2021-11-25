@@ -80,7 +80,7 @@ public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.Homest
         Homestay homestay = listHomestay.get(position);
         viewHolder.textNamaHomestay.setText(homestay.nama);
         viewHolder.textJenis.setText(homestay.jenis);
-        viewHolder.textRating.setText(homestay.rating);
+        viewHolder.textRating.setText(homestay.rating.toString());
         Picasso.get().load(homestay.foto).into(viewHolder.imageHomestay);
 //        viewHolder.textRating.setText(homestay.rating);
 //        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
