@@ -5,10 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import com.example.aplikasiptb.adapter.HomestayAdapter;
 import com.example.aplikasiptb.model.Homestay;
+import com.example.aplikasiptb.model.HomestayItem;
+import com.example.aplikasiptb.model.HomestayList;
+import com.example.aplikasiptb.retrofit.PortalClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +31,12 @@ import com.example.aplikasiptb.databinding.ActivityMapBinding;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback,HomestayAdapter.OnHomestayViewHolderClick {
 
@@ -46,6 +55,34 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         setContentView(binding.getRoot());
 
 
+//        call.enqueue(new Callback<Auth>() {
+//            @Override
+//            public void onResponse(Call<Auth> call, Response<Auth> response) {
+//                Auth authClass = response.body();
+//                if (authClass != null ){
+//
+//                    AuthData authData = authClass.getData();
+//                    String token = authData.getToken();
+//
+//                    SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = preferences.edit();
+//                    editor.putString("TOKEN",token);
+//                    editor.apply();
+//
+//                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                }else{
+//                    Toast.makeText(getApplicationContext(),"Kombinasi Username dan Password anda salah",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Auth> call, Throwable t) {
+//                Toast.makeText(getApplicationContext(),"Gagal menghubungi server",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -63,7 +100,47 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         });
 
         homestayAdapter = new HomestayAdapter();
-        homestayAdapter.setListHomestay(generateData());
+
+        SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
+        String token = preferences.getString("TOKEN","");
+
+//        Toast.makeText(this,token,Toast.LENGTH_SHORT).show();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://ff66-114-125-58-154.ngrok.io")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        PortalClient portalClient = retrofit.create(PortalClient.class);
+
+        Call<HomestayList> call = portalClient.getHomestay(token);
+        call.enqueue(new Callback<HomestayList>() {
+            @Override
+            public void onResponse(Call<HomestayList> call, Response<HomestayList> response) {
+                HomestayList homestayList = response.body();
+                ArrayList<Homestay> homestays = new ArrayList<>();
+                if(homestayList != null){
+                    List<HomestayItem> homestayItem = homestayList.getHomestay();
+                    for (HomestayItem item: homestayItem){
+                        Homestay homestay = new Homestay(
+                                item.getId(),
+                                item.getNama(),
+                                item.getJenis(),
+                                3,
+                                item.getFoto()
+                        );
+                        homestays.add(homestay);
+                    }
+                }
+                homestayAdapter.setListHomestay(homestays);
+            }
+
+            @Override
+            public void onFailure(Call<HomestayList> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
+            }
+        });
+
         homestayAdapter.setClickObject(this);
 
 
@@ -75,25 +152,25 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         rvHomestay.setLayoutManager(layoutManager);
     }
 
-    public ArrayList<Homestay> generateData(){
-        ArrayList<Homestay> listHomestay = new ArrayList<>();
-        listHomestay.add(new Homestay("Homestay A",
-                "Penginapan",
-                1));
-        listHomestay.add(new Homestay("Homestay B",
-                "Penginapan",
-                2));
-        listHomestay.add(new Homestay("Homestay C",
-                "Penginapan",
-                3));
-        listHomestay.add(new Homestay("Homestay D",
-                "Penginapan",
-                4));
-        listHomestay.add(new Homestay("Homestay E",
-                "Penginapan",
-                5));
-        return listHomestay;
-    }
+//    public ArrayList<Homestay> generateData(){
+//        ArrayList<Homestay> listHomestay = new ArrayList<>();
+//        listHomestay.add(new Homestay("Homestay A",
+//                "Penginapan",
+//                1));
+//        listHomestay.add(new Homestay("Homestay B",
+//                "Penginapan",
+//                2));
+//        listHomestay.add(new Homestay("Homestay C",
+//                "Penginapan",
+//                3));
+//        listHomestay.add(new Homestay("Homestay D",
+//                "Penginapan",
+//                4));
+//        listHomestay.add(new Homestay("Homestay E",
+//                "Penginapan",
+//                5));
+//        return listHomestay;
+//    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.

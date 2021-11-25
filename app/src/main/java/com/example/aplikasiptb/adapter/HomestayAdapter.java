@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.example.aplikasiptb.DetailHomestayActivity;
 import com.example.aplikasiptb.MapActivity;
 import com.example.aplikasiptb.R;
 import com.example.aplikasiptb.model.Homestay;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,7 @@ public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.Homest
 
     public class HomestayViewHolder extends RecyclerView.ViewHolder {
         TextView textNamaHomestay,textJenis,textRating;
+        ImageView imageHomestay;
         ConstraintLayout parentLayout;
 
         public HomestayViewHolder(@NonNull View itemView) {
@@ -35,6 +38,7 @@ public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.Homest
             textNamaHomestay = itemView.findViewById(R.id.textNamaHomestay);
             textJenis = itemView.findViewById(R.id.textJenis);
             textRating = itemView.findViewById(R.id.textRating);
+            imageHomestay = itemView.findViewById(R.id.imageHomestay);
 //            parentLayout = itemView.findViewById(R.id.parent_layout);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,6 +80,8 @@ public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.Homest
         Homestay homestay = listHomestay.get(position);
         viewHolder.textNamaHomestay.setText(homestay.nama);
         viewHolder.textJenis.setText(homestay.jenis);
+        viewHolder.textRating.setText(homestay.rating);
+        Picasso.get().load(homestay.foto).into(viewHolder.imageHomestay);
 //        viewHolder.textRating.setText(homestay.rating);
 //        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
 //            @Override

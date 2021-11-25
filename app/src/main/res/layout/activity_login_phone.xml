@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="35dp"
         android:layout_marginVertical="15dp"
-        android:text="Anda akan menerima verifikasi SMS yang mungkin menerapkan tarif pesan dan data."
+        android:text="Anda akan menerima verifikasi SMS yang mungkin menerapkan tarif pesan dan authData."
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         tools:layout_editor_absoluteX="35dp" />
 
@@ -136,5 +136,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

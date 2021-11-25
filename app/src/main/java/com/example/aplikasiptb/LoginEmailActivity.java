@@ -3,6 +3,7 @@ package com.example.aplikasiptb;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.aplikasiptb.model.AuthClass;
+import com.example.aplikasiptb.model.Auth;
+import com.example.aplikasiptb.model.AuthData;
 import com.example.aplikasiptb.retrofit.PortalClient;
 
 import retrofit2.Call;
@@ -57,25 +59,33 @@ public class LoginEmailActivity extends AppCompatActivity {
 
     public void checkLogin(View view){
 
-
         String username = editUsername.getText().toString();
         String password = editPassword.getText().toString();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://tbptbklp4.herokuapp.com/")
+//                .baseUrl("https://tbptbklp4.herokuapp.com/")
+                .baseUrl("https://ff66-114-125-58-154.ngrok.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         PortalClient portalClient = retrofit.create(PortalClient.class);
 
-        Call<AuthClass> call = portalClient.checkLogin(username,password);
+        Call<Auth> call = portalClient.checkLogin(username,password);
         updateViewProgress(true);
-        call.enqueue(new Callback<AuthClass>() {
+        call.enqueue(new Callback<Auth>() {
             @Override
-            public void onResponse(Call<AuthClass> call, Response<AuthClass> response) {
-                AuthClass authClass = response.body();
+            public void onResponse(Call<Auth> call, Response<Auth> response) {
+                Auth authClass = response.body();
                 if (authClass != null ){
 
+                    AuthData authData = authClass.getData();
+                    String token = authData.getToken();
+//                    Toast.makeText(getApplicationContext(),token,Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("TOKEN",token);
+                    editor.apply();
 
                     Intent intent = new Intent(getApplicationContext(), MapActivity.class);
                     startActivity(intent);
@@ -87,7 +97,7 @@ public class LoginEmailActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<AuthClass> call, Throwable t) {
+            public void onFailure(Call<Auth> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"Gagal menghubungi server",Toast.LENGTH_SHORT).show();
                 updateViewProgress(false);
             }
