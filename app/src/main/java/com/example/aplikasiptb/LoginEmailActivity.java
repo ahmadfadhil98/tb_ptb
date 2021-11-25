@@ -63,8 +63,8 @@ public class LoginEmailActivity extends AppCompatActivity {
         String password = editPassword.getText().toString();
 
         Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://tbptbklp4.herokuapp.com/")
-                .baseUrl("https://135c-114-125-58-154.ngrok.io")
+                .baseUrl("https://tbptbklp4.herokuapp.com/")
+//                .baseUrl("https://135c-114-125-58-154.ngrok.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

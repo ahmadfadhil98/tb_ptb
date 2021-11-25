@@ -78,7 +78,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 //        Toast.makeText(this,token,Toast.LENGTH_SHORT).show();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://135c-114-125-58-154.ngrok.io")
+                .baseUrl("https://tbptbklp4.herokuapp.com/")
+//                .baseUrl("https://135c-114-125-58-154.ngrok.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
