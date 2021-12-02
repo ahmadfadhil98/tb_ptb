@@ -62,13 +62,8 @@ public class LoginEmailActivity extends AppCompatActivity {
         String username = editUsername.getText().toString();
         String password = editPassword.getText().toString();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://tbptbklp4.herokuapp.com/")
-//                .baseUrl("https://135c-114-125-58-154.ngrok.io")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        PortalClient portalClient = retrofit.create(PortalClient.class);
+        Authent authent = new Authent();
+        PortalClient portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
 
         Call<Auth> call = portalClient.checkLogin(username,password);
         updateViewProgress(true);

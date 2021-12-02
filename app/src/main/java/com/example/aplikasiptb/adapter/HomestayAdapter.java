@@ -30,7 +30,9 @@ public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.Homest
 
     public class HomestayViewHolder extends RecyclerView.ViewHolder {
         TextView textNamaHomestay,textJenis,textRating;
+        String idHomestay;
         ImageView imageHomestay;
+        Homestay home;
         ConstraintLayout parentLayout;
 
         public HomestayViewHolder(@NonNull View itemView) {
@@ -43,14 +45,14 @@ public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.Homest
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    clickObject.onClick();
+                    clickObject.onClick(home);
                 }
             });
         }
     }
 
     public interface OnHomestayViewHolderClick {
-        void onClick();
+        void onClick(Homestay homestay);
     }
 
     OnHomestayViewHolderClick clickObject;
@@ -78,10 +80,12 @@ public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.Homest
     @Override
     public void onBindViewHolder(@NonNull HomestayViewHolder viewHolder, int position) {
         Homestay homestay = listHomestay.get(position);
+        viewHolder.idHomestay = homestay.id.toString();
         viewHolder.textNamaHomestay.setText(homestay.nama);
         viewHolder.textJenis.setText(homestay.jenis);
         viewHolder.textRating.setText(homestay.rating.toString());
         Picasso.get().load(homestay.foto).into(viewHolder.imageHomestay);
+        viewHolder.home = homestay;
 //        viewHolder.textRating.setText(homestay.rating);
 //        viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -5,4 +5,5 @@
     <string name="title_activity_map">Map</string>
     <string name="title_activity_arah">ArahActivity</string>
     <string name="title_activity_navigasi">NavigasiActivity</string>
+    <string name="apiUrlLumen">https://76c9-114-125-5-48.ngrok.io</string>
 </resources>

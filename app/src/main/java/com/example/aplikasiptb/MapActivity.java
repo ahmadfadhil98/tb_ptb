@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.aplikasiptb.databinding.ActivityMapBinding;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,13 +79,8 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
 //        Toast.makeText(this,token,Toast.LENGTH_SHORT).show();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://tbptbklp4.herokuapp.com/")
-//                .baseUrl("https://135c-114-125-58-154.ngrok.io")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        PortalClient portalClient = retrofit.create(PortalClient.class);
+        Authent authent = new Authent();
+        PortalClient portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
 
         Call<HomestayList> call = portalClient.getHomestay(token);
         call.enqueue(new Callback<HomestayList>() {
@@ -99,9 +96,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                                 item.getNama(),
                                 item.getJenis(),
                                 3,
-                                item.getFoto()
+                                getString(R.string.apiUrlLumen)+item.getFoto(),
+                                item.getWebsite(),
+                                item.getNoHp(),
+                                item.getAlamat()
                         );
                         homestays.add(homestay);
+//                        Toast.makeText(getApplicationContext(),homestay.id,Toast.LENGTH_SHORT).show();
                     }
                 }
                 homestayAdapter.setListHomestay(homestays);
@@ -207,10 +208,31 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     }
 
+//    @Override
+//    public void onClick() {
+//        Intent intent = new Intent(this, DetailHomestayActivity.class);
+//        startActivity(intent);
+//    }
+
     @Override
-    public void onClick() {
+    public void onClick(Homestay homestay) {
+        Toast.makeText(getApplicationContext(),homestay.id.toString(),Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DetailHomestayActivity.class);
+        intent.putExtra("id",homestay.id);
+        intent.putExtra("website",homestay.website);
+        intent.putExtra("nama",homestay.nama);
+        intent.putExtra("jenis",homestay.jenis);
+        intent.putExtra("alamat",homestay.alamat);
+        intent.putExtra("no_hp",homestay.noHp);
+        intent.putExtra("rating",homestay.rating.toString());
+        intent.putExtra("foto",homestay.foto);
         startActivity(intent);
     }
 
+//    @Override
+//    public void onClick(String idhomestay) {
+//        Toast.makeText(getApplicationContext(),idhomestay,Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(this, DetailHomestayActivity.class);
+//        startActivity(intent);
+//    }
 }
