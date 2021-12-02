@@ -12,10 +12,6 @@ public class LaunchScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch_screen);
-        int baseUrl = R.string.apiUrlLumen;
-        String urlBase = getString(R.string.apiUrlLumen);
-        Toast.makeText(getApplicationContext(),baseUrl, Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(),urlBase, Toast.LENGTH_LONG).show();
     }
 
     public void toWalkhthrough(View view){

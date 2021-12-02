@@ -216,7 +216,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void onClick(Homestay homestay) {
-        Toast.makeText(getApplicationContext(),homestay.id.toString(),Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DetailHomestayActivity.class);
         intent.putExtra("id",homestay.id);
         intent.putExtra("website",homestay.website);
