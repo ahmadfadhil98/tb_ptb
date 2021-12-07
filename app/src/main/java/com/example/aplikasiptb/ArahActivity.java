@@ -121,14 +121,14 @@ public class ArahActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        mMap.setTrafficEnabled(true);
-        origion = new LatLng(30.7333,76.7794);
-        dest = new LatLng(28.7041,77.1025);
-        mMap.addMarker(new MarkerOptions().position(origion).title("Lokasi Anda"));
-        mMap.addMarker(new MarkerOptions().position(dest).title("Lokasi Anda"));
-        getDirection("30.7333"+","+"76.7794","28.7041"+","+"77.1025");
-//        getCurrentLocation();
+//        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+//        mMap.setTrafficEnabled(true);
+//        origion = new LatLng(30.7333,76.7794);
+//        dest = new LatLng(28.7041,77.1025);
+//        mMap.addMarker(new MarkerOptions().position(origion).title("Lokasi Anda"));
+//        mMap.addMarker(new MarkerOptions().position(dest).title("Lokasi Anda"));
+//        getDirection("30.7333"+","+"76.7794","28.7041"+","+"77.1025");
+        getCurrentLocation();
 
 
         // Add a marker in Sydney and move the camera

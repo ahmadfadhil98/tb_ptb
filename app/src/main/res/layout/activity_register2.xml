@@ -69,7 +69,7 @@
         android:layout_marginHorizontal="35dp"
         android:layout_marginBottom="35dp"
         android:background="@drawable/button_bg"
-        android:onClick="toRegister3"
+        android:onClick="toRegister1"
         android:text="Selanjutnya"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

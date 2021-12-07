@@ -2,16 +2,19 @@ package com.example.aplikasiptb.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class HomestayItem{
+public class HomeItem{
+
+    @SerializedName("website")
+    private String website;
 
     @SerializedName("nama")
     private String nama;
 
+    @SerializedName("no_hp")
+    private String noHp;
+
     @SerializedName("foto")
     private String foto;
-
-    @SerializedName("latitude")
-    private double latitude;
 
     @SerializedName("jenis")
     private String jenis;
@@ -22,19 +25,23 @@ public class HomestayItem{
     @SerializedName("id")
     private int id;
 
-    @SerializedName("longitude")
-    private double longitude;
+    @SerializedName("alamat")
+    private String alamat;
+
+    public String getWebsite(){
+        return website;
+    }
 
     public String getNama(){
         return nama;
     }
 
-    public String getFoto(){
-        return foto;
+    public String getNoHp(){
+        return noHp;
     }
 
-    public double getLatitude(){
-        return latitude;
+    public String getFoto(){
+        return foto;
     }
 
     public String getJenis(){
@@ -49,7 +56,7 @@ public class HomestayItem{
         return id;
     }
 
-    public double getLongitude(){
-        return longitude;
+    public String getAlamat(){
+        return alamat;
     }
 }

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import com.example.aplikasiptb.model.Review;
 import com.example.aplikasiptb.model.ReviewItem;
 import com.example.aplikasiptb.model.ReviewList;
 import com.example.aplikasiptb.retrofit.PortalClient;
+import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,9 @@ public class ReviewActivity extends AppCompatActivity {
     Button uploadBtn;
 
     Integer idHomestay;
+    PortalClient portalClient;
+    String token;
+    String baseUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +58,17 @@ public class ReviewActivity extends AppCompatActivity {
         });
 
         idHomestay = getIntent().getIntExtra("idHomestay",0);
-
         reviewAdapter = new ReviewAdapter();
-//        reviewAdapter.setListReview(
-//                generateData()
-//        );
+
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
-        String token = preferences.getString("TOKEN","");
+        token = preferences.getString("TOKEN","");
 
+        baseUrl = getString(R.string.apiUrlLumen);
         Authent authent = new Authent();
-        PortalClient portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
+        portalClient = authent.setPortalClient(baseUrl);
 
-        Call<ReviewList> call = portalClient.getReview(token,idHomestay);
+        Call<ReviewList> call = portalClient.getDReview(token,idHomestay);
+        updateViewProgress(true);
         call.enqueue(new Callback<ReviewList>() {
             @Override
             public void onResponse(Call<ReviewList> call, Response<ReviewList> response) {
@@ -74,6 +78,7 @@ public class ReviewActivity extends AppCompatActivity {
                     List<ReviewItem> reviewItems = reviewList.getReview();
                     for (ReviewItem item: reviewItems){
                             Review review = new Review(
+                                    item.getFoto(),
                                     item.getNama(),
                                     item.getKomentar(),
                                     item.getRating(),
@@ -83,17 +88,17 @@ public class ReviewActivity extends AppCompatActivity {
                     }
                 }
                 reviewAdapter.setListReview(reviews);
+                updateViewProgress(false);
             }
 
             @Override
             public void onFailure(Call<ReviewList> call, Throwable t) {
+                updateViewProgress(false);
                 Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
             }
         });
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this);
-//        GridLayoutManager layoutManager = new GridLayoutManager(this, 2,GridLayoutManager.VERTICAL, false);
-
         rvReview = findViewById(R.id.rvReview);
         rvReview.setAdapter(reviewAdapter);
         rvReview.setLayoutManager(layoutManager);
@@ -120,31 +125,21 @@ public class ReviewActivity extends AppCompatActivity {
 
     }
 
-//    public ArrayList<Review> generateData(){
-//        ArrayList<Review> listReview = new ArrayList<>();
-//        listReview.add(new Review("Ahmad Fadhil",
-//                "Temnpat nya bagus",
-//                1,
-//                "1 Februari 2012"));
-//        listReview.add(new Review("Ahmad Fadhil",
-//                "Temnpat nya bersih",
-//                2,
-//                "1 Februari 2012"));
-//        listReview.add(new Review("Ahmad Fadhil",
-//                "Temnpat nya mantap",
-//                3,
-//                "1 Februari 2012"));
-//        listReview.add(new Review("Ahmad Fadhil",
-//                "Temnpat nya keren",
-//                4,
-//                "1 Februari 2012"));
-//        return listReview;
-//    }
 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, DetailHomestayActivity.class);
+        intent.putExtra("idHomestay",idHomestay);
         startActivity(intent);
         finish();
+    }
+
+    public void updateViewProgress(Boolean active){
+        ProgressBar progressBar = findViewById(R.id.progressLaunch);
+        if (active){
+            progressBar.setVisibility(View.VISIBLE);
+        }else{
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

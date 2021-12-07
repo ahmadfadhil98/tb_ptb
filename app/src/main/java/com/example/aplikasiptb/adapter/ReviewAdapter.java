@@ -58,7 +58,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         viewHolder.textNama.setText(review.nama);
         viewHolder.textTanggal.setText(review.tanggal);
         viewHolder.textKomen.setText(review.komen);
-        viewHolder.ratingReview.setRating(review.star);
+        viewHolder.ratingReview.setRating(Float.parseFloat(review.star.toString()));
 
     }
 

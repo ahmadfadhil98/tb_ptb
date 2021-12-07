@@ -17,7 +17,7 @@ public class WalkhthroughActivity extends AppCompatActivity {
     }
 
     public void toRegister(View view){
-        Intent intent = new Intent(this, Register1Activity.class);
+        Intent intent = new Intent(this, Register3Activity.class);
         startActivity(intent);
         finish();
     }

@@ -7,17 +7,20 @@ public class ReviewItem{
     @SerializedName("nama")
     private String nama;
 
+    @SerializedName("foto")
+    private String foto;
+
     @SerializedName("updated_at")
     private String updatedAt;
-
-    @SerializedName("foto")
-    private Object foto;
 
     @SerializedName("komentar")
     private String komentar;
 
     @SerializedName("rating")
-    private int rating;
+    private double rating;
+
+    @SerializedName("homestay_id")
+    private int homestayId;
 
     public String getNama(){
         return nama;
@@ -27,7 +30,7 @@ public class ReviewItem{
         return updatedAt;
     }
 
-    public Object getFoto(){
+    public String getFoto(){
         return foto;
     }
 
@@ -35,7 +38,11 @@ public class ReviewItem{
         return komentar;
     }
 
-    public int getRating(){
+    public double getRating(){
         return rating;
+    }
+
+    public int getHomestayId(){
+        return homestayId;
     }
 }

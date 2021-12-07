@@ -20,12 +20,15 @@ public class Register2Activity extends AppCompatActivity {
 
     ImageView iconBack;
     private ImageView imageView;
+    Integer idUser,userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register2);
 
+        idUser = getIntent().getIntExtra("idUser",0);
+        userId = getIntent().getIntExtra("userId",0);
         imageView = (ImageView) findViewById(R.id.upload);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,10 +115,24 @@ public class Register2Activity extends AppCompatActivity {
         finish();
     }
 
-    @Override
-    public void onBackPressed() {
+    public void toRegister1(View view){
         Intent intent = new Intent(this, Register1Activity.class);
+        intent.putExtra("idUser",idUser);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(userId!=0){
+            Intent intent = new Intent(this, Register3Activity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            Intent intent = new Intent(this, WalkhthroughActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 }

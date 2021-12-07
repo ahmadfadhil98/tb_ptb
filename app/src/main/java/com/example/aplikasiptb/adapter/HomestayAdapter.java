@@ -45,6 +45,7 @@ public class HomestayAdapter extends RecyclerView.Adapter<HomestayAdapter.Homest
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     clickObject.onClick(home);
                 }
             });

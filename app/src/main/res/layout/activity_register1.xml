@@ -30,7 +30,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back" />
 
+    <ProgressBar
+        android:id="@+id/progressRegister1"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -54,7 +66,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/nama"
+                        android:id="@+id/textNamaUser"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="35dp"
@@ -66,32 +78,22 @@
                         tools:ignore="SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <TextView
+                    android:id="@+id/warningNama"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/email2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="35dp"
-                        android:layout_marginVertical="10dp"
-                        android:background="@drawable/input_bg"
-                        android:ems="10"
-                        android:hint="Email"
-                        android:inputType="textEmailAddress"
-                        android:minHeight="48dp"
-                        android:paddingHorizontal="25dp"
-                        tools:ignore="SpeakableTextPresentCheck" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="TextView"
+                    android:textColor="@color/design_default_color_error"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="35dp"
-                    android:layout_marginLeft="25dp"
                     android:layout_marginVertical="5dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="35dp"
                     android:orientation="horizontal">
 
                     <com.hbb20.CountryCodePicker
@@ -110,7 +112,7 @@
                         android:layout_height="match_parent">
 
                         <EditText
-                            android:id="@+id/nomor3"
+                            android:id="@+id/textHp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -125,37 +127,47 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/warningHp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="TextView"
+                    android:textColor="@color/design_default_color_error"
+                    android:visibility="gone" />
+
+                <TextView
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="5dp"
                     android:layout_marginHorizontal="40dp"
-                    android:text="Jenis Kelamin" />
+                    android:layout_marginTop="5dp"
+                    android:text="Jenis Kelamin"
+                    android:textColor="@color/black" />
 
                 <RadioGroup
-                    android:id="@+id/radio_group"
+                    android:id="@+id/radioJk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/view_below"
                     android:layout_marginHorizontal="35dp"
                     android:autofillHints="Jenis Kelamin"
-                    android:orientation="horizontal"
-                    android:layout_above="@+id/view_below" >
+                    android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/radio1"
+                        android:id="@+id/radioLk"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="60dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="60dp"
+                        android:layout_weight="1"
                         android:checked="true"
                         android:text="Laki-laki" />
 
                     <RadioButton
-                        android:id="@+id/radio2"
+                        android:id="@+id/radioPr"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="Perempuan" />
                 </RadioGroup>
 
@@ -165,7 +177,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/tempat"
+                        android:id="@+id/textTmptLahir"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="35dp"
@@ -177,6 +189,16 @@
                         tools:ignore="SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/warningTmptLahir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="TextView"
+                    android:textColor="@color/design_default_color_error"
+                    android:visibility="gone" />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/caseTgl"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -184,7 +206,7 @@
                     android:layout_height="match_parent">
 
                     <EditText
-                        android:id="@+id/tanggal"
+                        android:id="@+id/textTglLahir"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="35dp"
@@ -199,19 +221,41 @@
                         tools:ignore="SpeakableTextPresentCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <TextView
+                    android:id="@+id/warningtglLahir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="TextView"
+                    android:textColor="@color/design_default_color_error"
+                    android:visibility="gone" />
+
             </LinearLayout>
         </ScrollView>
 
-        <Button
-            android:id="@+id/button9"
+        <TextView
+            android:id="@+id/kebijakan2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginHorizontal="35dp"
+            android:layout_marginVertical="10dp"
+            android:layout_weight="0"
+            android:text="Dengan melanjutkan, Anda menyetujui Persyaratan Layanan dan Kebijakan Privasi kami."
+            app:layout_constraintBottom_toTopOf="@+id/button10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonDaftar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="35dp"
+            android:layout_marginTop="0dp"
             android:layout_marginBottom="35dp"
             android:background="@drawable/button_bg"
-            android:onClick="toRegister2"
-            android:text="Selanjutnya"
+            android:onClick="toMap"
+            android:text="Daftar"
             android:textSize="16sp" />
     </LinearLayout>
 

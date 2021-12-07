@@ -9,14 +9,19 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aplikasiptb.adapter.FasilitasAdapter;
+import com.example.aplikasiptb.model.DHome;
 import com.example.aplikasiptb.model.Fasilitas;
 import com.example.aplikasiptb.model.FasilitasHomestayItem;
 import com.example.aplikasiptb.model.FasilitasHomestayList;
+import com.example.aplikasiptb.model.HomeItem;
 import com.example.aplikasiptb.retrofit.PortalClient;
 import com.squareup.picasso.Picasso;
 
@@ -35,6 +40,9 @@ public class DetailHomestayActivity extends AppCompatActivity {
     RecyclerView rvFasilitas;
     FasilitasAdapter fasilitasAdapter;
     Integer idHomestay;
+    PortalClient portalClient;
+    String token;
+    String baseUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,40 +50,26 @@ public class DetailHomestayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_homestay);
 
         imageHome = findViewById(R.id.imageHome);
-        Picasso.get().load(getIntent().getStringExtra("foto")).into(imageHome);
+        urlWeb = findViewById(R.id.textUrl);
+        textNamaHome = findViewById(R.id.textNamaHome);
+        textJenis = findViewById(R.id.textJenis);
+        textDRating = findViewById(R.id.textDRating);
+        textAlamat = findViewById(R.id.textAlamat);
+        textNohp = findViewById(R.id.textPhone);
 
-        idHomestay = getIntent().getIntExtra("id",0);
+        idHomestay = getIntent().getIntExtra("idHomestay",0);
+
         fasilitasAdapter = new FasilitasAdapter();
 
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
-        String token = preferences.getString("TOKEN","");
+        token = preferences.getString("TOKEN","");
 
-//        Toast.makeText(this,token,Toast.LENGTH_SHORT).show();
-
+        baseUrl = getString(R.string.apiUrlLumen);
         Authent authent = new Authent();
-        PortalClient portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
+        portalClient = authent.setPortalClient(baseUrl);
 
-        Call<FasilitasHomestayList> call = portalClient.getDFasilitas(token,idHomestay);
-        call.enqueue(new Callback<FasilitasHomestayList>() {
-            @Override
-            public void onResponse(Call<FasilitasHomestayList> call, Response<FasilitasHomestayList> response) {
-                FasilitasHomestayList fasilitasHomestayList = response.body();
-                ArrayList<Fasilitas> fasilitas = new ArrayList<>();
-                if (fasilitasHomestayList!=null){
-                    List<FasilitasHomestayItem> fasilitasHomestayItems = fasilitasHomestayList.getFasilitasHomestay();
-                    for (FasilitasHomestayItem item : fasilitasHomestayItems){
-                        Fasilitas fasilitas1 = new Fasilitas(item.getNama());
-                        fasilitas.add(fasilitas1);
-                    }
-                }
-                fasilitasAdapter.setListFasilitas(fasilitas);
-            }
-
-            @Override
-            public void onFailure(Call<FasilitasHomestayList> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
-            }
-        });
+        setFasilitas();
+        setDHomestay();
 //        fasilitasAdapter.setListFasilitas(generateData());
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this);
@@ -93,9 +87,6 @@ public class DetailHomestayActivity extends AppCompatActivity {
             }
         });
 
-        String website = getIntent().getStringExtra("website");
-        urlWeb = findViewById(R.id.textUrl);
-        urlWeb.setText(website);
 
         urlWeb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,25 +104,7 @@ public class DetailHomestayActivity extends AppCompatActivity {
             }
         });
 
-        textNamaHome = findViewById(R.id.textNamaHome);
-        String namaHome = getIntent().getStringExtra("nama");
-        textNamaHome.setText(namaHome);
 
-        textJenis = findViewById(R.id.textJenis);
-        String jenis = getIntent().getStringExtra("jenis");
-        textJenis.setText(jenis);
-
-        textDRating = findViewById(R.id.textDRating);
-        String rating = getIntent().getStringExtra("rating");
-        textDRating.setText(rating);
-
-        textAlamat = findViewById(R.id.textAlamat);
-        String alamat = getIntent().getStringExtra("alamat");
-        textAlamat.setText(alamat);
-
-        String noHp = getIntent().getStringExtra("no_hp");
-        textNohp = findViewById(R.id.textPhone);
-        textNohp.setText(noHp);
         textNohp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,12 +123,65 @@ public class DetailHomestayActivity extends AppCompatActivity {
         });
     }
 
-    public ArrayList<Fasilitas> generateData(){
-        ArrayList<Fasilitas> fasilitasArrayList = new ArrayList<>();
-        fasilitasArrayList.add(new Fasilitas("Kolam Renang"));
-        fasilitasArrayList.add(new Fasilitas("WIFI"));
-        fasilitasArrayList.add(new Fasilitas("Sarapam"));
-        return fasilitasArrayList;
+    public void setFasilitas(){
+        Call<FasilitasHomestayList> call = portalClient.getDFasilitas(token,idHomestay);
+        updateViewProgress(1);
+        call.enqueue(new Callback<FasilitasHomestayList>() {
+            @Override
+            public void onResponse(Call<FasilitasHomestayList> call, Response<FasilitasHomestayList> response) {
+                FasilitasHomestayList fasilitasHomestayList = response.body();
+                ArrayList<Fasilitas> fasilitas = new ArrayList<>();
+                if (fasilitasHomestayList!=null){
+                    List<FasilitasHomestayItem> fasilitasHomestayItems = fasilitasHomestayList.getFasilitasHomestay();
+                    for (FasilitasHomestayItem item : fasilitasHomestayItems){
+                        Fasilitas fasilitas1 = new Fasilitas(item.getNama());
+                        fasilitas.add(fasilitas1);
+                    }
+                }
+                fasilitasAdapter.setListFasilitas(fasilitas);
+                updateViewProgress(3);
+            }
+
+            @Override
+            public void onFailure(Call<FasilitasHomestayList> call, Throwable t) {
+                updateViewProgress(2);
+                Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void setDHomestay(){
+        Call<DHome> call = portalClient.getHome(token,idHomestay);
+        updateViewProgress(1);
+        call.enqueue(new Callback<DHome>() {
+            @Override
+            public void onResponse(Call<DHome> call, Response<DHome> response) {
+                DHome dHome = response.body();
+                if(dHome!=null){
+//                    HomeItem item = (HomeItem) dHome.getHome();
+                    List<HomeItem> homeItems = dHome.getHome();
+                    for (HomeItem item : homeItems){
+                        urlWeb.setText(item.getWebsite());
+                        textAlamat.setText(item.getAlamat());
+                        textNamaHome.setText(item.getNama());
+                        textDRating.setText(Double.toString(item.getRating()));
+                        textJenis.setText(item.getJenis());
+                        textNohp.setText(item.getNoHp());
+                        Picasso.get().load(baseUrl+item.getFoto()).into(imageHome);
+                    }
+//                    List<HomestayItem> homestayItem = homestayList.getHomestay();
+
+                }
+                updateViewProgress(3);
+            }
+
+            @Override
+            public void onFailure(Call<DHome> call, Throwable t) {
+                updateViewProgress(2);
+                Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void toReview(View view){
@@ -182,5 +208,24 @@ public class DetailHomestayActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void updateViewProgress(Integer active){
+        FrameLayout black = findViewById(R.id.blank);
+        ProgressBar progressBar = findViewById(R.id.progressDHome);
+        TextView textNoData = findViewById(R.id.textNoData);
+        if (active==1){
+            black.setVisibility(View.VISIBLE);
+            textNoData.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+        }else if(active==2){
+            black.setVisibility(View.VISIBLE);
+            textNoData.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+        }else{
+            black.setVisibility(View.GONE);
+            textNoData.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

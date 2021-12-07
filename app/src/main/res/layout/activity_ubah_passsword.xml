@@ -43,6 +43,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:passwordToggleEnabled="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">>
 
                 <EditText
@@ -50,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="35dp"
-                    android:layout_marginVertical="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/input_bg"
                     android:ems="10"
                     android:hint="Password"
@@ -58,11 +59,30 @@
                     android:minHeight="48dp"
                     android:paddingHorizontal="25dp"
                     tools:ignore="SpeakableTextPresentCheck" />
+
             </com.google.android.material.textfield.TextInputLayout>
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="48dp"
+                android:hint="Lupa Password" />
+
+            <TextView
+                android:id="@+id/warPasslama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_marginBottom="5dp"
+                android:text="TextView"
+                android:textColor="@color/design_default_color_error"
+                android:visibility="gone" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:passwordToggleEnabled="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">>
 
                 <EditText
@@ -73,17 +93,28 @@
                     android:layout_marginVertical="10dp"
                     android:background="@drawable/input_bg"
                     android:ems="10"
-                    android:hint="Password"
+                    android:hint="Password Baru"
                     android:inputType="textPassword"
                     android:minHeight="48dp"
                     android:paddingHorizontal="25dp"
                     tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:id="@+id/warPassBaru"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_marginBottom="5dp"
+                android:text="TextView"
+                android:textColor="@color/design_default_color_error"
+                android:visibility="gone" />
+
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">>
+                app:passwordToggleEnabled="true">>
 
                 <EditText
                     android:id="@+id/pass_conf"
@@ -99,6 +130,16 @@
                     android:paddingHorizontal="25dp"
                     tools:ignore="SpeakableTextPresentCheck" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/warPassConf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="48dp"
+                android:layout_marginBottom="5dp"
+                android:text="TextView"
+                android:textColor="@color/design_default_color_error"
+                android:visibility="gone" />
 
         </LinearLayout>
     </ScrollView>

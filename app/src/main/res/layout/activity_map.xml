@@ -55,6 +55,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:scrollbars="horizontal"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/map"
         tools:listitem="@layout/item_homestay" />
 

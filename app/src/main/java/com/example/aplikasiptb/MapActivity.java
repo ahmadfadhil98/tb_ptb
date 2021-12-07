@@ -9,7 +9,7 @@ import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -30,15 +30,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.aplikasiptb.databinding.ActivityMapBinding;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback,HomestayAdapter.OnHomestayViewHolderClick {
 
@@ -48,6 +45,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     EditText search;
     RecyclerView rvHomestay;
     HomestayAdapter homestayAdapter;
+    int idUser;
+//    private MarkerOptions options = new MarkerOptions();
+    private ArrayList<LatLng> latlngs = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         binding = ActivityMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        idUser = getIntent().getIntExtra("idUser",0);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -95,14 +95,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                                 item.getId(),
                                 item.getNama(),
                                 item.getJenis(),
-                                3,
-                                getString(R.string.apiUrlLumen)+item.getFoto(),
-                                item.getWebsite(),
-                                item.getNoHp(),
-                                item.getAlamat()
+                                item.getRating(),
+                                getString(R.string.apiUrlLumen)+item.getFoto()
                         );
                         homestays.add(homestay);
-//                        Toast.makeText(getApplicationContext(),homestay.id,Toast.LENGTH_SHORT).show();
+                        LatLng harau = new LatLng(item.getLatitude(), item.getLongitude());
+                        mMap.addMarker(new MarkerOptions().position(harau));
                     }
                 }
                 homestayAdapter.setListHomestay(homestays);
@@ -159,7 +157,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         // Add a marker in Sydney and move the camera
         LatLng harau = new LatLng(-0.105881, 100.6603642);
-        mMap.addMarker(new MarkerOptions().position(harau).title("Lembah Harau"));
+        mMap.addMarker(new MarkerOptions().position(harau));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(harau,15));
     }
 
@@ -171,6 +169,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
     public void toProfil(View view){
         Intent intent = new Intent(this, ProfilActivity.class);
+        intent.putExtra("idUser",idUser);
         startActivity(intent);
         finish();
     }
@@ -217,14 +216,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onClick(Homestay homestay) {
         Intent intent = new Intent(this, DetailHomestayActivity.class);
-        intent.putExtra("id",homestay.id);
-        intent.putExtra("website",homestay.website);
-        intent.putExtra("nama",homestay.nama);
-        intent.putExtra("jenis",homestay.jenis);
-        intent.putExtra("alamat",homestay.alamat);
-        intent.putExtra("no_hp",homestay.noHp);
-        intent.putExtra("rating",homestay.rating.toString());
-        intent.putExtra("foto",homestay.foto);
+        intent.putExtra("idHomestay",homestay.id);
         startActivity(intent);
     }
 
