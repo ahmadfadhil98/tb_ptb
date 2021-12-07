@@ -185,6 +185,7 @@ public class DetailHomestayActivity extends AppCompatActivity {
     }
 
     public void toReview(View view){
+//        Toast.makeText(this,idHomestay.toString(),Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, ReviewActivity.class);
         intent.putExtra("idHomestay",idHomestay);
         startActivity(intent);

@@ -135,7 +135,7 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     public void updateViewProgress(Boolean active){
-        ProgressBar progressBar = findViewById(R.id.progressLaunch);
+        ProgressBar progressBar = findViewById(R.id.progressReview);
         if (active){
             progressBar.setVisibility(View.VISIBLE);
         }else{
