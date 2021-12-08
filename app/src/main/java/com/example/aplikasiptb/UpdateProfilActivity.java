@@ -28,6 +28,7 @@ import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.retrofit.PortalClient;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,7 +48,7 @@ public class UpdateProfilActivity extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton radioButton;
     Integer userId;
-    String token;
+    String token,baseUrl;
     PortalClient portalClient;
     TextView warFullname,warUsername,warEmail,warHp,warTempatLhr,warTglLhr;
     private DatePickerDialog datePickerDialog;
@@ -78,8 +79,9 @@ public class UpdateProfilActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
         token = preferences.getString("TOKEN","");
 
+        baseUrl = getString(R.string.apiUrlLumen);
         Authent authent = new Authent();
-        portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
+        portalClient = authent.setPortalClient(baseUrl);
 
         setData();
         iconBack = findViewById(R.id.backImg);
@@ -101,7 +103,7 @@ public class UpdateProfilActivity extends AppCompatActivity {
             }
         });
 
-        imageView = (ImageView) findViewById(R.id.upload);
+        imageView = findViewById(R.id.upload);
         uploadBtn = findViewById(R.id.uploadBtn);
 
         uploadBtn.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +131,7 @@ public class UpdateProfilActivity extends AppCompatActivity {
                             radioGroup.check(R.id.radio2jk);
                         }
 
+                        Picasso.get().load(baseUrl+item.getFoto()).into(imageView);
                         fullname.setText(item.getNama());
                         username.setText(item.getUsername());
                         email.setText(item.getEmail());

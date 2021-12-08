@@ -41,11 +41,11 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.AvatarView
 
                     clickObject.onClick(path);
 
-//                    if (frameSelect.getVisibility()==View.VISIBLE){
-//                        frameSelect.setVisibility(View.GONE);
-//                    }else {
-//                        frameSelect.setVisibility(View.VISIBLE);
-//                    }
+                    if (frameSelect.getVisibility()==View.VISIBLE){
+                        frameSelect.setVisibility(View.GONE);
+                    }else {
+                        frameSelect.setVisibility(View.VISIBLE);
+                    }
                 }
             });
         }
@@ -81,19 +81,19 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.AvatarView
     @Override
     public void onBindViewHolder(@NonNull AvatarViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Avatar avatar = list.get(position);
-        Picasso.get().load(avatar.path).into(holder.imgAvatar);
+        Picasso.get().load(avatar.baseUrl+avatar.path).into(holder.imgAvatar);
         holder.path = avatar.path;
-        holder.imgAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (holder.frameSelect.getVisibility()==View.VISIBLE){
-                    holder.frameSelect.setVisibility(View.GONE);
-//                    holder.getAdapterPosition();
-                }else {
-                    holder.frameSelect.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+//        holder.imgAvatar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (holder.frameSelect.getVisibility()==View.VISIBLE){
+//                    holder.frameSelect.setVisibility(View.GONE);
+////                    holder.getAdapterPosition();
+//                }else {
+//                    holder.frameSelect.setVisibility(View.VISIBLE);
+//                }
+//            }
+//        });
 
     }
 

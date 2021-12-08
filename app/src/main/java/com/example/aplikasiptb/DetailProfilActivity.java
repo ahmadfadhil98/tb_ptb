@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.retrofit.PortalClient;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -22,15 +23,17 @@ import retrofit2.Response;
 
 public class DetailProfilActivity extends AppCompatActivity {
 
-    ImageView iconBack;
+    ImageView iconBack,imgAvatar;
     TextView textNama,textUsername,textEmail,textPassword,textJk,textHp,textLahir;
     Integer userId;
+    String baseUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_profil);
 
+        imgAvatar = findViewById(R.id.imgAvatarDProfil);
         textNama = findViewById(R.id.textNamaDProfil);
         textUsername = findViewById(R.id.textUserDProfil);
         textEmail = findViewById(R.id.textEmailDProfil);
@@ -42,8 +45,9 @@ public class DetailProfilActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
         String token = preferences.getString("TOKEN","");
 
+        baseUrl = getString(R.string.apiUrlLumen);
         Authent authent = new Authent();
-        PortalClient portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
+        PortalClient portalClient = authent.setPortalClient(baseUrl);
 
         Call<DUser> call = portalClient.getDUser(token,token);
         call.enqueue(new Callback<DUser>() {
@@ -62,6 +66,7 @@ public class DetailProfilActivity extends AppCompatActivity {
                             jk = "Perempuan";
                         }
 
+                        Picasso.get().load(baseUrl+item.getFoto()).into(imgAvatar);
                         textNama.setText(item.getNama());
                         textUsername.setText(item.getUsername());
                         textEmail.setText(item.getEmail());

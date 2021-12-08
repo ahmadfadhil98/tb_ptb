@@ -14,6 +14,7 @@ import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.retrofit.PortalClient;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -23,17 +24,19 @@ import retrofit2.Response;
 
 public class ProfilActivity extends AppCompatActivity {
 
-    ImageView iconBack;
+    ImageView iconBack,imgAvatar;
     int idUser;
     TextView textNama,textEmail;
     PortalClient portalClient;
-    String token;
+    String token,baseUrl;
     SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
+
+        imgAvatar = findViewById(R.id.imgAvatarProfil);
 
         idUser = getIntent().getIntExtra("idUser",0);
         textNama = findViewById(R.id.textNamaProfil);
@@ -42,8 +45,9 @@ public class ProfilActivity extends AppCompatActivity {
         preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
         token = preferences.getString("TOKEN","");
 
+        baseUrl = getString(R.string.apiUrlLumen);
         Authent authent = new Authent();
-        portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
+        portalClient = authent.setPortalClient(baseUrl);
 
         Call<DUser> call = portalClient.getDUser(token,token);
         call.enqueue(new Callback<DUser>() {
@@ -55,6 +59,7 @@ public class ProfilActivity extends AppCompatActivity {
                     for (DetailUserItem item : detailUserItems){
                         textNama.setText(item.getNama());
                         textEmail.setText(item.getEmail());
+                        Picasso.get().load(baseUrl+item.getFoto()).into(imgAvatar);
                     }
                 }else{
                     Toast.makeText(getApplicationContext(), "Tidak ada response", Toast.LENGTH_SHORT).show();

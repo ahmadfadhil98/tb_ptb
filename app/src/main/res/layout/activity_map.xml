@@ -40,7 +40,7 @@
             android:paddingStart="35dp" />
 
         <ImageView
-            android:id="@+id/imageView18"
+            android:id="@+id/imgAvatarMap"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:onClick="toProfil"

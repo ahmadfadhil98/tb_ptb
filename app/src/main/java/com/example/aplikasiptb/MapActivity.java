@@ -13,9 +13,12 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.aplikasiptb.adapter.HomestayAdapter;
+import com.example.aplikasiptb.model.DUser;
+import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.model.Homestay;
 import com.example.aplikasiptb.model.HomestayItem;
 import com.example.aplikasiptb.model.HomestayList;
@@ -28,6 +31,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.aplikasiptb.databinding.ActivityMapBinding;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,6 +50,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     RecyclerView rvHomestay;
     HomestayAdapter homestayAdapter;
     int idUser;
+    String baseUrl,token;
+    PortalClient portalClient;
+    ImageView imgAvatar;
 //    private MarkerOptions options = new MarkerOptions();
     private ArrayList<LatLng> latlngs = new ArrayList<>();
 
@@ -61,6 +68,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        imgAvatar = findViewById(R.id.imgAvatarMap);
         search = (EditText) findViewById(R.id.search);
         search.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -75,13 +83,28 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         homestayAdapter = new HomestayAdapter();
 
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
-        String token = preferences.getString("TOKEN","");
+        token = preferences.getString("TOKEN","");
 
-//        Toast.makeText(this,token,Toast.LENGTH_SHORT).show();
+        baseUrl = getString(R.string.apiUrlLumen);
 
         Authent authent = new Authent();
-        PortalClient portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
+        portalClient = authent.setPortalClient(baseUrl);
 
+        setHomestay();
+        setAvatar();
+
+        homestayAdapter.setClickObject(this);
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false);
+
+        rvHomestay = findViewById(R.id.rvHomestay);
+        rvHomestay.setAdapter(homestayAdapter);
+        rvHomestay.setLayoutManager(layoutManager);
+    }
+
+    public void setHomestay(){
         Call<HomestayList> call = portalClient.getHomestay(token);
         call.enqueue(new Callback<HomestayList>() {
             @Override
@@ -96,7 +119,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                                 item.getNama(),
                                 item.getJenis(),
                                 item.getRating(),
-                                getString(R.string.apiUrlLumen)+item.getFoto()
+                                baseUrl+item.getFoto()
                         );
                         homestays.add(homestay);
                         LatLng harau = new LatLng(item.getLatitude(), item.getLongitude());
@@ -111,37 +134,31 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                 Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
             }
         });
-
-        homestayAdapter.setClickObject(this);
-
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
-                LinearLayoutManager.HORIZONTAL, false);
-
-        rvHomestay = findViewById(R.id.rvHomestay);
-        rvHomestay.setAdapter(homestayAdapter);
-        rvHomestay.setLayoutManager(layoutManager);
     }
 
-//    public ArrayList<Homestay> generateData(){
-//        ArrayList<Homestay> listHomestay = new ArrayList<>();
-//        listHomestay.add(new Homestay("Homestay A",
-//                "Penginapan",
-//                1));
-//        listHomestay.add(new Homestay("Homestay B",
-//                "Penginapan",
-//                2));
-//        listHomestay.add(new Homestay("Homestay C",
-//                "Penginapan",
-//                3));
-//        listHomestay.add(new Homestay("Homestay D",
-//                "Penginapan",
-//                4));
-//        listHomestay.add(new Homestay("Homestay E",
-//                "Penginapan",
-//                5));
-//        return listHomestay;
-//    }
+    public void setAvatar(){
+        Call<DUser> call = portalClient.getDUser(token,token);
+        call.enqueue(new Callback<DUser>() {
+            @Override
+            public void onResponse(Call<DUser> call, Response<DUser> response) {
+                DUser dUser = response.body();
+                if(dUser!=null){
+                    List<DetailUserItem> detailUserItems = dUser.getDetailUser();
+                    for (DetailUserItem item : detailUserItems){
+                        Picasso.get().load(baseUrl+item.getFoto()).into(imgAvatar);
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), "Tidak ada response", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DUser> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.

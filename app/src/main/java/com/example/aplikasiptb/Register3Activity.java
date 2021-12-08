@@ -169,7 +169,7 @@ public class Register3Activity extends AppCompatActivity {
                             editor.putString("TOKEN",token);
                             editor.apply();
 
-                            Intent intent = new Intent(getApplicationContext(), Register2Activity.class);
+                            Intent intent = new Intent(getApplicationContext(), RegisterAvatarActivity.class);
                             intent.putExtra("userId",idUser);
                             startActivity(intent);
                             finish();

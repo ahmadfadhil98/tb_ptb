@@ -225,7 +225,7 @@ public class Register1Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, Register2Activity.class);
+        Intent intent = new Intent(this, RegisterAvatarActivity.class);
         startActivity(intent);
         finish();
     }

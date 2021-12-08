@@ -17,6 +17,7 @@ import com.example.aplikasiptb.adapter.AvatarAdapter;
 import com.example.aplikasiptb.model.Avatar;
 import com.example.aplikasiptb.model.AvatarItem;
 import com.example.aplikasiptb.model.AvatarList;
+import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.retrofit.PortalClient;
 
 import java.util.ArrayList;
@@ -32,9 +33,10 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
     AvatarAdapter avatarAdapter;
     ImageView backImg;
     Button nextBtn;
-    Integer userId,idUser,kodeuser;
+    Integer userId,idUser,kodeuser,idPengguna;
     TextView head;
-    String baseUrl;
+    String baseUrl,foto,token;
+    PortalClient portalClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,12 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
         setContentView(R.layout.activity_register_avatar);
 
         nextBtn = findViewById(R.id.btnNext);
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toNext(v);
+            }
+        });
         head = findViewById(R.id.textHead);
 
         idUser = getIntent().getIntExtra("idUser",0);
@@ -57,11 +65,11 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
         avatarAdapter = new AvatarAdapter();
 
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
-        String token = preferences.getString("TOKEN","");
+        token = preferences.getString("TOKEN","");
 
         baseUrl = getString(R.string.apiUrlLumen);
         Authent authent = new Authent();
-        PortalClient portalClient = authent.setPortalClient(baseUrl);
+        portalClient = authent.setPortalClient(baseUrl);
 
         Call<AvatarList> call = portalClient.getAvatar(token);
         call.enqueue(new Callback<AvatarList>() {
@@ -73,7 +81,7 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
                     List<AvatarItem> avatarItems = avatarList.getAvatar();
                     for (AvatarItem item : avatarItems){
                         Avatar avatar = new Avatar(
-                                baseUrl+item.getPath()
+                                item.getPath(),baseUrl
                         );
                         avatars.add(avatar);
                     }
@@ -110,22 +118,94 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
 
     }
 
+    @Override
+    public void onClick(String position) {
+        foto = position;
+        Toast.makeText(getApplicationContext(),position,Toast.LENGTH_SHORT).show();
+    }
+
     public void toNext(View view){
-        if(kodeuser!=0){
-            Intent intent = new Intent(this, DetailProfilActivity.class);
-            intent.putExtra("idUser",idUser);
-            startActivity(intent);
-            finish();
+        if (foto==null){
+            Toast.makeText(getApplicationContext(),"Pilih Avatar",Toast.LENGTH_SHORT).show();
         }else{
-            if (idUser == 0) {
-                idUser = userId;
+
+            if(idUser!=0){
+                idPengguna = idUser;
+            }else if(userId!=0){
+                idPengguna = userId;
+            }else if (kodeuser!=0){
+                idPengguna = kodeuser;
+            }else{
+                Toast.makeText(getApplicationContext(),"idPengguna tidak ada",Toast.LENGTH_SHORT).show();
             }
 
-            Intent intent = new Intent(this, Register1Activity.class);
-            intent.putExtra("idUser",idUser);
-            startActivity(intent);
-            finish();
+            if (idPengguna!=null){
+
+                if(kodeuser!=0){
+                    Call<ResponseRegister> call = portalClient.updateAvatar(token,idPengguna,foto);
+                    call.enqueue(new Callback<ResponseRegister>() {
+                        @Override
+                        public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                            ResponseRegister responseRegister = response.body();
+                            if(responseRegister!=null){
+                                String message = responseRegister.getMessage();
+                                if(message!=null){
+                                    Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), DetailProfilActivity.class);
+                                    intent.putExtra("idUser",idPengguna);
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Tidak ada response",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else{
+                    Toast.makeText(getApplicationContext(),"Disini",Toast.LENGTH_SHORT).show();
+                    Call<ResponseRegister> call = portalClient.registerAvatar(token,idPengguna,foto);
+                    call.enqueue(new Callback<ResponseRegister>() {
+                        @Override
+                        public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                            ResponseRegister responseRegister = response.body();
+                            if(responseRegister!=null){
+                                String message = responseRegister.getMessage();
+                                if(message!=null){
+                                    Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), Register1Activity.class);
+                                    intent.putExtra("idUser",idPengguna);
+                                    startActivity(intent);
+                                    finish();
+                                }
+
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Tidak ada response",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+                }
+
+
+
+
+            }
+
+
         }
+
 
     }
 
@@ -143,8 +223,5 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
     }
 
 
-    @Override
-    public void onClick(String position) {
-        Toast.makeText(getApplicationContext(),position,Toast.LENGTH_SHORT).show();
-    }
+
 }

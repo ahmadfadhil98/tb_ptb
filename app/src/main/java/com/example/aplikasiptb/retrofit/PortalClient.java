@@ -62,9 +62,25 @@ public interface PortalClient {
 
     @FormUrlEncoded
     @POST("api/duser/store")
-    Call<ResponseRegister> registerUser(
+    Call<ResponseRegister> registerAvatar(
             @Header("token") String token,
             @Field("id") int id,
+            @Field("foto") String foto
+    );
+
+    @FormUrlEncoded
+    @POST("api/user/update/{id}")
+    Call<ResponseRegister> updateAvatar(
+            @Header("token") String token,
+            @Path("id") int id,
+            @Field("foto") String foto
+    );
+
+    @FormUrlEncoded
+    @POST("api/user/update/{id}")
+    Call<ResponseRegister> registerUser(
+            @Header("token") String token,
+            @Path("id") int id,
             @Field("nama") String nama,
             @Field("jk") int jk,
             @Field("no_hp") String no_hp,
