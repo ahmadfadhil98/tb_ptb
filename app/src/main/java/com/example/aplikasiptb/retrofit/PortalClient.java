@@ -8,6 +8,7 @@ import com.example.aplikasiptb.model.FasilitasHomestayList;
 import com.example.aplikasiptb.model.HomestayList;
 import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.model.ReviewList;
+import com.example.aplikasiptb.model.UnitList;
 
 
 import java.sql.Date;
@@ -109,10 +110,33 @@ public interface PortalClient {
             @Field("tgl_lahir") String tgl_lahir
     );
 
+    @FormUrlEncoded
+    @POST("api/review/store")
+    Call<ResponseRegister> review(
+            @Header("token") String token,
+            @Field("homestay_id") int homestay_id,
+            @Field("user_id") int user_id,
+            @Field("rating") float rating,
+            @Field("komentar") String komentar
+    );
+
+    @GET("api/review/{user_id}/{homestay_id}")
+    Call<ResponseRegister> reviewItem(
+            @Header("token") String token,
+            @Path("user_id") int user_id,
+            @Path("homestay_id") int homestay_id
+    );
+
     @GET("api/duser/{id}")
     Call<DUser> getDUser(
             @Header("token") String token,
             @Path("id") String tokenString
+    );
+
+    @GET("/api/unit/{id}")
+    Call<UnitList> getUnit(
+            @Header("token") String token,
+            @Path("id") int id
     );
 
     @POST("/logout")

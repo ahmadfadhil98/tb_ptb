@@ -16,6 +16,12 @@ public class ResponseRegister{
     @SerializedName("message")
     private String message;
 
+    @SerializedName("komentar")
+    private String komentar;
+
+    @SerializedName("rating")
+    private float rating;
+
     @SerializedName("email")
     private List<String> email;
 
@@ -52,5 +58,14 @@ public class ResponseRegister{
 
     public List<String> getUsername(){
         return username;
+    }
+
+
+    public String getKomentar() {
+        return komentar;
+    }
+
+    public float getRating() {
+        return rating;
     }
 }

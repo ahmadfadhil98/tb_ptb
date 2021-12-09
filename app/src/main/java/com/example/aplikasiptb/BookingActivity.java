@@ -24,6 +24,7 @@ public class BookingActivity extends AppCompatActivity {
     Spinner unit_spin,tipe_homestay_spin,pembayaran_spin;
     List<String> plantlist;
     ArrayAdapter<String> spinAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

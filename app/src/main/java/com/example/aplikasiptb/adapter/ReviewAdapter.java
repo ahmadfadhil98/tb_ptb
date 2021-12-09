@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aplikasiptb.R;
 import com.example.aplikasiptb.model.Review;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
             textTanggal = itemView.findViewById(R.id.textTanggal);
             textKomen = itemView.findViewById(R.id.textKomen);
             ratingReview = itemView.findViewById(R.id.ratingReview);
+            imgAvatar = itemView.findViewById(R.id.imgAvatar);
         }
     }
 
@@ -59,6 +61,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         viewHolder.textTanggal.setText(review.tanggal);
         viewHolder.textKomen.setText(review.komen);
         viewHolder.ratingReview.setRating(Float.parseFloat(review.star.toString()));
+        Picasso.get().load(review.avatar).into(viewHolder.imgAvatar);
 
     }
 

@@ -121,7 +121,7 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
     @Override
     public void onClick(String position) {
         foto = position;
-        Toast.makeText(getApplicationContext(),position,Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(),position,Toast.LENGTH_SHORT).show();
     }
 
     public void toNext(View view){
@@ -168,7 +168,7 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
                         }
                     });
                 }else{
-                    Toast.makeText(getApplicationContext(),"Disini",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(),"Disini",Toast.LENGTH_SHORT).show();
                     Call<ResponseRegister> call = portalClient.registerAvatar(token,idPengguna,foto);
                     call.enqueue(new Callback<ResponseRegister>() {
                         @Override

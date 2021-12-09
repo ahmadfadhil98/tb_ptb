@@ -125,7 +125,7 @@ public class Register3Activity extends AppCompatActivity {
             warEmail.setText("Email masih kosong");
         }else if (password.equals("")){
             warPassword.setVisibility(View.VISIBLE);
-            warPassword.setText("Username masih kosong");
+            warPassword.setText("Password masih kosong");
         }else if (password.length()<6){
             warPassword.setVisibility(View.VISIBLE);
             warPassword.setText("Password minimal 6 karakter");
