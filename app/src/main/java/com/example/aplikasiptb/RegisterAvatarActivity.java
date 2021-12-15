@@ -33,7 +33,7 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
     AvatarAdapter avatarAdapter;
     ImageView backImg;
     Button nextBtn;
-    Integer userId,idUser,kodeuser,idPengguna;
+    Integer userIdLaunch,userIdRegis,idUserLaunch,idUserProfil,idUser;
     TextView head;
     String baseUrl,foto,token;
     PortalClient portalClient;
@@ -52,11 +52,12 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
         });
         head = findViewById(R.id.textHead);
 
-        idUser = getIntent().getIntExtra("idUser",0);
-        userId = getIntent().getIntExtra("userId",0);
-        kodeuser = getIntent().getIntExtra("kodeuser",0);
+        userIdLaunch = getIntent().getIntExtra("userIdLaunch",0);
+        userIdRegis = getIntent().getIntExtra("userIdRegis",0);
+        idUserProfil = getIntent().getIntExtra("idUserProfil",0);
+        idUserLaunch = getIntent().getIntExtra("idUserLaunch",0);
 
-        if (kodeuser!=0){
+        if (idUserProfil!=0){
             head.setText("Ganti Avatar");
         }else{
             head.setText("Pendaftaran");
@@ -129,20 +130,22 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
             Toast.makeText(getApplicationContext(),"Pilih Avatar",Toast.LENGTH_SHORT).show();
         }else{
 
-            if(idUser!=0){
-                idPengguna = idUser;
-            }else if(userId!=0){
-                idPengguna = userId;
-            }else if (kodeuser!=0){
-                idPengguna = kodeuser;
+            if(userIdLaunch!=0){
+                idUser = userIdLaunch;
+            }else if(userIdRegis!=0){
+                idUser = userIdRegis;
+            }else if (idUserLaunch!=0){
+                idUser = idUserLaunch;
+            }else if (idUserProfil!=0){
+                idUser = idUserProfil;
             }else{
                 Toast.makeText(getApplicationContext(),"idPengguna tidak ada",Toast.LENGTH_SHORT).show();
             }
 
-            if (idPengguna!=null){
+            if (idUser!=null){
 
-                if(kodeuser!=0){
-                    Call<ResponseRegister> call = portalClient.updateAvatar(token,idPengguna,foto);
+                if(idUserProfil!=0||idUserLaunch!=0){
+                    Call<ResponseRegister> call = portalClient.updateAvatar(token,idUser,foto);
                     call.enqueue(new Callback<ResponseRegister>() {
                         @Override
                         public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
@@ -150,11 +153,20 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
                             if(responseRegister!=null){
                                 String message = responseRegister.getMessage();
                                 if(message!=null){
-                                    Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), DetailProfilActivity.class);
-                                    intent.putExtra("idUser",idPengguna);
-                                    startActivity(intent);
-                                    finish();
+                                    if(idUserProfil!=0){
+                                        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), DetailProfilActivity.class);
+                                        intent.putExtra("idUser",idUser);
+                                        startActivity(intent);
+                                        finish();
+                                    }else{
+                                        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), Register1Activity.class);
+                                        intent.putExtra("idUser",idUser);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+
                                 }
 
                             }else{
@@ -169,7 +181,7 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
                     });
                 }else{
 //                    Toast.makeText(getApplicationContext(),"Disini",Toast.LENGTH_SHORT).show();
-                    Call<ResponseRegister> call = portalClient.registerAvatar(token,idPengguna,foto);
+                    Call<ResponseRegister> call = portalClient.registerAvatar(token,idUser,foto);
                     call.enqueue(new Callback<ResponseRegister>() {
                         @Override
                         public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
@@ -179,7 +191,7 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
                                 if(message!=null){
                                     Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), Register1Activity.class);
-                                    intent.putExtra("idUser",idPengguna);
+                                    intent.putExtra("idUser",idUser);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -198,11 +210,7 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
 
                 }
 
-
-
-
             }
-
 
         }
 
@@ -211,12 +219,16 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
 
     @Override
     public void onBackPressed() {
-        if (userId!=0){
+        if (userIdLaunch!=0||idUserLaunch!=0){
+            Intent intent = new Intent(this, WalkhthroughActivity.class);
+            startActivity(intent);
+            finish();
+        }else if(userIdRegis!=0){
             Intent intent = new Intent(this, Register3Activity.class);
             startActivity(intent);
             finish();
-        }else{
-            Intent intent = new Intent(this, WalkhthroughActivity.class);
+        }else if(idUserProfil!=0){
+            Intent intent = new Intent(this, UpdateProfilActivity.class);
             startActivity(intent);
             finish();
         }

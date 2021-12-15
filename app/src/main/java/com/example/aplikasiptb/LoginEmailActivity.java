@@ -15,7 +15,11 @@ import android.widget.Toast;
 
 import com.example.aplikasiptb.model.Auth;
 import com.example.aplikasiptb.model.AuthData;
+import com.example.aplikasiptb.model.DUser;
+import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.retrofit.PortalClient;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +32,9 @@ public class LoginEmailActivity extends AppCompatActivity {
     ImageView iconBack;
     EditText editUsername;
     EditText editPassword;
+    PortalClient portalClient;
+    String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +70,7 @@ public class LoginEmailActivity extends AppCompatActivity {
         String password = editPassword.getText().toString();
 
         Authent authent = new Authent();
-        PortalClient portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
+        portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
 
         Call<Auth> call = portalClient.checkLogin(username,password);
         updateViewProgress(true);
@@ -74,7 +81,7 @@ public class LoginEmailActivity extends AppCompatActivity {
                 if (authClass != null ){
 
                     AuthData authData = authClass.getData();
-                    String token = authData.getToken();
+                    token = authData.getToken();
 //                    Toast.makeText(getApplicationContext(),token,Toast.LENGTH_SHORT).show();
 
                     SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
@@ -82,9 +89,11 @@ public class LoginEmailActivity extends AppCompatActivity {
                     editor.putString("TOKEN",token);
                     editor.apply();
 
-                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-                    startActivity(intent);
-                    finish();
+                    checkDetail();
+
+//                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+//                    startActivity(intent);
+//                    finish();
                 }else{
                     Toast.makeText(getApplicationContext(),"Kombinasi Username dan Password anda salah",Toast.LENGTH_SHORT).show();
                 }
@@ -105,6 +114,66 @@ public class LoginEmailActivity extends AppCompatActivity {
 //        }else {
 //            Toast.makeText(this,"Password/Username Anda salah",Toast.LENGTH_SHORT).show();
 //        }
+    }
+
+    public void checkDetail(){
+        Call<DUser> call = portalClient.getDUser(token,token);
+        updateViewProgress(true);
+        call.enqueue(new Callback<DUser>() {
+            @Override
+            public void onResponse(Call<DUser> call, Response<DUser> response) {
+                DUser dUser = response.body();
+                if (dUser!=null){
+//                    Toast.makeText(getApplicationContext(),"duser ngak kosong",Toast.LENGTH_SHORT).show();
+                    List<DetailUserItem> detailUserItems = dUser.getDetailUser();
+                    int idUser = dUser.getIdUser();
+
+                    if(detailUserItems.isEmpty()){
+//                        Toast.makeText(getApplicationContext(),"duser kosong",Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(getApplicationContext(),RegisterAvatarActivity.class);
+                        intent.putExtra("userIdLaunch",idUser);
+                        finish();
+                        startActivity(intent);
+                    }else{
+                        for (DetailUserItem item : detailUserItems){
+                            if(item.getFoto()==null){
+                                Intent intent = new Intent(getApplicationContext(),RegisterAvatarActivity.class);
+                                intent.putExtra("idUserLaunch",idUser);
+                                finish();
+                                startActivity(intent);
+                            }else if(item.getNama()==null){
+                                Intent intent = new Intent(getApplicationContext(),Register1Activity.class);
+                                intent.putExtra("idUser",idUser);
+                                finish();
+                                startActivity(intent);
+                            }else{
+                                Intent intent = new Intent(getApplicationContext(),MapActivity.class);
+                                intent.putExtra("idUser",idUser);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                finish();
+                                startActivity(intent);
+                            }
+                        }
+                    }
+                }else{
+                    Intent intent = new Intent(getApplicationContext(),WalkhthroughActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    finish();
+                    startActivity(intent);
+                }
+                updateViewProgress(false);
+            }
+
+            @Override
+            public void onFailure(Call<DUser> call, Throwable t) {
+                updateViewProgress(false);
+                Intent intent = new Intent(getApplicationContext(),WalkhthroughActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                finish();
+                startActivity(intent);
+            }
+        });
     }
 
     public void updateViewProgress(Boolean active){

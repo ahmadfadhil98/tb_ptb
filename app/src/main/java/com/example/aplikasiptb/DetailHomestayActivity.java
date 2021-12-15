@@ -194,6 +194,7 @@ public class DetailHomestayActivity extends AppCompatActivity {
 
     public void toBooking(View view){
         Intent intent = new Intent(this, BookingActivity.class);
+        intent.putExtra("idHomestay",idHomestay);
         startActivity(intent);
         finish();
     }

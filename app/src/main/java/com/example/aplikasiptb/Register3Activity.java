@@ -170,7 +170,7 @@ public class Register3Activity extends AppCompatActivity {
                             editor.apply();
 
                             Intent intent = new Intent(getApplicationContext(), RegisterAvatarActivity.class);
-                            intent.putExtra("userId",idUser);
+                            intent.putExtra("userIdRegis",idUser);
                             startActivity(intent);
                             finish();
                         }

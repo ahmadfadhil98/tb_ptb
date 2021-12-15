@@ -7,6 +7,28 @@
     android:orientation="vertical"
     tools:context=".BookingActivity">
 
+    <FrameLayout
+        android:id="@+id/layoutProgressBooking"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progressBar6"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,41 +111,53 @@
                 android:minHeight="48dp"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
-            <TextView
-                android:id="@+id/textView5"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="45dp"
-                android:text="Tipe Homestay" />
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginVertical="10dp"
+                android:orientation="horizontal">
 
-            <Spinner
-                android:id="@+id/tipe_homestay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="55dp"
-                android:layout_marginRight="35dp"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <EditText
-                    android:id="@+id/jumlah"
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="35dp"
-                    android:layout_marginVertical="10dp"
-                    android:background="@drawable/input_bg"
-                    android:hint="Jumlah Hari Sewa"
-                    android:minHeight="48dp"
-                    android:paddingHorizontal="25dp"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    android:layout_weight="1">>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <EditText
+                        android:id="@+id/checkIn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_bg"
+                        android:ems="10"
+                        android:hint="Check In"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">>
+
+                    <EditText
+                        android:id="@+id/checkOut"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_bg"
+                        android:ems="10"
+                        android:hint="Check Out"
+                        android:inputType="date"
+                        android:minHeight="48dp"
+                        android:paddingHorizontal="25dp"
+                        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

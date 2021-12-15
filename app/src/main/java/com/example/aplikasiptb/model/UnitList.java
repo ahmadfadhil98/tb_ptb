@@ -8,7 +8,14 @@ public class UnitList{
     @SerializedName("unit")
     private List<UnitItem> unit;
 
+    @SerializedName("jumlah")
+    private int jumlah;
+
     public List<UnitItem> getUnit(){
         return unit;
+    }
+
+    public int getJumlah(){
+        return jumlah;
     }
 }

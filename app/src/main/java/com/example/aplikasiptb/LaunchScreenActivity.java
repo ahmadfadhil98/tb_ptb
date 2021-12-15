@@ -57,14 +57,14 @@ public class LaunchScreenActivity extends AppCompatActivity {
 //                        Toast.makeText(getApplicationContext(),"duser kosong",Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getApplicationContext(),RegisterAvatarActivity.class);
-                        intent.putExtra("idUser",idUser);
+                        intent.putExtra("userIdLaunch",idUser);
                         finish();
                         startActivity(intent);
                     }else{
                         for (DetailUserItem item : detailUserItems){
                             if(item.getFoto()==null){
                                 Intent intent = new Intent(getApplicationContext(),RegisterAvatarActivity.class);
-                                intent.putExtra("idUser",idUser);
+                                intent.putExtra("idUserLaunch",idUser);
                                 finish();
                                 startActivity(intent);
                             }else if(item.getNama()==null){

@@ -6,15 +6,21 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.retrofit.PortalClient;
+import com.google.android.material.chip.Chip;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,6 +56,7 @@ public class DetailProfilActivity extends AppCompatActivity {
         PortalClient portalClient = authent.setPortalClient(baseUrl);
 
         Call<DUser> call = portalClient.getDUser(token,token);
+        updateViewProgress(true);
         call.enqueue(new Callback<DUser>() {
             @Override
             public void onResponse(Call<DUser> call, Response<DUser> response) {
@@ -72,15 +79,28 @@ public class DetailProfilActivity extends AppCompatActivity {
                         textEmail.setText(item.getEmail());
                         textJk.setText(jk);
                         textHp.setText(item.getNoHp());
-                        textLahir.setText(item.getTempatLahir()+", "+item.getTglLahir());
+
+                        String tlhr = item.getTglLahir();
+                        SimpleDateFormat formatawal = new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat formatakhir = new SimpleDateFormat("dd MMMM yyyy");
+                        Date dtlhr = null;
+                        try {
+                            dtlhr = formatawal.parse(tlhr);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        textLahir.setText(item.getTempatLahir()+", "+formatakhir.format(dtlhr));
                     }
                 }else{
                     Toast.makeText(getApplicationContext(), "Tidak ada response", Toast.LENGTH_SHORT).show();
                 }
+                updateViewProgress(false);
             }
 
             @Override
             public void onFailure(Call<DUser> call, Throwable t) {
+                updateViewProgress(false);
                 Toast.makeText(getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
             }
         });
@@ -114,5 +134,14 @@ public class DetailProfilActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProfilActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void updateViewProgress(Boolean active){
+        FrameLayout progress = findViewById(R.id.layputProgressDProfil);
+        if (active){
+            progress.setVisibility(View.VISIBLE);
+        }else{
+            progress.setVisibility(View.GONE);
+        }
     }
 }

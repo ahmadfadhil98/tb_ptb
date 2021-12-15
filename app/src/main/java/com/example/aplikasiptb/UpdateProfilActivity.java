@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,8 +31,10 @@ import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.retrofit.PortalClient;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -109,13 +112,18 @@ public class UpdateProfilActivity extends AppCompatActivity {
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImage(UpdateProfilActivity.this);
+//                selectImage(UpdateProfilActivity.this);
+                Intent intent = new Intent(getApplicationContext(), RegisterAvatarActivity.class);
+                intent.putExtra("idUserProfil",userId);
+                startActivity(intent);
+                finish();
             }
         });
     }
 
     public void setData(){
         Call<DUser> call = portalClient.getDUser(token,token);
+        updateViewProgress(true);
         call.enqueue(new Callback<DUser>() {
             @Override
             public void onResponse(Call<DUser> call, Response<DUser> response) {
@@ -137,15 +145,26 @@ public class UpdateProfilActivity extends AppCompatActivity {
                         email.setText(item.getEmail());
                         noHp.setText(item.getNoHp());
                         tempatLahir.setText(item.getTempatLahir());
-                        tglLahir.setText(item.getTglLahir());
+
+                        String tlhr = item.getTglLahir();
+                        SimpleDateFormat formatawal = new SimpleDateFormat("yyyy-MM-dd");
+                        Date dtlhr = null;
+                        try {
+                            dtlhr = formatawal.parse(tlhr);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        tglLahir.setText(dateFormatter.format(dtlhr));
                     }
                 }else{
                     Toast.makeText(getApplicationContext(), "Tidak ada response", Toast.LENGTH_SHORT).show();
                 }
+                updateViewProgress(false);
             }
 
             @Override
             public void onFailure(Call<DUser> call, Throwable t) {
+                updateViewProgress(false);
                 Toast.makeText(getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
             }
         });
@@ -355,5 +374,14 @@ public class UpdateProfilActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DetailProfilActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void updateViewProgress(Boolean active){
+        FrameLayout progress = findViewById(R.id.layoutProgressUpdateProfil);
+        if (active){
+            progress.setVisibility(View.VISIBLE);
+        }else{
+            progress.setVisibility(View.GONE);
+        }
     }
 }

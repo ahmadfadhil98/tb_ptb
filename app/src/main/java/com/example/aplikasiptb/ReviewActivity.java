@@ -30,7 +30,10 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -125,12 +128,14 @@ public class ReviewActivity extends AppCompatActivity {
                 if(reviewList!=null){
                     List<ReviewItem> reviewItems = reviewList.getReview();
                     for (ReviewItem item: reviewItems){
+                        SimpleDateFormat formatakhir = new SimpleDateFormat("dd MMMM yyyy");
+                        String tlhr = formatakhir.format(item.getUpdatedAt());
                         Review review = new Review(
                                 baseUrl+item.getFoto(),
                                 item.getNama(),
                                 item.getKomentar(),
                                 item.getRating(),
-                                item.getUpdatedAt()
+                                tlhr
                         );
                         reviews.add(review);
                     }

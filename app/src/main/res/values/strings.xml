@@ -6,5 +6,5 @@
     <string name="title_activity_arah">ArahActivity</string>
     <string name="title_activity_navigasi">NavigasiActivity</string>
 <!--    <string name="apiUrlLumen">https://tbptbklp4.herokuapp.com</string>-->
-    <string name="apiUrlLumen">https://c0cd-114-125-43-58.ngrok.io</string>
+    <string name="apiUrlLumen">https://9dfc-114-125-5-165.ngrok.io</string>
 </resources>

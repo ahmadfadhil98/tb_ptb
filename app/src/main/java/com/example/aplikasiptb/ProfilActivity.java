@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class ProfilActivity extends AppCompatActivity {
         portalClient = authent.setPortalClient(baseUrl);
 
         Call<DUser> call = portalClient.getDUser(token,token);
+        updateViewProgress(true);
         call.enqueue(new Callback<DUser>() {
             @Override
             public void onResponse(Call<DUser> call, Response<DUser> response) {
@@ -64,10 +66,12 @@ public class ProfilActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(getApplicationContext(), "Tidak ada response", Toast.LENGTH_SHORT).show();
                 }
+                updateViewProgress(false);
             }
 
             @Override
             public void onFailure(Call<DUser> call, Throwable t) {
+                updateViewProgress(false);
                 Toast.makeText(getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
             }
         });
@@ -127,5 +131,14 @@ public class ProfilActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void updateViewProgress(Boolean active){
+        FrameLayout progress = findViewById(R.id.layoutProfilProgress);
+        if (active){
+            progress.setVisibility(View.VISIBLE);
+        }else{
+            progress.setVisibility(View.GONE);
+        }
     }
 }

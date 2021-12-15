@@ -2,6 +2,8 @@ package com.example.aplikasiptb.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class ReviewItem{
 
     @SerializedName("nama")
@@ -11,7 +13,7 @@ public class ReviewItem{
     private String foto;
 
     @SerializedName("updated_at")
-    private String updatedAt;
+    private Date updatedAt;
 
     @SerializedName("komentar")
     private String komentar;
@@ -26,7 +28,7 @@ public class ReviewItem{
         return nama;
     }
 
-    public String getUpdatedAt(){
+    public Date getUpdatedAt(){
         return updatedAt;
     }
 
