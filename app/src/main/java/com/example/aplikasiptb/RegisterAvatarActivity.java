@@ -33,7 +33,7 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
     AvatarAdapter avatarAdapter;
     ImageView backImg;
     Button nextBtn;
-    Integer userIdLaunch,userIdRegis,idUserLaunch,idUserProfil,idUser;
+    Integer userIdLaunch,userIdRegis,idUserLaunch,idUserProfil,idUser,idUserBack;
     TextView head;
     String baseUrl,foto,token;
     PortalClient portalClient;
@@ -56,6 +56,7 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
         userIdRegis = getIntent().getIntExtra("userIdRegis",0);
         idUserProfil = getIntent().getIntExtra("idUserProfil",0);
         idUserLaunch = getIntent().getIntExtra("idUserLaunch",0);
+        idUserBack = getIntent().getIntExtra("idUserBack",0);
 
         if (idUserProfil!=0){
             head.setText("Ganti Avatar");
@@ -138,13 +139,15 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
                 idUser = idUserLaunch;
             }else if (idUserProfil!=0){
                 idUser = idUserProfil;
+            }else if (idUserBack!=0){
+                idUser = idUserBack;
             }else{
                 Toast.makeText(getApplicationContext(),"idPengguna tidak ada",Toast.LENGTH_SHORT).show();
             }
 
             if (idUser!=null){
 
-                if(idUserProfil!=0||idUserLaunch!=0){
+                if(idUserProfil!=0||idUserLaunch!=0||idUserBack!=0){
                     Call<ResponseRegister> call = portalClient.updateAvatar(token,idUser,foto);
                     call.enqueue(new Callback<ResponseRegister>() {
                         @Override
