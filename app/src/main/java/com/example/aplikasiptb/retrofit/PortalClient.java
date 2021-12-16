@@ -101,6 +101,7 @@ public interface PortalClient {
             @Header("token") String token,
             @Path("id") int id,
             @Field("nama") String nama,
+            @Field("username") String username,
             @Field("email") String email,
             @Field("jk") int jk,
             @Field("no_hp") String no_hp,

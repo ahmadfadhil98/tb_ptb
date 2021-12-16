@@ -227,6 +227,7 @@ public class UpdateProfilActivity extends AppCompatActivity {
                     token,
                     userId,
                     namaUser,
+                    user,
                     mail,
                     jenisKelamin,
                     hp,

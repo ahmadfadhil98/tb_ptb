@@ -1,9 +1,11 @@
 package com.example.aplikasiptb;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -227,11 +229,36 @@ public class RegisterAvatarActivity extends AppCompatActivity implements AvatarA
             startActivity(intent);
             finish();
         }else if(userIdRegis!=0){
-            Intent intent = new Intent(this, Register3Activity.class);
-            startActivity(intent);
-            finish();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setTitle("Konfirmasi");
+            builder.setMessage("Apakah anda yakin ingin menghentikan proses registrasi?");
+
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+                    // Do nothing but close the dialog
+                    Intent intent = new Intent(getApplicationContext(), WalkhthroughActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    // Do nothing
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
         }else if(idUserProfil!=0){
             Intent intent = new Intent(this, UpdateProfilActivity.class);
+            intent.putExtra("idUser",idUser);
             startActivity(intent);
             finish();
         }
