@@ -20,13 +20,12 @@ import java.util.ArrayList;
 public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.AvatarViewHolder>{
 
     ArrayList<Avatar> list = new ArrayList<>();
+    AvatarViewHolder avatarHolder;
 
     public class AvatarViewHolder extends RecyclerView.ViewHolder {
         ImageView imgAvatar;
         FrameLayout frameSelect;
-        int log;
         String path;
-        Boolean selected;
 
         public AvatarViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -34,20 +33,23 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.AvatarView
             imgAvatar = itemView.findViewById(R.id.avatarIcon);
             frameSelect = itemView.findViewById(R.id.frameSelect);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selected = true;
 
-                    clickObject.onClick(path);
 
-                    if (frameSelect.getVisibility()==View.VISIBLE){
-                        frameSelect.setVisibility(View.GONE);
-                    }else {
-                        frameSelect.setVisibility(View.VISIBLE);
-                    }
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    selected = true;
+//                    clickObject.onClick(path);
+//
+//                    if (frameSelect.getVisibility()==View.VISIBLE){
+//                        frameSelect.setVisibility(View.GONE);
+//                    }else {
+//                        frameSelect.setVisibility(View.VISIBLE);
+//                    }
+//
+//                    avatarHolder = this.c
+//                }
+//            });
         }
     }
 
@@ -82,18 +84,29 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.AvatarView
     public void onBindViewHolder(@NonNull AvatarViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Avatar avatar = list.get(position);
         Picasso.get().load(avatar.baseUrl+avatar.path).into(holder.imgAvatar);
-        holder.path = avatar.path;
-//        holder.imgAvatar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (holder.frameSelect.getVisibility()==View.VISIBLE){
-//                    holder.frameSelect.setVisibility(View.GONE);
-////                    holder.getAdapterPosition();
-//                }else {
-//                    holder.frameSelect.setVisibility(View.VISIBLE);
-//                }
-//            }
-//        });
+//        holder.path = avatar.path;
+//        holder.pos
+        holder.imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (holder.frameSelect.getVisibility()==View.VISIBLE){
+                    holder.frameSelect.setVisibility(View.GONE);
+                    holder.path = null;
+                }else {
+                    holder.path = avatar.path;
+                    holder.frameSelect.setVisibility(View.VISIBLE);
+                }
+
+                if(avatarHolder!=null){
+                    avatarHolder.frameSelect.setVisibility(View.GONE);
+                }
+
+                clickObject.onClick(holder.path);
+
+                avatarHolder = holder;
+            }
+        });
 
     }
 

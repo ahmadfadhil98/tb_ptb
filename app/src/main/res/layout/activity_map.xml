@@ -16,6 +16,7 @@
         tools:context=".MapActivity" />
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -48,6 +49,16 @@
             tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/pullUp"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginBottom="-5dp"
+        android:src="@drawable/pictureup"
+        app:layout_constraintBottom_toTopOf="@+id/rvHomestay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHomestay"
         android:layout_width="match_parent"
@@ -55,8 +66,10 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:scrollbars="horizontal"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/map"
-        tools:listitem="@layout/item_homestay" />
+        tools:listitem="@layout/item_homestay">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

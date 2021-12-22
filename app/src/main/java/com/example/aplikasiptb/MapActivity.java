@@ -52,7 +52,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     int idUser;
     String baseUrl,token;
     PortalClient portalClient;
-    ImageView imgAvatar;
+    ImageView imgAvatar,pullUp;
 //    private MarkerOptions options = new MarkerOptions();
     private ArrayList<LatLng> latlngs = new ArrayList<>();
 
@@ -80,6 +80,20 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             }
         });
 
+        rvHomestay = findViewById(R.id.rvHomestay);
+        pullUp = findViewById(R.id.pullUp);
+        pullUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(rvHomestay.getVisibility()==View.VISIBLE){
+                    rvHomestay.setVisibility(View.GONE);
+                }else{
+                    rvHomestay.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+
         homestayAdapter = new HomestayAdapter();
 
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
@@ -99,7 +113,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false);
 
-        rvHomestay = findViewById(R.id.rvHomestay);
+
         rvHomestay.setAdapter(homestayAdapter);
         rvHomestay.setLayoutManager(layoutManager);
     }
@@ -243,4 +257,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 //        Intent intent = new Intent(this, DetailHomestayActivity.class);
 //        startActivity(intent);
 //    }
+
+
 }

@@ -118,9 +118,11 @@ public class ArahActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMyLocationEnabled(true);
 //        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 //        mMap.setTrafficEnabled(true);
 //        origion = new LatLng(30.7333,76.7794);
@@ -137,53 +139,53 @@ public class ArahActivity extends FragmentActivity implements OnMapReadyCallback
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
-    private void getDirection(String origin,String destination){
-        Toast.makeText(ArahActivity.this, getKunciAPI(), Toast.LENGTH_SHORT).show();
-
-        apiInterface.getDirection("driving","less_driving",origin,destination,
-                "AIzaSyB7EXQ_BLiJNLhXvpUXzgJhlGvOOANp90E")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Result>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
-            @Override
-            public void onSuccess(@NonNull Result result) {
-                polylinelist = new ArrayList<>();
-                List<Route> routeList = result.getRoutes();
-                Log.i("Tes", String.valueOf(routeList));
-                for (Route route:routeList){
-                    String polyline = route.getOverViewPolyline().getPoints();
-                    polylinelist.addAll(decodePoly(polyline));
-                }
-//                String[] stringArray = polylinelist.toArray(new String[0]);
-//                Log.i("Tes", String.valueOf(polylinelist));
-                polylineOptions = new PolylineOptions();
-                polylineOptions.color(ContextCompat.getColor(getApplicationContext(),
-                        R.color.design_default_color_primary));
-                polylineOptions.width(8);
-                polylineOptions.startCap(new ButtCap());
-                polylineOptions.jointType(JointType.ROUND);
-                polylineOptions.addAll(polylinelist);
-                mMap.addPolyline(polylineOptions);
-
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                builder.include(origion);
-                builder.include(dest);
-                mMap.animateCamera(CameraUpdateFactory.
-                        newLatLngBounds(builder.build(), 100));
-            }
-
-            @Override
-            public void onError(@NonNull Throwable e) {
-
-            }
-        })
-        ;
-    }
+//    private void getDirection(String origin,String destination){
+//        Toast.makeText(ArahActivity.this, getKunciAPI(), Toast.LENGTH_SHORT).show();
+//
+//        apiInterface.getDirection("driving","less_driving",origin,destination,
+//                "AIzaSyB7EXQ_BLiJNLhXvpUXzgJhlGvOOANp90E")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new SingleObserver<Result>() {
+//            @Override
+//            public void onSubscribe(@NonNull Disposable d) {
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(@NonNull Result result) {
+//                polylinelist = new ArrayList<>();
+//                List<Route> routeList = result.getRoutes();
+//                Log.i("Tes", String.valueOf(routeList));
+//                for (Route route:routeList){
+//                    String polyline = route.getOverViewPolyline().getPoints();
+//                    polylinelist.addAll(decodePoly(polyline));
+//                }
+////                String[] stringArray = polylinelist.toArray(new String[0]);
+////                Log.i("Tes", String.valueOf(polylinelist));
+//                polylineOptions = new PolylineOptions();
+//                polylineOptions.color(ContextCompat.getColor(getApplicationContext(),
+//                        R.color.design_default_color_primary));
+//                polylineOptions.width(8);
+//                polylineOptions.startCap(new ButtCap());
+//                polylineOptions.jointType(JointType.ROUND);
+//                polylineOptions.addAll(polylinelist);
+//                mMap.addPolyline(polylineOptions);
+//
+//                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+//                builder.include(origion);
+//                builder.include(dest);
+//                mMap.animateCamera(CameraUpdateFactory.
+//                        newLatLngBounds(builder.build(), 100));
+//            }
+//
+//            @Override
+//            public void onError(@NonNull Throwable e) {
+//
+//            }
+//        })
+//        ;
+//    }
 
     private List<LatLng> decodePoly(String encoded){
         List<LatLng> poly = new ArrayList<>();

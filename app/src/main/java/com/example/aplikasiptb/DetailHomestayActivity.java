@@ -158,13 +158,12 @@ public class DetailHomestayActivity extends AppCompatActivity {
             public void onResponse(Call<DHome> call, Response<DHome> response) {
                 DHome dHome = response.body();
                 if(dHome!=null){
-//                    HomeItem item = (HomeItem) dHome.getHome();
                     List<HomeItem> homeItems = dHome.getHome();
                     for (HomeItem item : homeItems){
                         urlWeb.setText(item.getWebsite());
                         textAlamat.setText(item.getAlamat());
                         textNamaHome.setText(item.getNama());
-                        textDRating.setText(Double.toString(item.getRating()));
+                        textDRating.setText(String.format("%.2f",item.getRating()));
                         textJenis.setText(item.getJenis());
                         textNohp.setText(item.getNoHp());
                         Picasso.get().load(baseUrl+item.getFoto()).into(imageHome);

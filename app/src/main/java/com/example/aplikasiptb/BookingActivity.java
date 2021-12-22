@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -46,19 +47,22 @@ public class BookingActivity extends AppCompatActivity {
 
     ImageView iconBack;
     Spinner unit_spin,pembayaran_spin;
-    List<String> unitListSting;
+    List<String> unitListSting,pembayaranList;
     List<Integer> idList,hargaList;
-    ArrayAdapter<String> spinAdapter;
+    ArrayAdapter<String> spinAdapter,spinPembayaranAdapter;
     String token,baseUrl,tglCheckIn,tglCheckOut,timeCheckIn,timeCheckOut,inCheck,OutCheck;
     PortalClient portalClient;
     Integer idHomestay,harga;
     EditText nama,checkIn,checkOut,tarif,uangDp;
+    TextView reset;
     SimpleDateFormat simpleDateFormat;
+
 
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
     private TimePickerDialog timePickerDialog;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +81,21 @@ public class BookingActivity extends AppCompatActivity {
         checkOut = findViewById(R.id.checkOut);
         tarif = findViewById(R.id.tarif);
         uangDp = findViewById(R.id.uang_muka);
+        reset = findViewById(R.id.reset);
+        unit_spin = findViewById(R.id.unit);
+        pembayaran_spin = findViewById(R.id.pembayaran);
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkIn.setText(null);
+                checkOut.setText(null);
+                tarif.setText(null);
+                uangDp.setText(null);
+                unit_spin.setSelection(0);
+                pembayaran_spin.setSelection(0);
+            }
+        });
 
         idHomestay = getIntent().getIntExtra("idHomestay",0);
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
@@ -87,17 +106,24 @@ public class BookingActivity extends AppCompatActivity {
         Authent authent = new Authent();
         portalClient = authent.setPortalClient(baseUrl);
 
-        unit_spin = findViewById(R.id.unit);
-        pembayaran_spin = findViewById(R.id.pembayaran);
-
         String[] units = new String[]{
                 "Select an item..."
+        };
+
+        String[] pembayarans = new String[]{
+                "Select an item...",
+                "Bank BRI",
+                "Bank BNI",
+                "Bank BSI",
+                "Bank Mandiri",
+                "Bank BCA"
         };
 
         idList = new ArrayList<>();
         hargaList = new ArrayList<>();
         idList.add(0);
         hargaList.add(0);
+        pembayaranList = new ArrayList<>(Arrays.asList(pembayarans));
         unitListSting = new ArrayList<>(Arrays.asList(units));
 
         Call<UnitList> call =  portalClient.getUnit(token,idHomestay);
@@ -128,8 +154,10 @@ public class BookingActivity extends AppCompatActivity {
         });
 
         setSpinner(unitListSting);
+        setSpinnerLagi(pembayaranList);
 
         spinAdapter.setDropDownViewResource(R.layout.spinner_item_unit);
+        spinPembayaranAdapter.setDropDownViewResource(R.layout.spinner_item_unit);
 
         unit_spin.setAdapter(spinAdapter);
         unit_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -146,7 +174,7 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
 
-        pembayaran_spin.setAdapter(spinAdapter);
+        pembayaran_spin.setAdapter(spinPembayaranAdapter);
 
         getNamaUser();
 
@@ -307,7 +335,36 @@ public class BookingActivity extends AppCompatActivity {
         };
     }
 
+    public void setSpinnerLagi(List<String> list){
+        spinPembayaranAdapter = new ArrayAdapter<String>(
+                this,R.layout.spinner_item_unit,list){
+
+            @Override
+            public boolean isEnabled(int position) {
+                if(position == 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                } else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
+    }
+
     public void toInfoPembayaran(View view){
+
         Intent intent = new Intent(this, InfoPembayaranActivity.class);
         startActivity(intent);
         finish();
