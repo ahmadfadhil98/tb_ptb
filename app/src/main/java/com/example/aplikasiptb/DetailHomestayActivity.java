@@ -43,6 +43,7 @@ public class DetailHomestayActivity extends AppCompatActivity {
     PortalClient portalClient;
     String token;
     String baseUrl;
+    Double latitude,longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,6 +168,8 @@ public class DetailHomestayActivity extends AppCompatActivity {
                         textJenis.setText(item.getJenis());
                         textNohp.setText(item.getNoHp());
                         Picasso.get().load(baseUrl+item.getFoto()).into(imageHome);
+                        latitude = item.getLatitude();
+                        longitude = item.getLongitude();
                     }
 //                    List<HomestayItem> homestayItem = homestayList.getHomestay();
 
@@ -200,6 +203,9 @@ public class DetailHomestayActivity extends AppCompatActivity {
 
     public void toMapArah(View view){
         Intent intent = new Intent(this, ArahActivity.class);
+        intent.putExtra("idHomestay",idHomestay);
+        intent.putExtra("latitude",latitude);
+        intent.putExtra("longitude",longitude);
         startActivity(intent);
         finish();
     }

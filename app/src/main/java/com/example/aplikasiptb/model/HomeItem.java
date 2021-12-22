@@ -10,6 +10,12 @@ public class HomeItem{
     @SerializedName("nama")
     private String nama;
 
+    @SerializedName("longitude")
+    private double longitude;
+
+    @SerializedName("latitude")
+    private double latitude;
+
     @SerializedName("no_hp")
     private String noHp;
 
@@ -58,5 +64,13 @@ public class HomeItem{
 
     public String getAlamat(){
         return alamat;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
     }
 }

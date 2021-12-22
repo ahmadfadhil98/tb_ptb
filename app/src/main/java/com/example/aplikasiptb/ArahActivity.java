@@ -73,6 +73,8 @@ public class ArahActivity extends FragmentActivity implements OnMapReadyCallback
     private List<LatLng> polylinelist;
     private PolylineOptions polylineOptions;
     private LatLng origion,dest;
+    private int idHomestay;
+    private Double latitude,longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,9 @@ public class ArahActivity extends FragmentActivity implements OnMapReadyCallback
         locationRequest.setFastestInterval(2000);
 
 //        getCurrentLocation();
+        idHomestay = getIntent().getIntExtra("idHomestay",0);
+        latitude = getIntent().getDoubleExtra("latitude",0.0);
+        longitude = getIntent().getDoubleExtra("longitude",0.0);
 
         iconBack = findViewById(R.id.backImg);
         iconBack.setOnClickListener(new View.OnClickListener() {
@@ -355,6 +360,7 @@ public class ArahActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, DetailHomestayActivity.class);
+        intent.putExtra("idHomestay",idHomestay);
         startActivity(intent);
         finish();
     }
