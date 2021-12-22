@@ -22,7 +22,7 @@ import retrofit2.http.Path;
 public interface PortalClient {
 
     @FormUrlEncoded
-    @POST("/login")
+    @POST("login")
     Call<Auth> checkLogin(
             @Field("username") String username,
             @Field("password") String Password
@@ -52,7 +52,7 @@ public interface PortalClient {
     );
 
     @FormUrlEncoded
-    @POST("/register")
+    @POST("register")
     Call<ResponseRegister> register(
             @Field("username") String username,
             @Field("email") String email,
@@ -132,13 +132,13 @@ public interface PortalClient {
             @Path("id") String tokenString
     );
 
-    @GET("/api/unit/{id}")
+    @GET("api/unit/{id}")
     Call<UnitList> getUnit(
             @Header("token") String token,
             @Path("id") int id
     );
 
-    @POST("/logout")
+    @POST("logout")
     Call<ResponseRegister> logout(
             @Header("token") String token
     );
