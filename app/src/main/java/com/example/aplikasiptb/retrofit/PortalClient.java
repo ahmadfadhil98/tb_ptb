@@ -6,6 +6,7 @@ import com.example.aplikasiptb.model.DHome;
 import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.FasilitasHomestayList;
 import com.example.aplikasiptb.model.HomestayList;
+import com.example.aplikasiptb.model.PembayaranList;
 import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.model.ReviewList;
 import com.example.aplikasiptb.model.UnitList;
@@ -145,5 +146,8 @@ public interface PortalClient {
 
     @GET("api/avatar")
     Call<AvatarList> getAvatar(@Header("token") String token);
+
+    @GET("api/pembayaran/{id}")
+    Call<PembayaranList> getPembayaran(@Header("token") String token,@Path("id") int id);
 
 }

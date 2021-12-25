@@ -87,8 +87,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
             public void onClick(View v) {
                 if(rvHomestay.getVisibility()==View.VISIBLE){
                     rvHomestay.setVisibility(View.GONE);
+                    pullUp.setImageResource(R.drawable.pictureup);
                 }else{
                     rvHomestay.setVisibility(View.VISIBLE);
+                    pullUp.setImageResource(R.drawable.picturedown);
                 }
 
             }

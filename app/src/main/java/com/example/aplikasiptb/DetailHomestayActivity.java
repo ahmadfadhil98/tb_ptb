@@ -36,7 +36,7 @@ import retrofit2.Response;
 public class DetailHomestayActivity extends AppCompatActivity {
 
     TextView urlWeb,textNohp,textNamaHome,textJenis,textDRating,textAlamat;
-    ImageView iconBack,imageHome;
+    ImageView iconBack,imageHome,imgHomeFull;
     RecyclerView rvFasilitas;
     FasilitasAdapter fasilitasAdapter;
     Integer idHomestay;
@@ -57,6 +57,21 @@ public class DetailHomestayActivity extends AppCompatActivity {
         textDRating = findViewById(R.id.textDRating);
         textAlamat = findViewById(R.id.textAlamat);
         textNohp = findViewById(R.id.textPhone);
+        imgHomeFull = findViewById(R.id.imageHomeFull);
+
+        imageHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgHomeFull.setVisibility(View.VISIBLE);
+            }
+        });
+
+        imgHomeFull.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imgHomeFull.setVisibility(View.GONE);
+            }
+        });
 
         idHomestay = getIntent().getIntExtra("idHomestay",0);
 
@@ -168,6 +183,7 @@ public class DetailHomestayActivity extends AppCompatActivity {
                         textJenis.setText(item.getJenis());
                         textNohp.setText(item.getNoHp());
                         Picasso.get().load(baseUrl+item.getFoto()).into(imageHome);
+                        Picasso.get().load(baseUrl+item.getFoto()).into(imgHomeFull);
                         latitude = item.getLatitude();
                         longitude = item.getLongitude();
                     }
@@ -212,9 +228,14 @@ public class DetailHomestayActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, MapActivity.class);
-        startActivity(intent);
-        finish();
+        if (imgHomeFull.getVisibility()==View.VISIBLE){
+            imgHomeFull.setVisibility(View.GONE);
+        }else{
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
     public void updateViewProgress(Integer active){

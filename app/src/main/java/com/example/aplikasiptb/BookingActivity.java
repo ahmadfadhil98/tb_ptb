@@ -26,6 +26,8 @@ import android.widget.Toast;
 
 import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.DetailUserItem;
+import com.example.aplikasiptb.model.PembayaranItem;
+import com.example.aplikasiptb.model.PembayaranList;
 import com.example.aplikasiptb.model.UnitItem;
 import com.example.aplikasiptb.model.UnitList;
 import com.example.aplikasiptb.retrofit.PortalClient;
@@ -47,12 +49,13 @@ public class BookingActivity extends AppCompatActivity {
 
     ImageView iconBack;
     Spinner unit_spin,pembayaran_spin;
-    List<String> unitListSting,pembayaranList;
-    List<Integer> idList,hargaList;
+    List<String> unitListSting,pembayaranListString,bankListString,noRekList;
+    List<Integer> idList,hargaList,idPembList;
     ArrayAdapter<String> spinAdapter,spinPembayaranAdapter;
     String token,baseUrl,tglCheckIn,tglCheckOut,timeCheckIn,timeCheckOut,inCheck,OutCheck;
+    String noRek,namaBank;
     PortalClient portalClient;
-    Integer idHomestay,harga;
+    Integer idHomestay,harga,id_pemb;
     EditText nama,checkIn,checkOut,tarif,uangDp;
     TextView reset;
     SimpleDateFormat simpleDateFormat;
@@ -112,18 +115,23 @@ public class BookingActivity extends AppCompatActivity {
 
         String[] pembayarans = new String[]{
                 "Select an item...",
-                "Bank BRI",
-                "Bank BNI",
-                "Bank BSI",
-                "Bank Mandiri",
-                "Bank BCA"
         };
 
         idList = new ArrayList<>();
         hargaList = new ArrayList<>();
+
+        idPembList = new ArrayList<>();
+        bankListString = new ArrayList<>();
+        noRekList = new ArrayList<>();
+
         idList.add(0);
         hargaList.add(0);
-        pembayaranList = new ArrayList<>(Arrays.asList(pembayarans));
+
+        idPembList.add(0);
+        bankListString.add("Kosong");
+        noRekList.add("Kosong");
+
+        pembayaranListString = new ArrayList<>(Arrays.asList(pembayarans));
         unitListSting = new ArrayList<>(Arrays.asList(units));
 
         Call<UnitList> call =  portalClient.getUnit(token,idHomestay);
@@ -153,8 +161,30 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
 
+        Call<PembayaranList> listCall = portalClient.getPembayaran(token,idHomestay);
+        listCall.enqueue(new Callback<PembayaranList>() {
+            @Override
+            public void onResponse(Call<PembayaranList> call, Response<PembayaranList> response) {
+                PembayaranList pembayaranList = response.body();
+                if(pembayaranList!=null){
+                    List<PembayaranItem> pembayaranItems = pembayaranList.getPembayaran();
+                    for(PembayaranItem item : pembayaranItems){
+                        pembayaranListString.add(item.getNamaBank());
+                        idPembList.add(item.getId());
+                        bankListString.add(item.getNamaBank());
+                        noRekList.add(item.getNoRekening());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PembayaranList> call, Throwable t) {
+
+            }
+        });
+
         setSpinner(unitListSting);
-        setSpinnerLagi(pembayaranList);
+        setSpinnerLagi(pembayaranListString);
 
         spinAdapter.setDropDownViewResource(R.layout.spinner_item_unit);
         spinPembayaranAdapter.setDropDownViewResource(R.layout.spinner_item_unit);
@@ -165,7 +195,7 @@ public class BookingActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int id_unit = idList.get(position);
                 harga = hargaList.get(position);
-                Toast.makeText(getApplicationContext(),Integer.toString(harga),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),Integer.toString(harga),Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -175,6 +205,20 @@ public class BookingActivity extends AppCompatActivity {
         });
 
         pembayaran_spin.setAdapter(spinPembayaranAdapter);
+        pembayaran_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                id_pemb = idPembList.get(position);
+                noRek = noRekList.get(position);
+                namaBank = bankListString.get(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         getNamaUser();
 
@@ -365,7 +409,17 @@ public class BookingActivity extends AppCompatActivity {
 
     public void toInfoPembayaran(View view){
 
+        String dpuang = uangDp.getText().toString();
+//        Toast.makeText(getApplicationContext(),dpuang,Toast.LENGTH_SHORT).show();
+
+
         Intent intent = new Intent(this, InfoPembayaranActivity.class);
+        intent.putExtra("total",harga);
+        intent.putExtra("id_pemb",id_pemb);
+        intent.putExtra("uangDp",dpuang);
+        intent.putExtra("namaBank",namaBank);
+        intent.putExtra("noRek",noRek);
+        intent.putExtra("idHomestay",idHomestay);
         startActivity(intent);
         finish();
     }

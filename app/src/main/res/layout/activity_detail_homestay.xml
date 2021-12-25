@@ -30,10 +30,18 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/imageHomeFull"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:srcCompat="@drawable/_4030276379_d04968cd36_b" />
+
     <FrameLayout
         android:id="@+id/blank"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -166,6 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="10dp"
                     android:text="Detail"
+                    android:textColor="@color/black"
                     android:textSize="18sp" />
 
                 <LinearLayout

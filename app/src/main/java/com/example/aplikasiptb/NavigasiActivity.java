@@ -2,8 +2,11 @@ package com.example.aplikasiptb;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -16,6 +19,7 @@ public class NavigasiActivity extends FragmentActivity implements OnMapReadyCall
 
     private GoogleMap mMap;
     private ActivityNavigasiBinding binding;
+    FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +51,11 @@ public class NavigasiActivity extends FragmentActivity implements OnMapReadyCall
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    @SuppressLint("MissingPermission")
+    public void getCurrentLocation(){
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationProviderClient.getLastLocation();
     }
 }
