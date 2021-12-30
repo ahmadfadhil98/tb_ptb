@@ -201,6 +201,8 @@ public class Register1Activity extends AppCompatActivity {
                         }else if(message!=null){
                             Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+                            intent.putExtra("srcActivity","Register1Activity");
+                            intent.putExtra("idUser",idUser);
                             startActivity(intent);
                             finish();
 
@@ -234,6 +236,7 @@ public class Register1Activity extends AppCompatActivity {
     public void updateViewProgress(Boolean active){
         Button button = findViewById(R.id.buttonDaftar1);
         ProgressBar progressBar = findViewById(R.id.progressRegister1);
+        TextView kebijakan = findViewById(R.id.kebijakanText);
         if (active){
             textNamaUser.setEnabled(false);
             textHp.setEnabled(false);
@@ -241,6 +244,7 @@ public class Register1Activity extends AppCompatActivity {
             tglLahir.setEnabled(false);
             radioJk.setEnabled(false);
             button.setVisibility(View.GONE);
+            kebijakan.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
         }else{
             textNamaUser.setEnabled(true);
@@ -249,6 +253,7 @@ public class Register1Activity extends AppCompatActivity {
             tglLahir.setEnabled(true);
             radioJk.setEnabled(true);
             button.setVisibility(View.VISIBLE);
+            kebijakan.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.GONE);
         }
     }

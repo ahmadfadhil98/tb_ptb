@@ -75,6 +75,7 @@ public class LaunchScreenActivity extends AppCompatActivity {
                             }else{
                                 Intent intent = new Intent(getApplicationContext(),MapActivity.class);
                                 intent.putExtra("idUser",idUser);
+                                intent.putExtra("srcActivity","LaunchScreenActivity");
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 finish();
                                 startActivity(intent);

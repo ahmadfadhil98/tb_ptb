@@ -1,9 +1,15 @@
 package com.example.aplikasiptb;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
@@ -22,6 +28,7 @@ import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.model.Homestay;
 import com.example.aplikasiptb.model.HomestayItem;
 import com.example.aplikasiptb.model.HomestayList;
+import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.retrofit.PortalClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +38,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.aplikasiptb.databinding.ActivityMapBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -53,6 +63,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
     String baseUrl,token;
     PortalClient portalClient;
     ImageView imgAvatar,pullUp;
+    String srcActivity,title,message;
 //    private MarkerOptions options = new MarkerOptions();
     private ArrayList<LatLng> latlngs = new ArrayList<>();
 
@@ -63,13 +74,49 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
         binding = ActivityMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         idUser = getIntent().getIntExtra("idUser",0);
+//        srcActivity = "";
+        srcActivity = getIntent().getStringExtra("srcActivity");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
+        token = preferences.getString("TOKEN","");
+
+        baseUrl = getString(R.string.apiUrlLumen);
+
+        Authent authent = new Authent();
+        portalClient = authent.setPortalClient(baseUrl);
+
+//        Toast.makeText(getApplicationContext(),srcActivity,Toast.LENGTH_SHORT).show();
+
+        if (srcActivity != null) {
+            if (srcActivity.equals("LoginEmailActivity")||srcActivity.equals("Register1Activity")){
+                displayNotification();
+            }
+
+        }
+
+
+
+        //Subcription
+//        FirebaseMessaging.getInstance().subscribeToTopic("Info");
+
+        //Token FCM
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if(task.isSuccessful()){
+                    String token = task.getResult();
+                    Log.d("fcm_token",token);
+                }
+            }
+        });
+
+
         imgAvatar = findViewById(R.id.imgAvatarMap);
-        search = (EditText) findViewById(R.id.search);
+        search = findViewById(R.id.search);
         search.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -98,14 +145,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         homestayAdapter = new HomestayAdapter();
 
-        SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
-        token = preferences.getString("TOKEN","");
-
-        baseUrl = getString(R.string.apiUrlLumen);
-
-        Authent authent = new Authent();
-        portalClient = authent.setPortalClient(baseUrl);
-
         setHomestay();
         setAvatar();
 
@@ -118,6 +157,67 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         rvHomestay.setAdapter(homestayAdapter);
         rvHomestay.setLayoutManager(layoutManager);
+    }
+
+    private void displayNotification(){
+
+//        Panggil Manager Notifikasi
+        NotificationManager notificationManager
+                = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+//        Buat channel dan tambahkan ke notification manager
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "com.example.aplikasiptb.CH01",
+                    "Channel Notifikasi Wellcome",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            notificationManager.createNotificationChannel(channel);
+        }
+
+//        Bikin Notifikasi
+
+        if(srcActivity=="LoginEmailActivity"){
+
+            title = "Wellcome back";
+            message = "Selamat datang kembali di HarauStay";
+
+        }else{
+
+            title = "Wellcome";
+            message = "Selamat datang di HarauStay";
+
+            setNotif(title,message);
+        }
+
+        Notification notification = new NotificationCompat.Builder(this,"com.example.aplikasiptb.CH01")
+                .setSmallIcon(R.drawable.info)
+                .setContentTitle(title)
+                .setContentText(message)
+                .build();
+
+        notificationManager.notify(123,notification);
+
+    }
+
+    public void setNotif(String title,String message){
+        Call<ResponseRegister> call = portalClient.addNotif(token,title,message);
+        call.enqueue(new Callback<ResponseRegister>() {
+            @Override
+            public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                ResponseRegister responseRegister = response.body();
+                if(responseRegister!=null){
+                    Toast.makeText(getApplicationContext(),responseRegister.getMessage(),Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Tidak ada response",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void setHomestay(){

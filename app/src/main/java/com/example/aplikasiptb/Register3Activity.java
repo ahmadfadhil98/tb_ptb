@@ -1,5 +1,6 @@
 package com.example.aplikasiptb;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -17,7 +18,10 @@ import android.widget.Toast;
 
 import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.retrofit.PortalClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -30,6 +34,8 @@ public class Register3Activity extends AppCompatActivity {
     ImageView iconBack;
     EditText textUsername,textPassword,textEmail,textKonfirmasi;
     TextView warUsername,warEmail,warPassword,warKonfirmasi;
+    String fcm_token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +50,15 @@ public class Register3Activity extends AppCompatActivity {
         warEmail = findViewById(R.id.warningEmail);
         warPassword = findViewById(R.id.warningPassword);
         warKonfirmasi = findViewById(R.id.warningKonfirmasi);
+
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if(task.isSuccessful()){
+                    fcm_token = task.getResult();
+                }
+            }
+        });
 
         textPassword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -141,7 +156,8 @@ public class Register3Activity extends AppCompatActivity {
             Authent authent = new Authent();
             PortalClient portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
 
-            Call<ResponseRegister> call = portalClient.register(username,email,password);
+            Call<ResponseRegister> call = portalClient.register(username,email,password,fcm_token);
+//            Toast.makeText(getApplicationContext(),fcm_token,Toast.LENGTH_SHORT).show();
             updateViewProgress(true);
             call.enqueue(new Callback<ResponseRegister>() {
                 @Override
@@ -167,6 +183,7 @@ public class Register3Activity extends AppCompatActivity {
                             SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putString("TOKEN",token);
+                            editor.putInt("IDUSER",idUser);
                             editor.apply();
 
                             Intent intent = new Intent(getApplicationContext(), RegisterAvatarActivity.class);

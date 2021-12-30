@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "465634055771",
+    "project_id": "ptbharaustay",
+    "storage_bucket": "ptbharaustay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465634055771:android:af097ef96dbd275e64517e",
+        "android_client_info": {
+          "package_name": "com.example.aplikasiptb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465634055771-87cp271nhusnru19mfbs5icqjril3ah5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aplikasiptb",
+            "certificate_hash": "f29c0bddcb8ac532ed0f8aa4f624e4e464d28e16"
+          }
+        },
+        {
+          "client_id": "465634055771-1tlpq943kgu5gisitd8ucbmpbp97j2q1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAp-cZOB8qrfVqhQ8aMFSi9KBq2qxdatQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465634055771-1tlpq943kgu5gisitd8ucbmpbp97j2q1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

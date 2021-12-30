@@ -2,11 +2,13 @@ package com.example.aplikasiptb;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -28,6 +30,7 @@ import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.model.PembayaranItem;
 import com.example.aplikasiptb.model.PembayaranList;
+import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.model.UnitItem;
 import com.example.aplikasiptb.model.UnitList;
 import com.example.aplikasiptb.retrofit.PortalClient;
@@ -55,7 +58,7 @@ public class BookingActivity extends AppCompatActivity {
     String token,baseUrl,tglCheckIn,tglCheckOut,timeCheckIn,timeCheckOut,inCheck,OutCheck;
     String noRek,namaBank;
     PortalClient portalClient;
-    Integer idHomestay,harga,id_pemb;
+    Integer idHomestay,harga,id_pemb,id_unit;
     EditText nama,checkIn,checkOut,tarif,uangDp;
     TextView reset;
     SimpleDateFormat simpleDateFormat;
@@ -193,7 +196,7 @@ public class BookingActivity extends AppCompatActivity {
         unit_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int id_unit = idList.get(position);
+                id_unit = idList.get(position);
                 harga = hargaList.get(position);
 //                Toast.makeText(getApplicationContext(),Integer.toString(harga),Toast.LENGTH_SHORT).show();
             }
@@ -409,20 +412,88 @@ public class BookingActivity extends AppCompatActivity {
 
     public void toInfoPembayaran(View view){
 
-        String dpuang = uangDp.getText().toString();
-//        Toast.makeText(getApplicationContext(),dpuang,Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Konfirmasi");
+        builder.setMessage("Apakah anda yakin melakuakan booking dengan unit homestay ini?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing but close the dialog
+//                Toast.makeText(getApplicationContext(),token,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),id_unit.toString(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),inCheck,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(),OutCheck,Toast.LENGTH_SHORT).show();
+
+                SimpleDateFormat formatawal = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
+                SimpleDateFormat formatakhir = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                Date inCHeckNew = null;
+                Date outCHeckNew = null;
+
+                try {
+                    inCHeckNew = formatawal.parse(inCheck);
+                    outCHeckNew = formatawal.parse(OutCheck);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                String checkInNew = formatakhir.format(inCHeckNew);
+                String checkOutNew = formatakhir.format(outCHeckNew);
+
+                Call<ResponseRegister> call = portalClient.booking(
+                        token,
+                        id_unit,
+                        checkInNew,
+                        checkOutNew,
+                        id_pemb
+                );
+                call.enqueue(new Callback<ResponseRegister>() {
+                    @Override
+                    public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                        ResponseRegister responseRegister = response.body();
+                        if(responseRegister!=null){
+                            String mess = responseRegister.getMessage();
+                            Toast.makeText(getApplicationContext(),mess,Toast.LENGTH_SHORT).show();
+
+                            String dpuang = uangDp.getText().toString();
+                            Integer idBooked= responseRegister.getId();
+
+                            Intent intent = new Intent(getApplicationContext(), InfoPembayaranActivity.class);
+                            intent.putExtra("idHomestay",idHomestay);
+                            intent.putExtra("idBooking",idBooked);
+                            startActivity(intent);
+                            finish();
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Tidak ada response",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Do nothing
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
 
 
-        Intent intent = new Intent(this, InfoPembayaranActivity.class);
-        intent.putExtra("total",harga);
-        intent.putExtra("id_pemb",id_pemb);
-        intent.putExtra("uangDp",dpuang);
-        intent.putExtra("namaBank",namaBank);
-        intent.putExtra("noRek",noRek);
-        intent.putExtra("idHomestay",idHomestay);
-        startActivity(intent);
-        finish();
     }
+
 
     @Override
     public void onBackPressed() {

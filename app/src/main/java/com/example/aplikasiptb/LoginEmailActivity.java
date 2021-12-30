@@ -1,10 +1,12 @@
 package com.example.aplikasiptb;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +20,9 @@ import com.example.aplikasiptb.model.AuthData;
 import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.retrofit.PortalClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -33,7 +38,8 @@ public class LoginEmailActivity extends AppCompatActivity {
     EditText editUsername;
     EditText editPassword;
     PortalClient portalClient;
-    String token;
+    String token,fcm_token;
+    Integer idUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,15 @@ public class LoginEmailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if(task.isSuccessful()){
+                    fcm_token = task.getResult();
+                }
             }
         });
     }
@@ -72,7 +87,7 @@ public class LoginEmailActivity extends AppCompatActivity {
         Authent authent = new Authent();
         portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
 
-        Call<Auth> call = portalClient.checkLogin(username,password);
+        Call<Auth> call = portalClient.checkLogin(username,password,fcm_token);
         updateViewProgress(true);
         call.enqueue(new Callback<Auth>() {
             @Override
@@ -82,11 +97,13 @@ public class LoginEmailActivity extends AppCompatActivity {
 
                     AuthData authData = authClass.getData();
                     token = authData.getToken();
+                    idUser = authData.getId();
 //                    Toast.makeText(getApplicationContext(),token,Toast.LENGTH_SHORT).show();
 
                     SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("TOKEN",token);
+                    editor.putInt("IDUSER",idUser);
                     editor.apply();
 
                     checkDetail();
@@ -150,6 +167,7 @@ public class LoginEmailActivity extends AppCompatActivity {
                             }else{
                                 Intent intent = new Intent(getApplicationContext(),MapActivity.class);
                                 intent.putExtra("idUser",idUser);
+                                intent.putExtra("srcActivity","LoginEmailActivity");
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 finish();
                                 startActivity(intent);
