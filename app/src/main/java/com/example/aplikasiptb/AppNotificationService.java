@@ -21,7 +21,7 @@ public class AppNotificationService extends FirebaseMessagingService {
 
     Intent intent;
     String bookingId,homestayId;
-    Integer idBooking,idHomestay;
+    Integer idBooking,idHomestay,status;
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
@@ -32,6 +32,8 @@ public class AppNotificationService extends FirebaseMessagingService {
         idBooking = Integer.valueOf(bookingId);
         homestayId = remoteMessage.getData().get("homestay_id");
         idHomestay = Integer.valueOf(homestayId);
+        status = Integer.valueOf(remoteMessage.getData().get("status"));
+
 
         //tampilkan nnotifikasi
         displayNotification(title,message);
@@ -53,11 +55,11 @@ public class AppNotificationService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(channel);
         }
 
-        if(title.equals("Pengingat")){
+        if(status==1){
             intent = new Intent(getApplicationContext(),InfoPembayaranActivity.class);
             intent.putExtra("homestayId",idHomestay);
             intent.putExtra("idBooking",idBooking);
-        }else{
+        }else if(status==2){
             intent = new Intent(getApplicationContext(),ArahActivity.class);
         }
 
