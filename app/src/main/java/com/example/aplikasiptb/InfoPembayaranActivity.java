@@ -28,7 +28,7 @@ public class InfoPembayaranActivity extends AppCompatActivity {
     ImageView iconBack;
     Integer idHomestay,idBooking,total,homestayId,idHome;
     String namaBank,noRek,uangDp;
-    TextView bankNama,totalBayar,dpUang,rekNo;
+    TextView bankNama,totalBayar,dpUang,rekNo,refNo;
 
 
     String token,baseUrl;
@@ -53,7 +53,8 @@ public class InfoPembayaranActivity extends AppCompatActivity {
         bankNama = findViewById(R.id.namaBank);
         totalBayar = findViewById(R.id.totalBayar);
         dpUang = findViewById(R.id.uangDp);
-        rekNo = findViewById(R.id.noRekening);
+        rekNo = findViewById(R.id.noRek);
+        refNo = findViewById(R.id.referensiNo);
 
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
         token = preferences.getString("TOKEN","");
@@ -93,6 +94,7 @@ public class InfoPembayaranActivity extends AppCompatActivity {
 
                         bankNama.setText(item.getNamaBank());
                         rekNo.setText(item.getNoRekening());
+                        refNo.setText(item.getToken());
                     }
                 }else{
                     Toast.makeText(getApplicationContext(),"Tidak ada response",Toast.LENGTH_SHORT).show();
