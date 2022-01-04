@@ -22,9 +22,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.aplikasiptb.direction.ApiInterface;
-import com.example.aplikasiptb.direction.Result;
-import com.example.aplikasiptb.direction.Route;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;
@@ -69,7 +66,6 @@ public class ArahActivity extends FragmentActivity implements OnMapReadyCallback
 
     private LocationRequest locationRequest;
 
-    public ApiInterface apiInterface;
     private List<LatLng> polylinelist;
     private PolylineOptions polylineOptions;
     private LatLng origion,dest;
@@ -106,12 +102,6 @@ public class ArahActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("https://maps.googleapis.com/")
-                .build();
-        apiInterface = retrofit.create(ApiInterface.class);
     }
 
     /**
@@ -143,54 +133,6 @@ public class ArahActivity extends FragmentActivity implements OnMapReadyCallback
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
-
-//    private void getDirection(String origin,String destination){
-//        Toast.makeText(ArahActivity.this, getKunciAPI(), Toast.LENGTH_SHORT).show();
-//
-//        apiInterface.getDirection("driving","less_driving",origin,destination,
-//                "AIzaSyB7EXQ_BLiJNLhXvpUXzgJhlGvOOANp90E")
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new SingleObserver<Result>() {
-//            @Override
-//            public void onSubscribe(@NonNull Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(@NonNull Result result) {
-//                polylinelist = new ArrayList<>();
-//                List<Route> routeList = result.getRoutes();
-//                Log.i("Tes", String.valueOf(routeList));
-//                for (Route route:routeList){
-//                    String polyline = route.getOverViewPolyline().getPoints();
-//                    polylinelist.addAll(decodePoly(polyline));
-//                }
-////                String[] stringArray = polylinelist.toArray(new String[0]);
-////                Log.i("Tes", String.valueOf(polylinelist));
-//                polylineOptions = new PolylineOptions();
-//                polylineOptions.color(ContextCompat.getColor(getApplicationContext(),
-//                        R.color.design_default_color_primary));
-//                polylineOptions.width(8);
-//                polylineOptions.startCap(new ButtCap());
-//                polylineOptions.jointType(JointType.ROUND);
-//                polylineOptions.addAll(polylinelist);
-//                mMap.addPolyline(polylineOptions);
-//
-//                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-//                builder.include(origion);
-//                builder.include(dest);
-//                mMap.animateCamera(CameraUpdateFactory.
-//                        newLatLngBounds(builder.build(), 100));
-//            }
-//
-//            @Override
-//            public void onError(@NonNull Throwable e) {
-//
-//            }
-//        })
-//        ;
-//    }
 
     private List<LatLng> decodePoly(String encoded){
         List<LatLng> poly = new ArrayList<>();

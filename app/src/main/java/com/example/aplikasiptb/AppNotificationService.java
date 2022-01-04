@@ -70,7 +70,7 @@ public class AppNotificationService extends FirebaseMessagingService {
         );
 
 //        Bikin Notifikasi
-        Notification notification = new NotificationCompat.Builder(this,"com.example.aplikasiptb.CH01")
+        Notification notification = new NotificationCompat.Builder(getApplicationContext(),"com.example.aplikasiptb.CH01")
                 .setSmallIcon(R.drawable.info)
                 .setContentTitle(title)
                 .setContentText(message)
