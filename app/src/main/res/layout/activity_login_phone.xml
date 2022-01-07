@@ -8,6 +8,18 @@
     tools:context=".LoginPhoneActivity">
 
     <TextView
+        android:id="@+id/warningNohp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="Nomor Handpone"
+        android:textColor="@color/design_default_color_error"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <TextView
         android:id="@+id/head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,8 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="35dp"
         android:layout_marginVertical="15dp"
-        android:text="Anda akan menerima verifikasi SMS yang mungkin menerapkan tarif pesan dan authData."
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        android:text="Anda akan menerima verifikasi SMS yang mungkin menerapkan tarif pesan dan data."
+        app:layout_constraintTop_toBottomOf="@+id/warningNohp"
         tools:layout_editor_absoluteX="35dp" />
 
     <LinearLayout
@@ -94,7 +106,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/nomor"
+                android:id="@+id/nomorhp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -109,27 +121,27 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="35dp"
         android:layout_marginVertical="10dp"
         android:background="@drawable/button_bg"
-        android:onClick="toMap"
+        android:onClick="toOtp"
         android:text="Masuk"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView51"
+        app:layout_constraintBottom_toTopOf="@+id/textLoginUserEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView51"
+        android:id="@+id/textLoginUserEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
         android:onClick="toLoginEmail"
-        android:text="Gunakan email, Langsung"
+        android:text="Login dengan Email atau Username"
         android:textAlignment="center"
         android:textColor="#6B4EFF"
         android:textSize="16sp"
@@ -138,7 +150,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/progressLogin"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

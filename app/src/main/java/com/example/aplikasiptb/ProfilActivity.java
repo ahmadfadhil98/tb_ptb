@@ -15,6 +15,7 @@ import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.retrofit.PortalClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -102,6 +103,7 @@ public class ProfilActivity extends AppCompatActivity {
                     String message =responseRegister.getMessage();
                     if(message!=null){
                         preferences.edit().clear().commit();
+                        FirebaseAuth.getInstance().signOut();
                         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), WalkhthroughActivity.class);
                         startActivity(intent);

@@ -22,6 +22,7 @@ public class AppNotificationService extends FirebaseMessagingService {
     Intent intent;
     String bookingId,homestayId;
     Integer idBooking,idHomestay,status;
+    PendingIntent pendingIntent;
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
@@ -64,7 +65,7 @@ public class AppNotificationService extends FirebaseMessagingService {
         }
 
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(
+        pendingIntent = PendingIntent.getActivity(
                 getApplicationContext(),
                 1231,
                 intent,

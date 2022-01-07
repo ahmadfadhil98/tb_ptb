@@ -6,7 +6,10 @@
     <string name="title_activity_arah">ArahActivity</string>
     <string name="title_activity_navigasi">NavigasiActivity</string>
     <!--    <string name="apiUrlLumen">https://tbptbklp4.herokuapp.com</string>-->
-    <string name="apiUrlLumen">https://c6aa-114-125-21-237.ngrok.io</string>
-<!--    <string name="apiUrlLumen">https://4582-114-125-59-71.ngrok.io/lumenapp/public/</string>-->
+    <string name="apiUrlLumen">https://733e-114-125-15-2.ngrok.io</string>
+    <!--    <string name="apiUrlLumen">https://4582-114-125-59-71.ngrok.io/lumenapp/public/</string>-->
     <string name="title_activity_main_map">MainMapActivity</string>
+
+
+    <string name="mapbox_access_token">pk.eyJ1IjoiZmFkaGlsYW5haG1hZCIsImEiOiJja3NjcjJscTkwamRoMndvYWxvMTlzZmRxIn0.uPBuJv5rBr0KfTv9elcRtw</string>
 </resources>

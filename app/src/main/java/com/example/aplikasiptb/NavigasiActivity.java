@@ -20,6 +20,7 @@ public class NavigasiActivity extends FragmentActivity implements OnMapReadyCall
     private GoogleMap mMap;
     private ActivityNavigasiBinding binding;
     FusedLocationProviderClient fusedLocationProviderClient;
+    MarkerOptions markerOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

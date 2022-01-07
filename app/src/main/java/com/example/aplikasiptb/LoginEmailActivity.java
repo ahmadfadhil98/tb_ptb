@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +42,7 @@ public class LoginEmailActivity extends AppCompatActivity {
     PortalClient portalClient;
     String token,fcm_token;
     Integer idUser;
+    TextView warnEmail,warnPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,44 @@ public class LoginEmailActivity extends AppCompatActivity {
 
         editUsername = findViewById(R.id.email);
         editPassword = findViewById(R.id.password);
+
+        warnEmail = findViewById(R.id.warnEmail);
+        warnPass = findViewById(R.id.warnPassword);
+
+        editUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                warnEmail.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        editPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                warnPass.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         iconBack = findViewById(R.id.backImg);
         iconBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +96,9 @@ public class LoginEmailActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        Authent authent = new Authent();
+        portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
 
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
@@ -84,53 +128,57 @@ public class LoginEmailActivity extends AppCompatActivity {
         String username = editUsername.getText().toString();
         String password = editPassword.getText().toString();
 
-        Authent authent = new Authent();
-        portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
+        if(username.equals("")) {
+            warnEmail.setText("Email atau Username masih kosong");
+            warnEmail.setVisibility(View.VISIBLE);
+        }else{
+            warnEmail.setVisibility(View.GONE);
+        }
 
-        Call<Auth> call = portalClient.checkLogin(username,password,fcm_token);
-        updateViewProgress(true);
-        call.enqueue(new Callback<Auth>() {
-            @Override
-            public void onResponse(Call<Auth> call, Response<Auth> response) {
-                Auth authClass = response.body();
-                if (authClass != null ){
+        if(password.equals("")){
+            warnPass.setText("Password belum masih kosong");
+            warnPass.setVisibility(View.VISIBLE);
+        }else{
+            warnPass.setVisibility(View.GONE);
+        }
 
-                    AuthData authData = authClass.getData();
-                    token = authData.getToken();
-                    idUser = authData.getId();
-//                    Toast.makeText(getApplicationContext(),token,Toast.LENGTH_SHORT).show();
+        if(!password.equals("")&&!username.equals("")){
+            Call<Auth> call = portalClient.checkLogin(username,password,fcm_token);
+            updateViewProgress(true);
+            call.enqueue(new Callback<Auth>() {
+                @Override
+                public void onResponse(Call<Auth> call, Response<Auth> response) {
+                    Auth authClass = response.body();
+                    if (authClass != null ){
 
-                    SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("TOKEN",token);
-                    editor.putInt("IDUSER",idUser);
-                    editor.apply();
+                        AuthData authData = authClass.getData();
+                        token = authData.getToken();
+                        idUser = authData.getId();
 
-                    checkDetail();
+                        SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("TOKEN",token);
+                        editor.putInt("IDUSER",idUser);
+                        editor.apply();
 
-//                    Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-//                    startActivity(intent);
-//                    finish();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Kombinasi Username dan Password anda salah",Toast.LENGTH_SHORT).show();
+                        checkDetail();
+
+                    }else{
+                        warnEmail.setText("Kombinasi Username dan Password anda salah");
+                        warnEmail.setVisibility(View.VISIBLE);
+                        warnPass.setText("Kombinasi Username dan Password anda salah");
+                        warnPass.setVisibility(View.VISIBLE);
+                    }
+                    updateViewProgress(false);
                 }
-                updateViewProgress(false);
-            }
 
-            @Override
-            public void onFailure(Call<Auth> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"Gagal menghubungi server",Toast.LENGTH_SHORT).show();
-                updateViewProgress(false);
-            }
-        });
-
-//        if (username.equals("admin")&& password.equals("admin")){
-//            Intent intent = new Intent(this, MapActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }else {
-//            Toast.makeText(this,"Password/Username Anda salah",Toast.LENGTH_SHORT).show();
-//        }
+                @Override
+                public void onFailure(Call<Auth> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(),"Gagal menghubungi server",Toast.LENGTH_SHORT).show();
+                    updateViewProgress(false);
+                }
+            });
+        }
     }
 
     public void checkDetail(){

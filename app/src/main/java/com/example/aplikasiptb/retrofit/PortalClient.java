@@ -32,6 +32,18 @@ public interface PortalClient {
             @Field("fcm_token") String token
     );
 
+    @GET("api/duserOtp/{phone}")
+    Call<ResponseRegister> checkPhone(
+            @Path("phone") String phone
+    );
+
+    @FormUrlEncoded
+    @POST("api/otpUser")
+    Call<Auth> loginHp(
+            @Field("id_user") Integer id_user,
+            @Field("fcm_token") String fcm_token
+    );
+
     @GET("api/homestay")
     Call<HomestayList> getHomestay(
             @Header("token") String token

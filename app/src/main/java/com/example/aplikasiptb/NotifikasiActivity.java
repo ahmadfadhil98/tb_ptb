@@ -63,7 +63,7 @@ public class NotifikasiActivity extends AppCompatActivity {
                 if(notifikasiList!=null){
                     List<NotifikasiItem> notifikasiItems = notifikasiList.getNotifikasi();
                     for (NotifikasiItem item : notifikasiItems){
-                        SimpleDateFormat formatakhir = new SimpleDateFormat("dd-MM-yyyy");
+                        SimpleDateFormat formatakhir = new SimpleDateFormat("dd-MM-yyyy, hh:mm");
                         String tgl = formatakhir.format(item.getCreatedAt());
                         Notifikasi notifikasi = new Notifikasi(item.getTitle(),tgl,item.getMessage());
                         notifikasis.add(notifikasi);

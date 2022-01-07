@@ -239,7 +239,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
                         );
                         homestays.add(homestay);
                         LatLng harau = new LatLng(item.getLatitude(), item.getLongitude());
-                        mMap.addMarker(new MarkerOptions().position(harau));
+                        mMap.addMarker(new MarkerOptions().position(harau).title(item.getNama()));
                     }
                 }
                 homestayAdapter.setListHomestay(homestays);
@@ -290,7 +290,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
         // Add a marker in Sydney and move the camera
         LatLng harau = new LatLng(-0.105881, 100.6603642);
-        mMap.addMarker(new MarkerOptions().position(harau));
+//        mMap.addMarker(new MarkerOptions().position(harau));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(harau,15));
     }
 
