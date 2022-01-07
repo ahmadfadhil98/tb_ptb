@@ -6,10 +6,16 @@
     <string name="title_activity_arah">ArahActivity</string>
     <string name="title_activity_navigasi">NavigasiActivity</string>
     <!--    <string name="apiUrlLumen">https://tbptbklp4.herokuapp.com</string>-->
-    <string name="apiUrlLumen">https://733e-114-125-15-2.ngrok.io</string>
+    <string name="apiUrlLumen">https://8895-182-1-5-186.ngrok.io</string>
     <!--    <string name="apiUrlLumen">https://4582-114-125-59-71.ngrok.io/lumenapp/public/</string>-->
     <string name="title_activity_main_map">MainMapActivity</string>
 
 
-    <string name="mapbox_access_token">pk.eyJ1IjoiZmFkaGlsYW5haG1hZCIsImEiOiJja3NjcjJscTkwamRoMndvYWxvMTlzZmRxIn0.uPBuJv5rBr0KfTv9elcRtw</string>
+    <string name="mapbox_access_token">sk.eyJ1IjoiYWhtYWRmYWRoaWxhbiIsImEiOiJja3k0amVuaGgwY2U1MndwdmZpbzd6YnY2In0.J8l9ulJ-DSXHufCvwwdbyQ</string>
+
+    <!-- Driving profile toggle -->
+    <string name="driving_profile">%1$sm\nby car</string>
+    <string name="walking_profile">%1$sm\non foot</string>
+    <string name="cycling_profile">%1$sm\nby bike</string>
+    <string name="instruction">Click on map or buttons to change route</string>
 </resources>

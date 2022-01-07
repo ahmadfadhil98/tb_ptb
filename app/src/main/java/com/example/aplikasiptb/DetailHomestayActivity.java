@@ -218,7 +218,7 @@ public class DetailHomestayActivity extends AppCompatActivity {
     }
 
     public void toMapArah(View view){
-        Intent intent = new Intent(this, ArahActivity.class);
+        Intent intent = new Intent(this, NavigationActivity.class);
         intent.putExtra("idHomestay",idHomestay);
         intent.putExtra("latitude",latitude);
         intent.putExtra("longitude",longitude);
