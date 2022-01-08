@@ -32,6 +32,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AplikasiPTB">
         <activity
+            android:name=".HistoryBookingActivity"
+            android:exported="false" />
+        <activity
             android:name=".OtpActivity"
             android:exported="false" />
         <activity
@@ -66,14 +69,6 @@
             android:name=".RegisterAvatarActivity"
             android:exported="false" />
         <activity
-            android:name=".NavigasiActivity"
-            android:exported="false"
-            android:label="@string/title_activity_navigasi" />
-        <activity
-            android:name=".ArahActivity"
-            android:exported="true"
-            android:label="@string/title_activity_arah" />
-        <activity
             android:name=".UpdateProfilActivity"
             android:exported="true" />
         <activity
@@ -101,9 +96,6 @@
             android:name=".LoginEmailActivity"
             android:exported="true" />
         <activity
-            android:name=".DetailHomestayActivity"
-            android:exported="true" />
-        <activity
             android:name=".WalkhthroughActivity"
             android:exported="true" />
         <activity
@@ -115,6 +107,9 @@
             android:exported="true" />
         <activity
             android:name=".DetailProfilActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DetailHomestayActivity"
             android:exported="true" />
         <activity
             android:name=".ProfilActivity"

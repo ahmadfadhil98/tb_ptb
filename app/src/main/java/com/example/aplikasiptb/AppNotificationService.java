@@ -61,7 +61,7 @@ public class AppNotificationService extends FirebaseMessagingService {
             intent.putExtra("homestayId",idHomestay);
             intent.putExtra("idBooking",idBooking);
         }else if(status==2){
-            intent = new Intent(getApplicationContext(),ArahActivity.class);
+            intent = new Intent(getApplicationContext(),NavigationActivity.class);
         }
 
 

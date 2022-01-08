@@ -41,7 +41,7 @@
         android:id="@+id/blank"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -251,11 +251,17 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvFasilitas"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
+                    android:background="@android:color/transparent"
                     tools:listitem="@layout/item_fasilitas" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvUnit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_unithomestay" />
 
             </LinearLayout>
 

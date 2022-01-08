@@ -146,6 +146,31 @@
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="25dp"
                     android:layout_marginVertical="5dp"
+                    android:onClick="toNotifikasi"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imagehistory"
+                        android:layout_width="25dp"
+                        android:layout_height="48dp"
+                        android:layout_marginHorizontal="10dp"
+                        app:srcCompat="@drawable/history" />
+
+                    <TextView
+                        android:id="@+id/history"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingVertical="15dp"
+                        android:text="History Booking"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginVertical="5dp"
                     android:orientation="horizontal">
 
                     <ImageView

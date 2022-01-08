@@ -5,6 +5,7 @@ import com.example.aplikasiptb.model.AvatarList;
 import com.example.aplikasiptb.model.DBooking;
 import com.example.aplikasiptb.model.DHome;
 import com.example.aplikasiptb.model.DUser;
+import com.example.aplikasiptb.model.DetailHomestay;
 import com.example.aplikasiptb.model.FasilitasHomestayList;
 import com.example.aplikasiptb.model.HomestayList;
 import com.example.aplikasiptb.model.NotifikasiList;
@@ -47,6 +48,12 @@ public interface PortalClient {
     @GET("api/homestay")
     Call<HomestayList> getHomestay(
             @Header("token") String token
+    );
+
+    @GET("api/dhome/{id}")
+    Call<DetailHomestay> setDHome(
+            @Header("token") String token,
+            @Path("id") Integer id
     );
 
     @GET("api/homestay/{id}")

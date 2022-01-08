@@ -1,6 +1,7 @@
 package com.example.aplikasiptb;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,11 +18,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aplikasiptb.adapter.FasilitasAdapter;
+import com.example.aplikasiptb.adapter.UnitAdapter;
 import com.example.aplikasiptb.model.DHome;
+import com.example.aplikasiptb.model.DetailHomestay;
 import com.example.aplikasiptb.model.Fasilitas;
+import com.example.aplikasiptb.model.FasilitasHomeItem;
 import com.example.aplikasiptb.model.FasilitasHomestayItem;
 import com.example.aplikasiptb.model.FasilitasHomestayList;
 import com.example.aplikasiptb.model.HomeItem;
+import com.example.aplikasiptb.model.UnitHome;
+import com.example.aplikasiptb.model.UnitHomeItem;
 import com.example.aplikasiptb.retrofit.PortalClient;
 import com.squareup.picasso.Picasso;
 
@@ -37,8 +43,9 @@ public class DetailHomestayActivity extends AppCompatActivity {
 
     TextView urlWeb,textNohp,textNamaHome,textJenis,textDRating,textAlamat;
     ImageView iconBack,imageHome,imgHomeFull;
-    RecyclerView rvFasilitas;
+    RecyclerView rvFasilitas,rvUnit;
     FasilitasAdapter fasilitasAdapter;
+    UnitAdapter unitAdapter;
     Integer idHomestay;
     PortalClient portalClient;
     String token;
@@ -76,6 +83,7 @@ public class DetailHomestayActivity extends AppCompatActivity {
         idHomestay = getIntent().getIntExtra("idHomestay",0);
 
         fasilitasAdapter = new FasilitasAdapter();
+        unitAdapter = new UnitAdapter();
 
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
         token = preferences.getString("TOKEN","");
@@ -84,16 +92,23 @@ public class DetailHomestayActivity extends AppCompatActivity {
         Authent authent = new Authent();
         portalClient = authent.setPortalClient(baseUrl);
 
-        setFasilitas();
-        setDHomestay();
+        detailHomestay();
+//        setFasilitas();
+//        setDHomestay();
 //        fasilitasAdapter.setListFasilitas(generateData());
 
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3,GridLayoutManager.HORIZONTAL,false);
 
         rvFasilitas = findViewById(R.id.rvFasilitas);
-        rvFasilitas.setAdapter(fasilitasAdapter);
-        rvFasilitas.setLayoutManager(layoutManager);
+        rvUnit = findViewById(R.id.rvUnit);
 
+        rvFasilitas.setAdapter(fasilitasAdapter);
+        rvFasilitas.setLayoutManager(gridLayoutManager);
+
+        rvUnit.setAdapter(unitAdapter);
+        rvUnit.setLayoutManager(layoutManager);
 
         iconBack = findViewById(R.id.backImg);
         iconBack.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +150,59 @@ public class DetailHomestayActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(DetailHomestayActivity.this, "Aplikasi Untuk melakukan Dial tidak ada", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    public void detailHomestay(){
+        Call<DetailHomestay> call = portalClient.setDHome(token,idHomestay);
+        updateViewProgress(1);
+        call.enqueue(new Callback<DetailHomestay>() {
+            @Override
+            public void onResponse(Call<DetailHomestay> call, Response<DetailHomestay> response) {
+                DetailHomestay detailHomestay = response.body();
+                ArrayList<Fasilitas> fasilitasList = new ArrayList<>();
+                ArrayList<UnitHome> unitHomes = new ArrayList<>();
+                if(detailHomestay!=null){
+                    urlWeb.setText(detailHomestay.getDetailHomestay().getWebsite());
+                    urlWeb.setText(detailHomestay.getDetailHomestay().getWebsite());
+                    textAlamat.setText(detailHomestay.getDetailHomestay().getAlamat());
+                    textNamaHome.setText(detailHomestay.getDetailHomestay().getNama());
+                    textDRating.setText(String.format("%.2f",detailHomestay.getDetailHomestay().getRating()));
+                    textJenis.setText(detailHomestay.getDetailHomestay().getJenis());
+                    textNohp.setText(detailHomestay.getDetailHomestay().getNoHp());
+                    Picasso.get().load(baseUrl+detailHomestay.getDetailHomestay().getFoto()).into(imageHome);
+                    Picasso.get().load(baseUrl+detailHomestay.getDetailHomestay().getFoto()).into(imgHomeFull);
+                    latitude = detailHomestay.getDetailHomestay().getLatitude();
+                    longitude = detailHomestay.getDetailHomestay().getLongitude();
+
+                    List<FasilitasHomeItem> fasilitasHomestayItemList =  detailHomestay.getFasilitasHome();
+                    for (FasilitasHomeItem item : fasilitasHomestayItemList){
+                        Fasilitas fasilitas = new Fasilitas(item.getNama());
+                        fasilitasList.add(fasilitas);
+                    }
+
+                    List<UnitHomeItem> unitHomeItemList = detailHomestay.getUnitHome();
+                    for (UnitHomeItem item:unitHomeItemList){
+                        UnitHome unitHome = new UnitHome(
+                                item.getId(),
+                                item.getNama(),
+                                item.getHarga(),
+                                item.getFoto());
+                        unitHomes.add(unitHome);
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(),"Ada yang salah",Toast.LENGTH_SHORT).show();
+                }
+                unitAdapter.setListUnit(unitHomes);
+                fasilitasAdapter.setListFasilitas(fasilitasList);
+                updateViewProgress(3);
+            }
+
+            @Override
+            public void onFailure(Call<DetailHomestay> call, Throwable t) {
+                updateViewProgress(2);
+                Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
             }
         });
     }
