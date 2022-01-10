@@ -15,6 +15,10 @@ public class UnitItem{
     @SerializedName("id")
     private int id;
 
+    @SerializedName("foto")
+    private String foto;
+
+
     public String getNama(){
         return nama;
     }
@@ -25,5 +29,9 @@ public class UnitItem{
 
     public int getId(){
         return id;
+    }
+
+    public String getFoto() {
+        return foto;
     }
 }

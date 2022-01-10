@@ -261,6 +261,7 @@
                     android:id="@+id/rvUnit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:clickable="false"
                     tools:listitem="@layout/item_unithomestay" />
 
             </LinearLayout>

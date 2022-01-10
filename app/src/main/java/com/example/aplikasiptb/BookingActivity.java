@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -26,11 +28,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.aplikasiptb.adapter.UnitAdapter;
 import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.DetailUserItem;
 import com.example.aplikasiptb.model.PembayaranItem;
 import com.example.aplikasiptb.model.PembayaranList;
 import com.example.aplikasiptb.model.ResponseRegister;
+import com.example.aplikasiptb.model.UnitHome;
+import com.example.aplikasiptb.model.UnitHomeItem;
 import com.example.aplikasiptb.model.UnitItem;
 import com.example.aplikasiptb.model.UnitList;
 import com.example.aplikasiptb.retrofit.PortalClient;
@@ -48,12 +53,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BookingActivity extends AppCompatActivity {
+public class BookingActivity extends AppCompatActivity implements UnitAdapter.OnUnitViewHolderClick {
 
     ImageView iconBack;
     Spinner unit_spin,pembayaran_spin;
     List<String> unitListSting,pembayaranListString,bankListString,noRekList;
-    List<Integer> idList,hargaList,idPembList;
+    List<Integer> idList,hargaList,idPembList,unitList;
     ArrayAdapter<String> spinAdapter,spinPembayaranAdapter;
     String token,baseUrl,tglCheckIn,tglCheckOut,timeCheckIn,timeCheckOut,inCheck,OutCheck;
     String noRek,namaBank;
@@ -62,7 +67,8 @@ public class BookingActivity extends AppCompatActivity {
     EditText nama,checkIn,checkOut,tarif,uangDp;
     TextView reset;
     SimpleDateFormat simpleDateFormat;
-
+    RecyclerView rvUnit;
+    UnitAdapter unitAdapter;
 
     private DatePickerDialog datePickerDialog;
     private SimpleDateFormat dateFormatter;
@@ -81,6 +87,15 @@ public class BookingActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        idHomestay = getIntent().getIntExtra("idHomestay",0);
+        SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
+        token = preferences.getString("TOKEN","");
+
+        baseUrl = getString(R.string.apiUrlLumen);
+
+        Authent authent = new Authent();
+        portalClient = authent.setPortalClient(baseUrl);
 
         nama =  findViewById(R.id.nama);
         checkIn =  findViewById(R.id.checkIn);
@@ -103,14 +118,7 @@ public class BookingActivity extends AppCompatActivity {
             }
         });
 
-        idHomestay = getIntent().getIntExtra("idHomestay",0);
-        SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
-        token = preferences.getString("TOKEN","");
-
-        baseUrl = getString(R.string.apiUrlLumen);
-
-        Authent authent = new Authent();
-        portalClient = authent.setPortalClient(baseUrl);
+        unitAdapter = new UnitAdapter(2);
 
         String[] units = new String[]{
                 "Select an item..."
@@ -143,17 +151,26 @@ public class BookingActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UnitList> call, Response<UnitList> response) {
                 UnitList unitList = response.body();
+                ArrayList<UnitHome> unitHomes = new ArrayList<>();
                 if(unitList != null){
                     List<UnitItem> unitItems = unitList.getUnit();
                     for(UnitItem item : unitItems){
                         unitListSting.add(item.getNama());
                         idList.add(item.getId());
                         hargaList.add(item.getHarga());
+
+                        UnitHome unitHome = new UnitHome(
+                                item.getId(),
+                                item.getNama(),
+                                item.getHarga(),
+                                item.getFoto());
+                        unitHomes.add(unitHome);
                     }
 
                 }else{
                     Toast.makeText(getApplicationContext(),"Tidak ada response",Toast.LENGTH_SHORT).show();
                 }
+                unitAdapter.setListUnit(unitHomes);
                 updateViewProgress(false);
             }
 
@@ -163,6 +180,15 @@ public class BookingActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
             }
         });
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,
+                LinearLayoutManager.HORIZONTAL, false);
+
+        unitAdapter.setClickObject(this);
+        rvUnit = findViewById(R.id.rvUnitBook);
+
+        rvUnit.setAdapter(unitAdapter);
+        rvUnit.setLayoutManager(layoutManager);
 
         Call<PembayaranList> listCall = portalClient.getPembayaran(token,idHomestay);
         listCall.enqueue(new Callback<PembayaranList>() {
@@ -198,7 +224,6 @@ public class BookingActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 id_unit = idList.get(position);
                 harga = hargaList.get(position);
-//                Toast.makeText(getApplicationContext(),Integer.toString(harga),Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -421,10 +446,6 @@ public class BookingActivity extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int which) {
                 // Do nothing but close the dialog
-//                Toast.makeText(getApplicationContext(),token,Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getApplicationContext(),id_unit.toString(),Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getApplicationContext(),inCheck,Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getApplicationContext(),OutCheck,Toast.LENGTH_SHORT).show();
 
                 SimpleDateFormat formatawal = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
                 SimpleDateFormat formatakhir = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -490,8 +511,7 @@ public class BookingActivity extends AppCompatActivity {
 
         AlertDialog alert = builder.create();
         alert.show();
-
-
+        
     }
 
 
@@ -510,5 +530,10 @@ public class BookingActivity extends AppCompatActivity {
         }else{
             progress.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void Onclick(List<Integer> unitList) {
+        this.unitList = unitList;
     }
 }

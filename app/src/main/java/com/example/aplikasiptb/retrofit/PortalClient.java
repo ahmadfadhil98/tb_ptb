@@ -56,17 +56,6 @@ public interface PortalClient {
             @Path("id") Integer id
     );
 
-    @GET("api/homestay/{id}")
-    Call<DHome> getHome(
-            @Header("token") String token,
-            @Path("id") int homestayId
-    );
-
-    @GET("api/dfasilitas/{id}")
-    Call<FasilitasHomestayList> getDFasilitas(
-            @Header("token") String token,
-            @Path("id") int homestayId
-    );
 
     @GET("api/review/{id}")
     Call<ReviewList> getDReview(

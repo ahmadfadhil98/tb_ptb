@@ -27,7 +27,6 @@ public class InfoPembayaranActivity extends AppCompatActivity {
 
     ImageView iconBack;
     Integer idHomestay,idBooking,total,homestayId,idHome;
-    String namaBank,noRek,uangDp;
     TextView bankNama,totalBayar,dpUang,rekNo,refNo;
 
 
@@ -107,10 +106,6 @@ public class InfoPembayaranActivity extends AppCompatActivity {
             }
         });
 
-//        bankNama.setText(namaBank);
-//        totalBayar.setText("Rp. "+total.toString());
-//        dpUang.setText(uangDp);
-//        rekNo.setText(noRek);
 
         iconBack = (ImageView) findViewById(R.id.backImg);
         iconBack.setOnClickListener(new View.OnClickListener() {

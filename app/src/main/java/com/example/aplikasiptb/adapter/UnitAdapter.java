@@ -1,8 +1,10 @@
 package com.example.aplikasiptb.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,13 +16,23 @@ import com.example.aplikasiptb.model.UnitHome;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.UnitViewHolder> {
+
+    ArrayList<UnitHome> listUnit = new ArrayList<>();
+    List<Integer> units = new ArrayList<>();
+    Integer status = 0;
+
+    public UnitAdapter(Integer status) {
+        this.status = status;
+    }
 
     public class UnitViewHolder extends RecyclerView.ViewHolder {
         TextView namaUnit,hargaUnit,qtyUnit;
         Integer idunit;
         ImageView imageUnit;
+        FrameLayout frameBg;
         UnitHome unitHome;
 
         public UnitViewHolder(@NonNull View itemView) {
@@ -28,11 +40,20 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.UnitViewHolder
             namaUnit = itemView.findViewById(R.id.textNamaUnit);
             hargaUnit = itemView.findViewById(R.id.textHargaUnit);
             qtyUnit = itemView.findViewById(R.id.textQtyUnit);
+            frameBg = itemView.findViewById(R.id.frameUnit);
 
         }
     }
 
-    ArrayList<UnitHome> listUnit = new ArrayList<>();
+    public interface OnUnitViewHolderClick{
+        void Onclick(List<Integer> unitList);
+    }
+
+    OnUnitViewHolderClick clickObject;
+
+    public void setClickObject(OnUnitViewHolderClick clickObject) {
+        this.clickObject = clickObject;
+    }
 
     public void setListUnit(ArrayList<UnitHome> listUnit){
         this.listUnit = listUnit;
@@ -54,7 +75,41 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.UnitViewHolder
         holder.namaUnit.setText(unitHome.nama);
         holder.hargaUnit.setText(unitHome.harga.toString());
         holder.idunit = unitHome.id;
-//        Picasso.get().load(unitHome.foto).into(holder.imageUnit);
+        if(unitHome.foto!=null){
+            Picasso.get().load(unitHome.foto).into(holder.imageUnit);
+        }
+        if (status==2){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (holder.frameBg.getVisibility()==View.GONE){
+                        holder.frameBg.setVisibility(View.VISIBLE);
+                        units.add(unitHome.id);
+                    }else{
+                        holder.frameBg.setVisibility(View.GONE);
+                        units = removeItem(units,unitHome.id);
+                    }
+                    Log.i("kategoris",units.toString());
+
+                    clickObject.Onclick(units);
+
+                }
+            });
+        }
+
+
+    }
+
+    public static List<Integer> removeItem(List<Integer> list,Integer value){
+        Integer index = list.indexOf(value);
+        List<Integer> result = new ArrayList<>();
+
+        for (Integer item : list){
+            if (value!=item){
+                result.add(item);
+            }
+        }
+        return result;
     }
 
     @Override

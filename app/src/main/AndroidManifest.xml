@@ -62,10 +62,6 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".MainMapActivity"
-            android:exported="false"
-            android:label="@string/title_activity_main_map" />
-        <activity
             android:name=".RegisterAvatarActivity"
             android:exported="false" />
         <activity
@@ -82,9 +78,6 @@
             android:exported="true" />
         <activity
             android:name=".Register3Activity"
-            android:exported="true" />
-        <activity
-            android:name=".Register2Activity"
             android:exported="true" />
         <activity
             android:name=".Register1Activity"

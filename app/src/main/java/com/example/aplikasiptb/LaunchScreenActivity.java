@@ -49,13 +49,10 @@ public class LaunchScreenActivity extends AppCompatActivity {
             public void onResponse(Call<DUser> call, Response<DUser> response) {
                 DUser dUser = response.body();
                 if (dUser!=null){
-//                    Toast.makeText(getApplicationContext(),"duser ngak kosong",Toast.LENGTH_SHORT).show();
                     List<DetailUserItem> detailUserItems = dUser.getDetailUser();
                     int idUser = dUser.getIdUser();
 
                     if(detailUserItems.isEmpty()){
-//                        Toast.makeText(getApplicationContext(),"duser kosong",Toast.LENGTH_SHORT).show();
-
                         Intent intent = new Intent(getApplicationContext(),RegisterAvatarActivity.class);
                         intent.putExtra("userIdLaunch",idUser);
                         finish();

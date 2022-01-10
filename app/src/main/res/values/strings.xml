@@ -6,7 +6,7 @@
     <string name="title_activity_arah">ArahActivity</string>
     <string name="title_activity_navigasi">NavigasiActivity</string>
     <!--    <string name="apiUrlLumen">https://tbptbklp4.herokuapp.com</string>-->
-    <string name="apiUrlLumen">https://54f7-114-125-4-217.ngrok.io</string>
+    <string name="apiUrlLumen">https://732b-182-1-51-24.ngrok.io</string>
     <!--    <string name="apiUrlLumen">https://4582-114-125-59-71.ngrok.io/lumenapp/public/</string>-->
     <string name="title_activity_main_map">MainMapActivity</string>
 

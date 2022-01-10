@@ -83,7 +83,7 @@ public class DetailHomestayActivity extends AppCompatActivity {
         idHomestay = getIntent().getIntExtra("idHomestay",0);
 
         fasilitasAdapter = new FasilitasAdapter();
-        unitAdapter = new UnitAdapter();
+        unitAdapter = new UnitAdapter(1);
 
         SharedPreferences preferences = getSharedPreferences("com.example.aplikasiptb",MODE_PRIVATE);
         token = preferences.getString("TOKEN","");
@@ -93,9 +93,6 @@ public class DetailHomestayActivity extends AppCompatActivity {
         portalClient = authent.setPortalClient(baseUrl);
 
         detailHomestay();
-//        setFasilitas();
-//        setDHomestay();
-//        fasilitasAdapter.setListFasilitas(generateData());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.HORIZONTAL, false);
@@ -207,71 +204,8 @@ public class DetailHomestayActivity extends AppCompatActivity {
         });
     }
 
-    public void setFasilitas(){
-        Call<FasilitasHomestayList> call = portalClient.getDFasilitas(token,idHomestay);
-        updateViewProgress(1);
-        call.enqueue(new Callback<FasilitasHomestayList>() {
-            @Override
-            public void onResponse(Call<FasilitasHomestayList> call, Response<FasilitasHomestayList> response) {
-                FasilitasHomestayList fasilitasHomestayList = response.body();
-                ArrayList<Fasilitas> fasilitas = new ArrayList<>();
-                if (fasilitasHomestayList!=null){
-                    List<FasilitasHomestayItem> fasilitasHomestayItems = fasilitasHomestayList.getFasilitasHomestay();
-                    for (FasilitasHomestayItem item : fasilitasHomestayItems){
-                        Fasilitas fasilitas1 = new Fasilitas(item.getNama());
-                        fasilitas.add(fasilitas1);
-                    }
-                }
-                fasilitasAdapter.setListFasilitas(fasilitas);
-                updateViewProgress(3);
-            }
-
-            @Override
-            public void onFailure(Call<FasilitasHomestayList> call, Throwable t) {
-                updateViewProgress(2);
-                Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public void setDHomestay(){
-        Call<DHome> call = portalClient.getHome(token,idHomestay);
-        updateViewProgress(1);
-        call.enqueue(new Callback<DHome>() {
-            @Override
-            public void onResponse(Call<DHome> call, Response<DHome> response) {
-                DHome dHome = response.body();
-                if(dHome!=null){
-                    List<HomeItem> homeItems = dHome.getHome();
-                    for (HomeItem item : homeItems){
-                        urlWeb.setText(item.getWebsite());
-                        textAlamat.setText(item.getAlamat());
-                        textNamaHome.setText(item.getNama());
-                        textDRating.setText(String.format("%.2f",item.getRating()));
-                        textJenis.setText(item.getJenis());
-                        textNohp.setText(item.getNoHp());
-                        Picasso.get().load(baseUrl+item.getFoto()).into(imageHome);
-                        Picasso.get().load(baseUrl+item.getFoto()).into(imgHomeFull);
-                        latitude = item.getLatitude();
-                        longitude = item.getLongitude();
-                    }
-//                    List<HomestayItem> homestayItem = homestayList.getHomestay();
-
-                }
-                updateViewProgress(3);
-            }
-
-            @Override
-            public void onFailure(Call<DHome> call, Throwable t) {
-                updateViewProgress(2);
-                Toast.makeText(getApplicationContext(),"Gagal",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
 
     public void toReview(View view){
-//        Toast.makeText(this,idHomestay.toString(),Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, ReviewActivity.class);
         intent.putExtra("idHomestay",idHomestay);
         startActivity(intent);

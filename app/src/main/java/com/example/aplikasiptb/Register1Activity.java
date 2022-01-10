@@ -124,12 +124,6 @@ public class Register1Activity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    public void toRegister2(View view){
-        Intent intent = new Intent(this, Register2Activity.class);
-        startActivity(intent);
-        finish();
-    }
-
     public void toLogin(View view){
         Intent intent = new Intent(this, MapActivity.class);
         startActivity(intent);
