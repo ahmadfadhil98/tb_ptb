@@ -131,7 +131,7 @@ public class LoginPhoneActivity extends AppCompatActivity {
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
-                        Toast.makeText(getApplicationContext(), "Verifikasi Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                 })
