@@ -126,12 +126,12 @@ public class LoginPhoneActivity extends AppCompatActivity {
 
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-
+                        Toast.makeText(getApplicationContext(), "Verifikasi compleate masuk sini", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
-
+                        Toast.makeText(getApplicationContext(), "Verifikasi Failed", Toast.LENGTH_SHORT).show();
                     }
 
                 })
