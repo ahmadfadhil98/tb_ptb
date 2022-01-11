@@ -22,6 +22,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.UnitViewHolder
 
     ArrayList<UnitHome> listUnit = new ArrayList<>();
     List<Integer> units = new ArrayList<>();
+    List<Integer> hargas = new ArrayList<>();
     Integer status = 0;
 
     public UnitAdapter(Integer status) {
@@ -46,7 +47,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.UnitViewHolder
     }
 
     public interface OnUnitViewHolderClick{
-        void Onclick(List<Integer> unitList);
+        void Onclick(List<Integer> unitList,List<Integer> hargaList);
     }
 
     OnUnitViewHolderClick clickObject;
@@ -85,13 +86,15 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.UnitViewHolder
                     if (holder.frameBg.getVisibility()==View.GONE){
                         holder.frameBg.setVisibility(View.VISIBLE);
                         units.add(unitHome.id);
+                        hargas.add(unitHome.harga);
                     }else{
                         holder.frameBg.setVisibility(View.GONE);
                         units = removeItem(units,unitHome.id);
+                        hargas = removeItem(hargas,unitHome.harga);
                     }
                     Log.i("kategoris",units.toString());
 
-                    clickObject.Onclick(units);
+                    clickObject.Onclick(units,hargas);
 
                 }
             });

@@ -68,7 +68,7 @@
                         android:id="@+id/textView19"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text="Tarif"
                         android:textColor="#0B0A0A"
                         android:textStyle="bold" />
@@ -78,7 +78,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Rp. 900.000 ,-" />
+                        android:text="Rp. 900.000 ,-"
+                        android:textIsSelectable="true"
+                        android:textSize="20sp"
+                        app:drawableRightCompat="?attr/actionModeCopyDrawable" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -91,7 +94,7 @@
                         android:id="@+id/textView2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text="Uang DP"
                         android:textColor="#0B0A0A"
                         android:textStyle="bold" />
@@ -101,7 +104,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Rp. 450.000 ,-" />
+                        android:text="Rp. 450.000 ,-"
+                        android:textIsSelectable="true"
+                        android:textSize="20sp"
+                        app:drawableRightCompat="?attr/actionModeCopyDrawable" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -115,7 +121,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="2dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text="Nomor Rekening"
                         android:textColor="#0B0A0A"
                         android:textStyle="bold" />
@@ -126,7 +132,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="2dp"
                         android:layout_weight="1"
-                        android:text="123456789" />
+                        android:text="123456789"
+                        android:textIsSelectable="true"
+                        android:textSize="20sp"
+                        app:drawableRightCompat="?attr/actionModeCopyDrawable" />
 
                 </LinearLayout>
 
@@ -141,7 +150,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="2dp"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text="Kode Bayar"
                         android:textColor="#0B0A0A"
                         android:textStyle="bold" />
@@ -152,7 +161,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="2dp"
                         android:layout_weight="1"
-                        android:text="123456789" />
+                        android:text="123456789"
+                        android:textIsSelectable="true"
+                        android:textSize="20sp"
+                        app:drawableRightCompat="?attr/actionModeCopyDrawable" />
 
                 </LinearLayout>
 
@@ -170,37 +182,187 @@
                 android:visibility="visible" />
 
             <TextView
-                android:id="@+id/textView25"
-                android:layout_width="wrap_content"
+                android:id="@+id/textAtm"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="45dp"
-                android:layout_marginVertical="10dp"
                 android:text="Petunjuk Transfer ATM"
                 android:textColor="#070707"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:visibility="visible" />
+                android:visibility="visible"
+                app:drawableRightCompat="@android:drawable/ic_menu_more" />
 
-            <TextView
-                android:id="@+id/textView26"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/petunjukAtm"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="45dp"
-                android:layout_marginVertical="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1. Pilih Menu Lain > Transfer."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2. Pilih Jenis rekening asal dan pilih Virtual Account Billing."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="3. Masukkan no. Virtual Account yang tertera di halaman dan pilih Benar."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="4.Tagihan yang harus dibayar akan muncul pada layar konfirmasi."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="5. Periksa informasi yang tertera di layar. Pastikan Merchant adalah HarauStay, Total tagihan. sudah benar dan username Anda {username}. Jika benar, pilih Ya."
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textIBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="45dp"
                 android:text="Petunjuk Transfer iBanking"
                 android:textColor="#070707"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:visibility="visible" />
+                android:visibility="visible"
+                app:drawableRightCompat="@android:drawable/ic_menu_more" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/petunjukIBanking"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="45dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textView51"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1. Pilih Transfer > Virtual Account Billing."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView71"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2. Masukkan no. Virtual Account yang tertera di halaman Pembayaran "
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView91"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="3. Pilih Rekening Debet dan klik Lanjut."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView111"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="4. Tagihan yang harus dibayar akan muncul pada layar konfirmasi."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView141"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="5. Periksa informasi yang tertera di layar. Pastikan Merchant adalah HarauStay, Total tagihan sudah benar dan username Anda {username}."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="6. Masukkan Kode Otentikasi Token Anda lalu klik Proses."
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/textView27"
-                android:layout_width="wrap_content"
+                android:id="@+id/textMBank"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="45dp"
-                android:layout_marginVertical="10dp"
                 android:text="Petunjuk Transfer mBanking"
                 android:textColor="#1C1A1A"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:visibility="visible" />
+                android:visibility="visible"
+                app:drawableRightCompat="@android:drawable/ic_menu_more" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/petunjukMBanking"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="45dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textView52"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1. Pilih Transfer > Virtual Account Billing."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView72"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="2. Pilih Rekening Debet > Masukkan no. Virtual Account yang tertera di halaman Pembayaran pada menu Input Baru."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView92"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="3. Tagihan yang harus dibayar akan muncul pada layar konfirmasi."
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/textView112"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="4. Periksa informasi yang tertera di layar. Pastikan Merchant adalah HarauStay, Total tagihan sudah benar dan username Anda {username}.  Jika benar, masukkan password transaksi dan klik Lanjut."
+                    android:textColor="@color/black" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
     </ScrollView>

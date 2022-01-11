@@ -89,26 +89,6 @@ public class NotifikasiActivity extends AppCompatActivity {
         rvNotifikasi.setLayoutManager(layoutManager);
     }
 
-    public ArrayList<Notifikasi> generateData(){
-        ArrayList<Notifikasi> listNotifikasi = new ArrayList<>();
-        listNotifikasi.add(new Notifikasi("Selamat!",
-                "19-02-2009",
-                "Booking Anda di homestay A Berhasil. Lakukan pembayaran Segera"));
-        listNotifikasi.add(new Notifikasi("Selamat!",
-                "19-02-2009",
-                "Booking Anda di homestay B Berhasil. Lakukan pembayaran Segera"));
-        listNotifikasi.add(new Notifikasi("Selamat!",
-                "19-02-2009",
-                "Booking Anda di homestay C Berhasil. Lakukan pembayaran Segera"));
-        listNotifikasi.add(new Notifikasi("Selamat!",
-                "19-02-2009",
-                "Booking Anda di homestay D Berhasil. Lakukan pembayaran Segera"));
-        listNotifikasi.add(new Notifikasi("Selamat!",
-                "19-02-2009",
-                "Booking Anda di homestay E Berhasil. Lakukan pembayaran Segera"));
-        return listNotifikasi;
-    }
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, ProfilActivity.class);

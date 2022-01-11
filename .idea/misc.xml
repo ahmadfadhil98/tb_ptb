@@ -24,14 +24,17 @@
         <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_ubah_passsword.xml" value="0.22" />
         <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_update_profil.xml" value="0.25" />
         <entry key="..\:/Berkas/AplikasiPTB/app/src/main/res/layout/activity_walkhthrough.xml" value="0.25" />
+        <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.240625" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/drawable/anonymous_house_1.xml" value="0.240625" />
+        <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/drawable/button_bg.xml" value="0.240625" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/drawable/eye.xml" value="0.21388888888888888" />
+        <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/drawable/ic_launcher_background.xml" value="0.240625" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_arah.xml" value="0.25" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_booking.xml" value="0.2" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_coba2.xml" value="0.22" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_detail_homestay.xml" value="0.2" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_detail_profil.xml" value="0.22" />
-        <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_history_booking.xml" value="0.12273550724637682" />
+        <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_history_booking.xml" value="0.22" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_info_pembayaran.xml" value="0.25" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_launch_screen.xml" value="0.25" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_login_email.xml" value="0.22" />
@@ -53,12 +56,14 @@
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/activity_walkhthrough.xml" value="0.22" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/item_avatar.xml" value="0.25" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/item_fasilitas.xml" value="0.33" />
+        <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/item_history.xml" value="0.2" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/item_homestay.xml" value="0.22" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/item_notifikasi.xml" value="0.25" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/item_review.xml" value="0.21" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/item_unithomestay.xml" value="0.2230769230769231" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/layout/spinner_item_unit.xml" value="0.10916919959473151" />
         <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.12604166666666666" />
+        <entry key="..\:/Berkas/PBT/tb_ptb/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15989583333333332" />
       </map>
     </option>
   </component>

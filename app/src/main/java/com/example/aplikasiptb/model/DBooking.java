@@ -6,9 +6,16 @@ import com.google.gson.annotations.SerializedName;
 public class DBooking{
 
     @SerializedName("detail_booking")
-    private List<DetailBookingItem> detailBooking;
+    private DetailBooking detailBooking;
 
-    public List<DetailBookingItem> getDetailBooking(){
+    @SerializedName("unit_booking")
+    private List<UnitBookingItem> unitBooking;
+
+    public DetailBooking getDetailBooking(){
         return detailBooking;
+    }
+
+    public List<UnitBookingItem> getUnitBooking(){
+        return unitBooking;
     }
 }

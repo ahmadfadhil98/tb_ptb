@@ -120,15 +120,6 @@
                 android:layout_marginHorizontal="45dp"
                 android:text="Tipe Unit" />
 
-            <Spinner
-                android:id="@+id/unit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="55dp"
-                android:layout_marginRight="35dp"
-                android:minHeight="48dp"
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUnitBook"
                 android:layout_width="match_parent"

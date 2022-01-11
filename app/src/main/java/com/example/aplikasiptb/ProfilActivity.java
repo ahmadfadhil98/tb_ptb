@@ -128,6 +128,12 @@ public class ProfilActivity extends AppCompatActivity {
         finish();
     }
 
+    public void toHistory(View view){
+        Intent intent = new Intent(this, HistoryBookingActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MapActivity.class);

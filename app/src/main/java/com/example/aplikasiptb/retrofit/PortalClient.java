@@ -3,10 +3,9 @@ package com.example.aplikasiptb.retrofit;
 import com.example.aplikasiptb.model.Auth;
 import com.example.aplikasiptb.model.AvatarList;
 import com.example.aplikasiptb.model.DBooking;
-import com.example.aplikasiptb.model.DHome;
 import com.example.aplikasiptb.model.DUser;
 import com.example.aplikasiptb.model.DetailHomestay;
-import com.example.aplikasiptb.model.FasilitasHomestayList;
+import com.example.aplikasiptb.model.HistBooking;
 import com.example.aplikasiptb.model.HomestayList;
 import com.example.aplikasiptb.model.NotifikasiList;
 import com.example.aplikasiptb.model.PembayaranList;
@@ -14,6 +13,8 @@ import com.example.aplikasiptb.model.ResponseRegister;
 import com.example.aplikasiptb.model.ReviewList;
 import com.example.aplikasiptb.model.UnitList;
 
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -166,7 +167,8 @@ public interface PortalClient {
     @POST("api/booking/store")
     Call<ResponseRegister> booking(
             @Header("token") String token,
-            @Field("unit_id") Integer unit_id,
+            @Field("units[]") List<Integer> list,
+            @Field("homestay_id") Integer homestay_id,
             @Field("check_in") String check_in,
             @Field("check_out") String check_out,
             @Field("pembayaran_id") Integer pembayaran_id
@@ -191,4 +193,8 @@ public interface PortalClient {
             @Path("id") Integer id
     );
 
+    @GET("api/history")
+    Call<HistBooking> getHistBook(
+            @Header("token") String token
+    );
 }

@@ -56,14 +56,15 @@ import retrofit2.Response;
 public class BookingActivity extends AppCompatActivity implements UnitAdapter.OnUnitViewHolderClick {
 
     ImageView iconBack;
-    Spinner unit_spin,pembayaran_spin;
-    List<String> unitListSting,pembayaranListString,bankListString,noRekList;
+    Spinner pembayaran_spin;
+    List<String> pembayaranListString,bankListString,noRekList;
     List<Integer> idList,hargaList,idPembList,unitList;
     ArrayAdapter<String> spinAdapter,spinPembayaranAdapter;
     String token,baseUrl,tglCheckIn,tglCheckOut,timeCheckIn,timeCheckOut,inCheck,OutCheck;
     String noRek,namaBank;
     PortalClient portalClient;
-    Integer idHomestay,harga,id_pemb,id_unit;
+    Integer idHomestay,id_pemb,id_unit;
+    Integer harga = 0;
     EditText nama,checkIn,checkOut,tarif,uangDp;
     TextView reset;
     SimpleDateFormat simpleDateFormat;
@@ -103,7 +104,6 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
         tarif = findViewById(R.id.tarif);
         uangDp = findViewById(R.id.uang_muka);
         reset = findViewById(R.id.reset);
-        unit_spin = findViewById(R.id.unit);
         pembayaran_spin = findViewById(R.id.pembayaran);
 
         reset.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +113,6 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
                 checkOut.setText(null);
                 tarif.setText(null);
                 uangDp.setText(null);
-                unit_spin.setSelection(0);
                 pembayaran_spin.setSelection(0);
             }
         });
@@ -129,21 +128,19 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
         };
 
         idList = new ArrayList<>();
-        hargaList = new ArrayList<>();
 
         idPembList = new ArrayList<>();
         bankListString = new ArrayList<>();
         noRekList = new ArrayList<>();
 
         idList.add(0);
-        hargaList.add(0);
+
 
         idPembList.add(0);
         bankListString.add("Kosong");
         noRekList.add("Kosong");
 
         pembayaranListString = new ArrayList<>(Arrays.asList(pembayarans));
-        unitListSting = new ArrayList<>(Arrays.asList(units));
 
         Call<UnitList> call =  portalClient.getUnit(token,idHomestay);
         updateViewProgress(true);
@@ -155,9 +152,9 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
                 if(unitList != null){
                     List<UnitItem> unitItems = unitList.getUnit();
                     for(UnitItem item : unitItems){
-                        unitListSting.add(item.getNama());
-                        idList.add(item.getId());
-                        hargaList.add(item.getHarga());
+//                        unitListSting.add(item.getNama());
+//                        idList.add(item.getId());
+//                        hargaList.add(item.getHarga());
 
                         UnitHome unitHome = new UnitHome(
                                 item.getId(),
@@ -185,8 +182,8 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
                 LinearLayoutManager.HORIZONTAL, false);
 
         unitAdapter.setClickObject(this);
-        rvUnit = findViewById(R.id.rvUnitBook);
 
+        rvUnit = findViewById(R.id.rvUnitBook);
         rvUnit.setAdapter(unitAdapter);
         rvUnit.setLayoutManager(layoutManager);
 
@@ -212,25 +209,11 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
             }
         });
 
-        setSpinner(unitListSting);
+//        setSpinner(unitListSting);
         setSpinnerLagi(pembayaranListString);
 
-        spinAdapter.setDropDownViewResource(R.layout.spinner_item_unit);
+//        spinAdapter.setDropDownViewResource(R.layout.spinner_item_unit);
         spinPembayaranAdapter.setDropDownViewResource(R.layout.spinner_item_unit);
-
-        unit_spin.setAdapter(spinAdapter);
-        unit_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                id_unit = idList.get(position);
-                harga = hargaList.get(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         pembayaran_spin.setAdapter(spinPembayaranAdapter);
         pembayaran_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -258,18 +241,18 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
         checkIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(harga!=null){
+//                if(harga!=null){
                     showDateDialog(1);
-                }
+//                }
 
             }
         });
         checkOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(harga!=null){
+//                if(harga!=null){
                     showDateDialog(2);
-                }
+//                }
             }
         });
 
@@ -282,19 +265,28 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
         OutCheck = checkOut.getText().toString();
         simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy, HH:mm");
 
-        try {
-            Date dateCheckIn = simpleDateFormat.parse(inCheck);
-            Date dateCheckOut = simpleDateFormat.parse(OutCheck);
+        long tarifHome = 0;
 
-            long time_difference = dateCheckOut.getTime() - dateCheckIn.getTime();
-            long hours_difference = (time_difference / (1000*60*60));
-            long tarifLong =  (hours_difference/24) * harga;
-            long uang_muka = tarifLong/2;
-            tarif.setText("Rp. "+Long.toString(tarifLong)+",-");
-            uangDp.setText("Rp. "+Long.toString(uang_muka)+",-");
-        } catch (ParseException e) {
-            e.printStackTrace();
+        for (Integer harga: hargaList) {
+            try {
+                Date dateCheckIn = simpleDateFormat.parse(inCheck);
+                Date dateCheckOut = simpleDateFormat.parse(OutCheck);
+
+                long time_difference = dateCheckOut.getTime() - dateCheckIn.getTime();
+                long hours_difference = (time_difference / (1000*60*60));
+                long tarifLong =  (hours_difference/24) * harga;
+
+                tarifHome = tarifLong + tarifHome;
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
+        long uang_muka = tarifHome/2;
+
+        tarif.setText("Rp. "+Long.toString(tarifHome)+",-");
+        uangDp.setText("Rp. "+Long.toString(uang_muka)+",-");
+
     }
 
     public void getNamaUser(){
@@ -362,7 +354,11 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
                 }else{
                     timeCheckOut = hourOfDay + ":" +minute;
                     checkOut.setText(tglCheckOut+", "+timeCheckOut);
-                    getDifference();
+
+                    if(hargaList!=null){
+                        getDifference();
+                    }
+
                 }
 
 
@@ -377,34 +373,6 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
 //        editText.setEnabled(false);
         editText.setCursorVisible(false);
         editText.setKeyListener(null);
-    }
-
-    public void setSpinner(List<String> list){
-        spinAdapter = new ArrayAdapter<String>(
-                this,R.layout.spinner_item_unit,list){
-
-            @Override
-            public boolean isEnabled(int position) {
-                if(position == 0) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-
-            @Override
-            public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if(position == 0){
-                    // Set the hint text color gray
-                    tv.setTextColor(Color.GRAY);
-                } else {
-                    tv.setTextColor(Color.BLACK);
-                }
-                return view;
-            }
-        };
     }
 
     public void setSpinnerLagi(List<String> list){
@@ -464,7 +432,8 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
 
                 Call<ResponseRegister> call = portalClient.booking(
                         token,
-                        id_unit,
+                        unitList,
+                        idHomestay,
                         checkInNew,
                         checkOutNew,
                         id_pemb
@@ -477,7 +446,6 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
                             String mess = responseRegister.getMessage();
                             Toast.makeText(getApplicationContext(),mess,Toast.LENGTH_SHORT).show();
 
-                            String dpuang = uangDp.getText().toString();
                             Integer idBooked= responseRegister.getId();
 
                             Intent intent = new Intent(getApplicationContext(), InfoPembayaranActivity.class);
@@ -533,7 +501,9 @@ public class BookingActivity extends AppCompatActivity implements UnitAdapter.On
     }
 
     @Override
-    public void Onclick(List<Integer> unitList) {
+    public void Onclick(List<Integer> unitList,List<Integer> hargaList) {
         this.unitList = unitList;
+        this.hargaList = hargaList;
+        getDifference();
     }
 }

@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Aplikasi PTB</string>
+    <string name="app_name">HarauStay</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_map">Map</string>
     <string name="title_activity_arah">ArahActivity</string>
     <string name="title_activity_navigasi">NavigasiActivity</string>
     <!--    <string name="apiUrlLumen">https://tbptbklp4.herokuapp.com</string>-->
-    <string name="apiUrlLumen">https://732b-182-1-51-24.ngrok.io</string>
+    <string name="apiUrlLumen">https://c04c-114-125-44-172.ngrok.io</string>
     <!--    <string name="apiUrlLumen">https://4582-114-125-59-71.ngrok.io/lumenapp/public/</string>-->
     <string name="title_activity_main_map">MainMapActivity</string>
 
