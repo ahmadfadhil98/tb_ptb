@@ -45,6 +45,9 @@ package com.example.aplikasiptb;
         import android.util.Log;
         import android.view.View;
         import android.widget.Button;
+        import android.widget.FrameLayout;
+        import android.widget.ProgressBar;
+        import android.widget.TextView;
         import android.widget.Toast;
 
         import com.google.android.gms.location.FusedLocationProviderClient;
@@ -148,6 +151,7 @@ public class NavigationActivity extends AppCompatActivity
 //        origin = Point.fromLngLat(100.6603642, -0.105881 );
         destination = Point.fromLngLat(longDes,latDes );
         dest = new LatLng(latDes,longDes);
+        updateViewProgress(true);
         getCurrentLocation();
 
         drivingButton = findViewById(R.id.driving_profile_button);
@@ -196,6 +200,7 @@ public class NavigationActivity extends AppCompatActivity
                 });
             }
         });
+        updateViewProgress(false);
     }
 
     @SuppressLint("MissingPermission")
@@ -233,9 +238,9 @@ public class NavigationActivity extends AppCompatActivity
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
 //        getCurrentLocation();
-//        destination = Point.fromLngLat(point.getLongitude(), point.getLatitude());
+        origin = Point.fromLngLat(point.getLongitude(), point.getLatitude());
 //        moveDestinationMarkerToNewLocation(point);
-//        getAllRoutes(true);
+        getAllRoutes(true);
         return true;
     }
 
@@ -494,5 +499,17 @@ public class NavigationActivity extends AppCompatActivity
         startActivity(intent);
         finish();
 
+    }
+
+    public void updateViewProgress(Boolean active){
+        FrameLayout black = findViewById(R.id.frameNav);
+        ProgressBar progressBar = findViewById(R.id.progresNav);
+        if (active){
+            black.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
+        }else{
+            black.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }
