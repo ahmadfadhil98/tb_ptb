@@ -47,6 +47,9 @@ public class UbahPassswordActivity extends AppCompatActivity {
         warPassBaru = findViewById(R.id.warPassBaru);
         warPassConf = findViewById(R.id.warPassConf);
 
+        textPassLama.setText("Password");
+        textPassLama.setEnabled(false);
+
         checkBox = findViewById(R.id.checkBox);
 
         userId = getIntent().getIntExtra("userId",0);
@@ -138,7 +141,7 @@ public class UbahPassswordActivity extends AppCompatActivity {
             warPassConf.setVisibility(View.VISIBLE);
             warPassConf.setText("Password Belum Sama");
         }else{
-            Toast.makeText(getApplicationContext(),userId.toString(),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(),userId.toString(),Toast.LENGTH_SHORT).show();
             Authent authent = new Authent();
             PortalClient portalClient = authent.setPortalClient(getString(R.string.apiUrlLumen));
 

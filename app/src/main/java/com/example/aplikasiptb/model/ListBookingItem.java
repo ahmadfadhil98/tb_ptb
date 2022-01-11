@@ -10,7 +10,7 @@ public class ListBookingItem{
     private String checkOut;
 
     @SerializedName("tarif")
-    private String tarif;
+    private Integer tarif;
 
     @SerializedName("nama")
     private String nama;
@@ -43,7 +43,7 @@ public class ListBookingItem{
         return checkOut;
     }
 
-    public String getTarif(){
+    public Integer getTarif(){
         return tarif;
     }
 

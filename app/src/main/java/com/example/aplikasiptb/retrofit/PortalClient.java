@@ -1,5 +1,7 @@
 package com.example.aplikasiptb.retrofit;
 
+import androidx.annotation.Nullable;
+
 import com.example.aplikasiptb.model.Auth;
 import com.example.aplikasiptb.model.AvatarList;
 import com.example.aplikasiptb.model.DBooking;
@@ -196,5 +198,14 @@ public interface PortalClient {
     @GET("api/history")
     Call<HistBooking> getHistBook(
             @Header("token") String token
+    );
+
+    @FormUrlEncoded
+    @POST("api/updateReview/{id}")
+    Call<ResponseRegister> updateReview(
+            @Header("token") String token,
+            @Path("id") Integer id,
+            @Field("rating") float rating,
+            @Field("komentar") String komentar
     );
 }

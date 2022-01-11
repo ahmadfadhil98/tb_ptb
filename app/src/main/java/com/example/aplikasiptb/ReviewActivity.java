@@ -55,6 +55,8 @@ public class ReviewActivity extends AppCompatActivity {
     TextInputEditText textKomentar;
     float rate;
 
+    Integer idRating;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -180,14 +182,22 @@ public class ReviewActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
                 ResponseRegister responseRegister = response.body();
                 if(responseRegister!=null){
+
                     float ratingReview = responseRegister.getRating();
                     String komenReview = responseRegister.getKomentar();
+
+                    if (ratingReview==0.0){
+                        idRating = 0;
+                    }else{
+                        idRating = 1;
+                    }
 
                     ratingBar.setRating(ratingReview);
                     if(komenReview!=null){
                         textKomentar.setText(komenReview);
                     }
                 }else{
+
                     Toast.makeText(getApplicationContext(),"Belum ada memberikan rating",Toast.LENGTH_SHORT).show();
                 }
             }
@@ -235,8 +245,45 @@ public class ReviewActivity extends AppCompatActivity {
             AlertDialog alert = builder.create();
             alert.show();
         }else{
-            ratingPush();
+            if(idRating==0){
+                ratingPush();
+            }else{
+                updateRating();
+            }
+
         }
+    }
+
+    public void updateRating(){
+        Call<ResponseRegister> call = portalClient.updateReview(
+                token,
+                idHomestay,
+                rate,
+                komentar
+        );
+        call.enqueue(new Callback<ResponseRegister>() {
+            @Override
+            public void onResponse(Call<ResponseRegister> call, Response<ResponseRegister> response) {
+                ResponseRegister responseRegister = response.body();
+                if(responseRegister!=null){
+                    String message = responseRegister.getMessage();
+                    if(message!=null){
+                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), DetailHomestayActivity.class);
+                        intent.putExtra("idHomestay",idHomestay);
+                        startActivity(intent);
+                        finish();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(), "Tidak ada response", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseRegister> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void ratingPush(){

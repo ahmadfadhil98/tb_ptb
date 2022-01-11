@@ -17,12 +17,13 @@ import java.util.ArrayList;
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
-        TextView nama,tgl,status;
+        TextView nama,tgl,status,tarif;
         public HistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             nama = itemView.findViewById(R.id.namaHome);
             tgl = itemView.findViewById(R.id.tglTrans);
             status = itemView.findViewById(R.id.statusBook);
+            tarif = itemView.findViewById(R.id.textTarif);
         }
     }
 
@@ -47,6 +48,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         HistoryBooking historyBooking = listHistory.get(position);
         holder.nama.setText(historyBooking.nama);
         holder.tgl.setText(historyBooking.tgl);
+        holder.tarif.setText(historyBooking.tarif.toString());
 
         if(historyBooking.status==1){
             holder.status.setText("Proses Pembayaran");

@@ -70,7 +70,11 @@ public class HistoryBookingActivity extends AppCompatActivity {
                         SimpleDateFormat formatakhir = new SimpleDateFormat("dd MMMM yyyy");
                         String tglHist = formatakhir.format(item.getUpdatedAt());
 
-                        HistoryBooking historyBooking = new HistoryBooking(item.getNama(),tglHist,item.getStatus());
+                        HistoryBooking historyBooking = new HistoryBooking(
+                                item.getNama(),
+                                tglHist,
+                                item.getStatus(),
+                                item.getTarif());
                         list.add(historyBooking);
                     }
                     historyAdapter.setListHistory(list);
