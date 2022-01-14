@@ -177,7 +177,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback,
 
 //        Bikin Notifikasi
 
-        if(srcActivity.equals("LoginEmailActivity")){
+        if(srcActivity=="LoginEmailActivity"){
 
             title = "Wellcome back";
             message = "Selamat datang kembali di HarauStay";
